@@ -1,0 +1,264 @@
+﻿@{
+    ViewBag.Title = "Drive On-The-Fly";
+}
+<div id="taskList"></div>
+<div id="taskList-template" class="d-none">
+    <div class="d-flex flex-row align-items-baseline shade p-1" data-sort-order="*sortOrder*">
+        <div class="col-auto">
+            <button class="btn btn-danger" skd-cmd="delete"><span class="fas fa-trash"></span></button>
+        </div>
+        <div class="col">
+            <button class="btn btn-outline-success w-100 text-left" skd-cmd="edit">
+                <span class="fas fa-fw *icon*"></span>
+                *actionTypeId*
+                *title*
+            </button>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-success" skd-cmd="start">*startDateTime*</button>
+            <button class="btn btn-danger" skd-cmd="end">*endDateTime*</button>
+        </div>
+    </div>
+</div>
+<style>
+    #taskList .d-flex + .d-flex {
+        margin-top: .25rem;
+    }
+
+    #taskList .shade:nth-child(2n+1) {
+        background-color: var(--bs-gray-400);
+    }
+
+    #taskList [skd-cmd=edit] {
+        white-space: nowrap;
+    }
+</style>
+<hr />
+<div id="buttons" class="d-flex flex-wrap flex-row"></div>
+<div id="btn-template" class="col-6 col-sm-3 d-none">
+    <button class="btn btn-info w-100 text-truncate">
+        <span class="fas"></span>
+        <span class="text-truncate"></span>
+    </button>
+</div>
+@section scripts {
+    <script>
+        class Tasks {
+            constructor() {
+                this.list = [];
+
+                if (localStorage.getItem("workOTF") != null && localStorage.getItem("workOTF").length > 0) {
+                    this.list = JSON.parse(localStorage.getItem("workOTF"));
+                } else {
+                    db.SaveDb();
+                }
+            }
+            Create(typeId, sortOrder, startDateTime, endDateTime, address, vehicle, link, dolly, trailer, remark) {
+                let task = new Task();
+                task.typeId = typeId;
+                task.sortOrder = sortOrder;
+                task.startDateTime = startDateTime;
+                task.endDateTime = endDateTime;
+                task.address = address;
+                task.vehicle = vehicle;
+                task.link = link;
+                task.dolly = dolly;
+                task.trailer = trailer;
+                task.remark = remark;
+
+                this.list.push(task);
+                db.SaveDb();
+
+                this.DisplayAll();
+                return task;
+            }
+            RetrieveBySortOrder(sortOrder) {
+                return this.list[Object.keys(this.list).find(key => this.list[key].sortOrder === sortOrder)];
+            }
+            GetIndex(sortOrder) {
+                return db.list.findIndex(object => {
+                    return object.sortOrder == sortOrder;
+                });
+            }
+            Delete(sortOrder) {
+                let index = db.list.findIndex(object => {
+                    return object.sortOrder == sortOrder;
+                });
+                console.log(index);
+                db.list.splice(index, 1);
+
+                db.ReSort();
+                db.SaveDb();
+                db.DisplayAll();
+            }
+            Overview() {
+                return this.list.sort(function (a, b) { return Number(a.sortOrder) - Number(b.sortOrder); });
+            }
+            ReSort() {
+                let newSortOrder = 100;
+
+                db.list.forEach(function (value, index, arr) {
+                    db.list[index].sortOrder = newSortOrder;
+                    newSortOrder = newSortOrder + 10;
+                });
+
+                 db.SaveDb();
+                return db.list;
+            }
+            NextSort() {
+                if (this.list.length == 0) {
+                    return 100;
+                }
+                return Number(db.list.sort(function (a, b) { return b.sortOrder - a.sortOrder; })[0].sortOrder) + 10;
+            }
+            DisplayAll() {
+                $("#taskList").html("");
+                this.Overview().forEach(function (value, index, arr) {
+                    value = Object.assign(Task.prototype, value);
+                    value.Display();
+                });
+            }
+            SaveDb() {
+                localStorage.setItem("workOTF", JSON.stringify(this.list));
+
+                return db;
+            }
+            DeleteDb() {
+                db.list = [];
+                db.SaveDb();
+                db.DisplayAll();
+
+                return db;
+            }
+        }
+        class Task {
+            constructor() {
+                this.typeId = 0;
+                this.sortOrder = 0;
+                this.startDateTime = new Date(0);
+                this.endDateTime = new Date(0);
+                this.address = "";
+                this.vehicle = "";
+                this.link = "";
+                this.dolly = "";
+                this.trailer = "";
+                this.remark = "";
+            }
+
+            TaskType() {
+                return types[Object.keys(types).find(key => types[key].id === this.typeId)];
+            }
+
+            Display() {
+                let elm = $("#taskList-template").clone();
+                elm = elm.html()
+                    .replace("*sortOrder*", this.sortOrder)
+                    .replace("*actionTypeId*", this.TaskType().title + " [" + this.typeId + "]")
+                    .replace("*startDateTime*", this.startDateTime == null
+                        ? "start"
+                        : new Date(this.startDateTime).Format("yyyy-MM-dd HH:mm"))
+                    .replace("*endDateTime*", this.endDateTime == null
+                        ? "end"
+                        : new Date(this.endDateTime).Format("yyyy-MM-dd HH:mm"))
+
+                    .replace("*icon*", this.TaskType().icon)
+                    .replace("*title*", this.address + this.link + this.dolly + this.trailer)
+                    .replace("*remark*", this.remark)
+                $("#taskList").append(elm);
+
+                $("#taskList [skd-cmd='delete']").off("click").on("click", function (e) {
+                    let sortOrder = Number($(this).closest(".d-flex").attr("data-sort-order"));
+                    db.Delete(sortOrder);
+                });
+            }
+        }
+        var db = new Tasks();
+
+        var types = [@Html.Raw(String.Join(", ", Common.WorkTaskTypes.Select(x => new { id = x.typeId, title = "'" + x.internalTitle + "'", type = "'" + x.actionType + "'", icon = "'" + x.icon + "'" })).Replace(" =", ":"))];
+        var vehicles = [@Html.Raw(String.Join(", ", Common.WorkVehicles.OrderBy(x=>x.WorkVehicleType.typeId).ThenBy(x=>x.numberplate).Select(x => new { id = x.vehicleId, title = "'" + x.numberplate + "'", type = "'" + x.WorkVehicleType.internalTitle + "'" })).Replace(" =", ":"))];
+        var addresses = [@Html.Raw(String.Join(", ", Common.WorkAddresses.OrderBy(x=>x.Address()).Select(x => new { id = x.addressId, title = "'" + x.Address() + "'" })).Replace(" =", ":"))];
+        $(function (e) {
+
+            types.forEach(function (elm) {
+                let btn = $("#btn-template").clone();
+                btn.removeAttr("id").removeClass("d-none");
+                btn.find("button").attr("id", "btn-" + elm.id);
+                btn.find("span[class*='fas']").addClass(elm.icon);
+                btn.find("span[class*='text-truncate']").text(elm.title);
+
+                $("#buttons").append(btn);
+            });
+
+            let cancel = $("#btn-template").clone();
+            cancel.removeAttr("id").removeClass("d-none");
+            cancel.find("button").attr("id", "btn-cancel").removeClass("btn-info").addClass("btn-danger");
+            cancel.find("span[class*='fas']").addClass("fa-trash");
+            cancel.find("span[class*='text-truncate']").text("Delete");
+            $("#buttons").append(cancel);
+
+            $("#buttons button").on("click", function (e) {
+                $(this).blur();
+
+                if ($(this).attr("id") == "btn-cancel") {
+                    db.DeleteDb();
+                    return;
+                }
+
+                let typeId = Number($(this).attr("id").substr(4));
+                let address = "";
+                let vehicle = "";
+                let link = "";
+                let dolly = "";
+                let trailer = "";
+                let remark = "";
+                switch (typeId) {
+                    case 101:
+                        address = prompt("Type address");
+                        break;
+                    case 151:
+                        address = prompt("Type address");
+                        break;
+                    case 153:
+                        address = prompt("Type address");
+                        break;
+                    case 201:
+                        vehicle = prompt("Type semi numberplate"); // semi
+                        break;
+                    case 203:
+                        vehicle = prompt("Type vehicle numberplate"); // truck
+                        break;
+                    case 205:
+                        link = prompt("Type link numberplate");
+                        break;
+                    case 207:
+                        dolly = prompt("Type dolly numberplate");
+                        break;
+                    case 209:
+                        trailer = prompt("Type trailer numberplate");
+                        break;
+                    case 249:
+                        trailer = prompt("Type trailer numberplate");
+                        break;
+                }
+
+                db.Create(typeId, db.NextSort(), Date.now(), null, address, link, dolly, trailer, remark);
+            });
+
+            db.DisplayAll();
+        });
+    </script>
+}
+@section styles {
+    <style>
+        #buttons button {
+            width: 150px;
+            flex-wrap: nowrap;
+        }
+
+        #buttons > div {
+            margin-top: .25rem;
+            padding-right: .25rem;
+            padding-left: .25rem;
+        }
+    </style>
+}

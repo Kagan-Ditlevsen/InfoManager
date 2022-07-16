@@ -1,0 +1,237 @@
+:root {
+    --modal-margin: 3rem;
+}
+
+/********* ERROR HANDLING */
+label[id*=-error] { /* hide generated jQuery validation error label */
+    display: none !important;
+}
+
+label sup {
+    color: var(--bs-danger);
+}
+
+/***************************** fields */
+[skd-cmd='datetime_set_now'], [skd-cmd='datetime_clear'] {
+    width: auto !important;
+    flex-grow: 0;
+}
+
+/*[skd-cmd=submit].btn-warning .fas::before, [skd-cmd=button-confirm][type=submit].btn-warning .fas ::before {
+    content: "\f110";*/ /* spinner */
+/*}
+
+[skd-cmd=submit].btn-success .fas::before, [skd-cmd=button-confirm][type=submit].btn-success .fas ::before {*/
+/* content: "\f164"; thumbs-up */
+/*content: "\f00c";*/ /* check mark */
+/*}
+
+[skd-cmd=submit].btn-danger .fas::before, [skd-cmd=button-confirm][type=submit].btn-danger .fas ::before {*/
+/* content: "\f165"; thumbs-down */
+/*content: "\f00d";*/ /* x */
+/*}
+
+[skd-cmd=button-confirm][type=submit].confirmed .fas::before {
+    content: "\f110";
+}*/
+
+[skd-cmd=button-toggle] {
+}
+
+    [skd-cmd=button-toggle][value=false] .col {
+        text-align: left;
+        padding: 0 .75rem 0 0;
+    }
+
+    [skd-cmd=button-toggle][value=true] .col {
+        text-align: right;
+        padding: 0 0 0 .75rem;
+    }
+
+#skd_debug_posted_values, .skd-modal-fullscreen {
+    visibility: hidden;
+    background: var(--bs-warning);
+    color: var(--bs-dark);
+    position: fixed;
+    width: calc(100vw - (2 * var(--modal-margin)));
+    height: calc(100vh - (2 * var(--modal-margin)));
+    margin: var(--modal-margin);
+    padding: calc(var(--modal-margin) / 2);
+    z-index: 10001;
+    border-radius: 1rem;
+}
+.skd-modal-fullscreen {
+    width: calc(100vw - 1rem);
+    height: calc(100vh - 1rem);
+    margin: .5rem;
+}
+
+    span[id$=_container] {
+        display: inline-flex;
+    }
+/* fields END */
+
+/*************************************************************/
+/* Form Row                                                  */
+/*************************************************************/
+[control-type=form-text-range] label {
+    position: relative;
+    top: -9px;
+}
+[control-type=form-button] button span[class^=pe]:empty{
+	display: none;
+}
+
+div.skd-form-row {
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;
+}
+
+.skd-form-row [type=submit] .fas {
+    min-width: 16px;
+}
+
+.skd-form-row label {
+    border: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.skd-form-row [required].error {
+    background: var(--skd-error-background-color);
+    border-color: var(--skd-error-border-color);
+}
+
+.skd-form-row [required].valid {
+    background: var(--skd-valid-background-color);
+    border-color: var(--skd-valid-border-color);
+}
+
+div.skd-form-row + div.skd-form-row {
+    margin-top: 1rem;
+}
+
+.skd-form-small .skd-form-row + .skd-form-row {
+    margin-top: .25rem;
+}
+
+@media only screen and (max-width: 576px) { /* SM++ */
+    .skd-form-row {
+        flex-direction: column !important;
+    }
+
+        .skd-form-row label {
+            width: calc(100% - .75rem);
+            margin-left: .75rem;
+            padding-bottom: .25rem;
+        }
+
+        .skd-form-row .col {
+            width: 100%;
+        }
+
+        .skd-form-row + .skd-form-row {
+            margin-top: .25rem!important;
+        }
+}
+
+.form-control.no-validation-icon {
+    padding-right: 0.5rem !important;
+    background-image: none !important;
+}
+
+.form-select.no-validation-icon {
+    padding-right: 0.5rem !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") !important;
+}
+
+/*************************************************************/
+/* Skd Dropdown Advanced                                     */
+/*************************************************************/
+/* Advanced */
+[skd-cmd=dropdownadv-toggle] {
+    border-radius: 0 var(--skd-border-radius) var(--skd-border-radius) 0 !important;
+}
+
+    [skd-cmd=dropdownadv-toggle].shown .fas {
+        transform: rotate(180deg);
+    }
+
+[skd-cmd=dropdownadv-list] {
+    position: absolute;
+    width: 1%;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    box-shadow: 0 0 0 0.25rem rgb(255 0 0 / 28%);
+    border-radius: var(--skd-border-radius) !important;
+}
+
+    [skd-cmd=dropdownadv-list] .card {
+        max-height: 300px;
+    }
+
+    [skd-cmd=dropdownadv-list] .card-header {
+        font-size: .875rem;
+        min-height: auto;
+    }
+
+    [skd-cmd=dropdownadv-list] .card-body {
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    [skd-cmd=dropdownadv-list] .card-footer {
+        min-height: .75rem !important;
+        max-height: .75rem !important;
+    }
+
+    [skd-cmd=dropdownadv-list] [skd-cmd=dropdownadv-save-custom][disabled] {
+        display: none;
+    }
+
+    [skd-cmd=dropdownadv-list] .skd-table-row:hover {
+        cursor: copy;
+    }
+
+/*************************************************************/
+/* Skd Table                                                 */
+/*************************************************************/
+.skd-table-row.active {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-success-rgb),var(--bs-text-opacity)) !important;
+}
+
+[skd-cmd='search'] {
+    width: 100px !important;
+}
+
+.skd-table-search {
+    width: auto;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin-right: -0.25rem;
+}
+
+    .skd-table-search :first-child {
+        border-radius: var(--skd-border-radius) 0 0 var(--skd-border-radius);
+        border-right: 0;
+    }
+
+    .skd-table-search :last-child {
+        border-radius: 0 var(--skd-border-radius) var(--skd-border-radius) 0;
+    }
+
+    .skd-table-search [skd-field="search-count"] {
+        flex-grow: 0;
+        width: calc(3ch + 1.25rem);
+        text-align: center;
+        cursor: help;
+        border-left-style: dashed;
+    }

@@ -1,0 +1,12 @@
+D:\Github\InfoManager\DAL\DAL\bin\Release\InfoManager.DAL.dll.config
+D:\Github\InfoManager\DAL\DAL\bin\Release\InfoManager.DAL.dll
+D:\Github\InfoManager\DAL\DAL\bin\Release\InfoManager.DAL.pdb
+D:\Github\InfoManager\DAL\DAL\bin\Release\EntityFramework.dll
+D:\Github\InfoManager\DAL\DAL\bin\Release\EntityFramework.SqlServer.dll
+D:\Github\InfoManager\DAL\DAL\bin\Release\EntityFramework.xml
+D:\Github\InfoManager\DAL\DAL\bin\Release\EntityFramework.SqlServer.xml
+D:\Github\InfoManager\DAL\DAL\obj\Release\_DAL.csproj.AssemblyReference.cache
+D:\Github\InfoManager\DAL\DAL\obj\Release\_DAL.csproj.CoreCompileInputs.cache
+D:\Github\InfoManager\DAL\DAL\obj\Release\_DAL.csproj.CopyComplete
+D:\Github\InfoManager\DAL\DAL\obj\Release\InfoManager.DAL.dll
+D:\Github\InfoManager\DAL\DAL\obj\Release\InfoManager.DAL.pdb

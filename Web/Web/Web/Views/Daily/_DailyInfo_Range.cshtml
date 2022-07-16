@@ -1,0 +1,15 @@
+﻿@model DailyInfo
+@{
+    DailyTypeExtra dte = Common.DailyTypeExtra.Single(x => x.extraId == Model.extraId);
+}
+@Form.Controls.Slider(new Form.Slider()
+{
+    JSonData = dte.inputData,
+
+    Id = "sidebar_extraId_" + Model.extraId,
+    IdName = "extraId_" + Model.extraId,
+    Title = dte.internalTitle,
+    LabelText = dte.internalTitle,
+    Required = dte.isRequired,
+    Value = Model.entry
+})

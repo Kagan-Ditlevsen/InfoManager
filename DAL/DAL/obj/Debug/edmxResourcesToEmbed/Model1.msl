@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="infomanager_dk_db_mainModelStoreContainer" CdmEntityContainer="infomanager_dk_db_mainEntities">
+    <EntitySetMapping Name="Daily">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.Daily">
+        <MappingFragment StoreEntitySet="Daily">
+          <ScalarProperty Name="dailyId" ColumnName="dailyId" />
+          <ScalarProperty Name="registerDateTime" ColumnName="registerDateTime" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="optionId" ColumnName="optionId" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyInfo">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.DailyInfo">
+        <MappingFragment StoreEntitySet="DailyInfo">
+          <ScalarProperty Name="dailyId" ColumnName="dailyId" />
+          <ScalarProperty Name="extraId" ColumnName="extraId" />
+          <ScalarProperty Name="entry" ColumnName="entry" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyType">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.DailyType">
+        <MappingFragment StoreEntitySet="DailyType">
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="parentTypeId" ColumnName="parentTypeId" />
+          <ScalarProperty Name="nextTypeId" ColumnName="nextTypeId" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="isFavorite" ColumnName="isFavorite" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="defaultOptionId" ColumnName="defaultOptionId" />
+          <ScalarProperty Name="iconCss" ColumnName="iconCss" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyTypeExtra">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.DailyTypeExtra">
+        <MappingFragment StoreEntitySet="DailyTypeExtra">
+          <ScalarProperty Name="extraId" ColumnName="extraId" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="isRequired" ColumnName="isRequired" />
+          <ScalarProperty Name="inputType" ColumnName="inputType" />
+          <ScalarProperty Name="inputData" ColumnName="inputData" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyTypeOption">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.DailyTypeOption">
+        <MappingFragment StoreEntitySet="DailyTypeOption">
+          <ScalarProperty Name="optionId" ColumnName="optionId" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Finance">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.Finance">
+        <MappingFragment StoreEntitySet="Finance">
+          <ScalarProperty Name="financeId" ColumnName="financeId" />
+          <ScalarProperty Name="receiptDateTime" ColumnName="receiptDateTime" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="shopId" ColumnName="shopId" />
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+          <ScalarProperty Name="receiptSum" ColumnName="receiptSum" />
+          <ScalarProperty Name="receiptId" ColumnName="receiptId" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FinanceAccount">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.FinanceAccount">
+        <MappingFragment StoreEntitySet="FinanceAccount">
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+          <ScalarProperty Name="parentAccountId" ColumnName="parentAccountId" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="sumInitial" ColumnName="sumInitial" />
+          <ScalarProperty Name="sumMovement" ColumnName="sumMovement" />
+          <ScalarProperty Name="sumActual" ColumnName="sumActual" />
+          <ScalarProperty Name="sumGroupTitle" ColumnName="sumGroupTitle" />
+          <ScalarProperty Name="C_lvl" ColumnName="_lvl" />
+          <ScalarProperty Name="C_sortOrder" ColumnName="_sortOrder" />
+          <ScalarProperty Name="C_title" ColumnName="_title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FinanceAccountType">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.FinanceAccountType">
+        <MappingFragment StoreEntitySet="FinanceAccountType">
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FinanceLine">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.FinanceLine">
+        <MappingFragment StoreEntitySet="FinanceLine">
+          <ScalarProperty Name="lineId" ColumnName="lineId" />
+          <ScalarProperty Name="financeId" ColumnName="financeId" />
+          <ScalarProperty Name="counterAccountId" ColumnName="counterAccountId" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="validateDateTime" ColumnName="validateDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FinDummy">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.FinDummy">
+        <MappingFragment StoreEntitySet="FinDummy">
+          <ScalarProperty Name="lineId" ColumnName="lineId" />
+          <ScalarProperty Name="registerDateTime" ColumnName="registerDateTime" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="accSalary" ColumnName="accSalary" />
+          <ScalarProperty Name="accBudget" ColumnName="accBudget" />
+          <ScalarProperty Name="accSaving" ColumnName="accSaving" />
+          <ScalarProperty Name="accCash" ColumnName="accCash" />
+          <ScalarProperty Name="accCoop" ColumnName="accCoop" />
+          <ScalarProperty Name="accHoliday" ColumnName="accHoliday" />
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Info">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.Info">
+        <MappingFragment StoreEntitySet="Info">
+          <ScalarProperty Name="infoId" ColumnName="infoId" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InfoCategory">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.InfoCategory">
+        <MappingFragment StoreEntitySet="InfoCategory">
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="parentCategoryId" ColumnName="parentCategoryId" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InfoEntry">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.InfoEntry">
+        <MappingFragment StoreEntitySet="InfoEntry">
+          <ScalarProperty Name="entryId" ColumnName="entryId" />
+          <ScalarProperty Name="infoId" ColumnName="infoId" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="entry" ColumnName="entry" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InfoEntryType">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.InfoEntryType">
+        <MappingFragment StoreEntitySet="InfoEntryType">
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SysUser">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.SysUser">
+        <MappingFragment StoreEntitySet="SysUser">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="statLastLogon" ColumnName="statLastLogon" />
+          <ScalarProperty Name="statGoodMorning" ColumnName="statGoodMorning" />
+          <ScalarProperty Name="statGoodNight" ColumnName="statGoodNight" />
+          <ScalarProperty Name="statCigQty" ColumnName="statCigQty" />
+          <ScalarProperty Name="isAwaken" ColumnName="isAwaken" />
+          <ScalarProperty Name="statSleepMs" ColumnName="statSleepMs" />
+          <ScalarProperty Name="statAwakenMs" ColumnName="statAwakenMs" />
+          <ScalarProperty Name="modifyDateTime" ColumnName="modifyDateTime" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SysUserTimesheet">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.SysUserTimesheet">
+        <MappingFragment StoreEntitySet="SysUserTimesheet">
+          <ScalarProperty Name="timesheetId" ColumnName="timesheetId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="startDateTime" ColumnName="startDateTime" />
+          <ScalarProperty Name="endDateTime" ColumnName="endDateTime" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Work">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.Work">
+        <MappingFragment StoreEntitySet="Work">
+          <ScalarProperty Name="workId" ColumnName="workId" />
+          <ScalarProperty Name="startDateTime" ColumnName="startDateTime" />
+          <ScalarProperty Name="endDateTime" ColumnName="endDateTime" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="systemRemark" ColumnName="systemRemark" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="deleteUserId" ColumnName="deleteUserId" />
+          <ScalarProperty Name="deleteDateTime" ColumnName="deleteDateTime" />
+          <ScalarProperty Name="finishedDateTime" ColumnName="finishedDateTime" />
+          <ScalarProperty Name="finishedUserId" ColumnName="finishedUserId" />
+          <ScalarProperty Name="archiveDateTime" ColumnName="archiveDateTime" />
+          <ScalarProperty Name="archiveUserId" ColumnName="archiveUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkAddress">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkAddress">
+        <MappingFragment StoreEntitySet="WorkAddress">
+          <ScalarProperty Name="addressId" ColumnName="addressId" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="gpsAddress" ColumnName="gpsAddress" />
+          <ScalarProperty Name="gpsPlusCode" ColumnName="gpsPlusCode" />
+          <ScalarProperty Name="systemRemark" ColumnName="systemRemark" />
+          <ScalarProperty Name="locationCode" ColumnName="locationCode" />
+          <ScalarProperty Name="isArchived" ColumnName="isArchived" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkStatusEnum">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkStatusEnum">
+        <MappingFragment StoreEntitySet="WorkStatusEnum">
+          <ScalarProperty Name="statusId" ColumnName="statusId" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkTask">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkTask">
+        <MappingFragment StoreEntitySet="WorkTask">
+          <ScalarProperty Name="taskId" ColumnName="taskId" />
+          <ScalarProperty Name="workId" ColumnName="workId" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="startDateTime" ColumnName="startDateTime" />
+          <ScalarProperty Name="endDateTime" ColumnName="endDateTime" />
+          <ScalarProperty Name="addressText" ColumnName="addressText" />
+          <ScalarProperty Name="vehicleText" ColumnName="vehicleText" />
+          <ScalarProperty Name="vehicleNumberplate" ColumnName="vehicleNumberplate" />
+          <ScalarProperty Name="linkNumberplate" ColumnName="linkNumberplate" />
+          <ScalarProperty Name="dollyNumberplate" ColumnName="dollyNumberplate" />
+          <ScalarProperty Name="trailerNumberplate" ColumnName="trailerNumberplate" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="systemRemark" ColumnName="systemRemark" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="deleteDateTime" ColumnName="deleteDateTime" />
+          <ScalarProperty Name="deleteUserId" ColumnName="deleteUserId" />
+          <ScalarProperty Name="isFinished" ColumnName="isFinished" />
+          <ScalarProperty Name="reportColumnNumber" ColumnName="reportColumnNumber" />
+          <ScalarProperty Name="transportId" ColumnName="transportId" />
+          <ScalarProperty Name="freighterSetup" ColumnName="freighterSetup" />
+          <ScalarProperty Name="addressSetup" ColumnName="addressSetup" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkTaskDocumentation">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkTaskDocumentation">
+        <MappingFragment StoreEntitySet="WorkTaskDocumentation">
+          <ScalarProperty Name="documentationId" ColumnName="documentationId" />
+          <ScalarProperty Name="workId" ColumnName="workId" />
+          <ScalarProperty Name="taskId" ColumnName="taskId" />
+          <ScalarProperty Name="registerDateTime" ColumnName="registerDateTime" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkTaskTemplate">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkTaskTemplate">
+        <MappingFragment StoreEntitySet="WorkTaskTemplate">
+          <ScalarProperty Name="templateId" ColumnName="templateId" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="startDateTime" ColumnName="startDateTime" />
+          <ScalarProperty Name="endDateTime" ColumnName="endDateTime" />
+          <ScalarProperty Name="addressText" ColumnName="addressText" />
+          <ScalarProperty Name="vehicleNumberplate" ColumnName="vehicleNumberplate" />
+          <ScalarProperty Name="linkNumberplate" ColumnName="linkNumberplate" />
+          <ScalarProperty Name="dollyNumberplate" ColumnName="dollyNumberplate" />
+          <ScalarProperty Name="trailerNumberplate" ColumnName="trailerNumberplate" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="systemRemark" ColumnName="systemRemark" />
+          <ScalarProperty Name="reportColumnNumber" ColumnName="reportColumnNumber" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkTaskType">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkTaskType">
+        <MappingFragment StoreEntitySet="WorkTaskType">
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="actionType" ColumnName="actionType" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="btnStartText" ColumnName="btnStartText" />
+          <ScalarProperty Name="btnEndText" ColumnName="btnEndText" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="requiredFields" ColumnName="requiredFields" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkVehicle">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkVehicle">
+        <MappingFragment StoreEntitySet="WorkVehicle">
+          <ScalarProperty Name="vehicleId" ColumnName="vehicleId" />
+          <ScalarProperty Name="numberplate" ColumnName="numberplate" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="isArchived" ColumnName="isArchived" />
+          <ScalarProperty Name="isTemporary" ColumnName="isTemporary" />
+          <ScalarProperty Name="lastLocation" ColumnName="lastLocation" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkVehicleType">
+      <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkVehicleType">
+        <MappingFragment StoreEntitySet="WorkVehicleType">
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

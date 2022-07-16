@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html class="h-100" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>IM5 - @ViewBag.Title</title>
+    <link rel="icon" type="image/x-icon" href="~/Content/Images/folder-blue.ico" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/skd")
+    @Styles.Render("~/Content/website")
+    <link href="~/Scripts/SkdWebHelper/Skd.Font.css" rel="stylesheet" />
+    <link href="~/Scripts/SkdWebHelper/Skd-Dark.Bootstrap.css" rel="stylesheet" />
+    <link href="~/Scripts/SkdWebHelper/Skd-Dark.css" rel="stylesheet" />
+    @RenderSection("styles", required: false)
+
+    @Scripts.Render("~/bundles/modernizr")
+    <script>
+        var highlightRowIds = [];
+        @if(TempData.ContainsKey("highlightRowIds"))
+        {
+            foreach(string id in TempData["highlightRowIds"].ToString().Split(';'))
+            {
+                <text>highlightRowIds.push('@id');</text>
+            }
+        }
+    </script>
+</head>
+<body>
+    @*<div class="skd-content-loader skd-content-loader-page"><img src="~/Content/Images/loader-circle.gif" /></div>*@
+
+    <div class="bg-warning">
+
+    </div>
+    <div class="content h-100">
+        <form id="pageForm" method="post" novalidate>
+            @RenderBody()
+        </form>
+    </div>
+
+    <right skd-sidebar loading-message="Loading content..." style="display: none">Loading content...</right>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @Scripts.Render("~/bundles/skd")
+    @Scripts.Render("~/bundles/website")
+    <script>
+        /* After user scripts */
+        var pageForm;
+
+        $(function () {
+            pageForm = $("#pageForm");
+        });
+    </script>
+    <!-- scripts -->
+    <!-- section: scripts -->
+    @RenderSection("scripts", required: false)
+    <!-- section: scripts END -->
+    <script>
+        /* After user scripts */
+        $(function () {
+            @Message.JavaScriptLines()
+            Skd.ContentLoadingHide();
+        });
+    </script>
+</body>
+</html>

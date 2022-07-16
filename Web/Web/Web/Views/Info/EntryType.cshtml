@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Entry types";
+}
+<div class="d-flex">
+    <div id="entryTypeList" class="col-6 skd-table">
+        <div class="card page-height">
+            <div class="card-header">
+                <div class="col ellipsis"><span class="fas fa-i-cursor"></span> List of entry types</div>
+                <div class="col-auto input-group input-group-sm skd-table-search">
+                    <input type="text" class="form-control" placeholder="search" skd-cmd="search" />
+                    <div class="input-group-append">
+                        <div class="input-group-text" skd-field="search-count">-1</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                @{
+                    int rowNo = 1;
+                    foreach (var elm in Common.InfoEntryTypes)
+                    {
+                        <div class="shade skd-table-row" data-id="@elm.typeId" style="order: @(rowNo++);">
+                            <div class="col-auto">@elm.typeId</div>
+                            <div class="col ellipsis">@elm.internalTitle</div>
+                            <div class="col-auto text-secondary">@elm.InfoEntry.Count()</div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div id="entryType" class="col-6">
+    </div>
+</div>
+@section scripts {
+    <script>
+        $(function (e) {
+        });
+    </script>
+}
+@section styles {
+    <style>
+    </style>
+}

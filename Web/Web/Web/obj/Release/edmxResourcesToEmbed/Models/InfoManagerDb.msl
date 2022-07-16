@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="haulmanager_eu_db_lestitModelStoreContainer" CdmEntityContainer="Db">
+    <FunctionImportMapping FunctionImportName="fnc_Work_Salary" FunctionName="haulmanager_eu_db_lestitModel.Store.fnc_Work_Salary">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="haulmanager_eu_db_lestitModel.fnc_Work_Salary_Result">
+          <ScalarProperty Name="startDateTime" ColumnName="startDateTime" />
+          <ScalarProperty Name="endDateTime" ColumnName="endDateTime" />
+          <ScalarProperty Name="hour0618" ColumnName="hour0618" />
+          <ScalarProperty Name="hour1823" ColumnName="hour1823" />
+          <ScalarProperty Name="hour2306" ColumnName="hour2306" />
+          <ScalarProperty Name="timespend" ColumnName="timespend" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Daily">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.Daily">
+        <MappingFragment StoreEntitySet="Daily">
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="optionId" ColumnName="optionId" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="registerDateTime" ColumnName="registerDateTime" />
+          <ScalarProperty Name="dailyId" ColumnName="dailyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyInfo">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.DailyInfo">
+        <MappingFragment StoreEntitySet="DailyInfo">
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="entry" ColumnName="entry" />
+          <ScalarProperty Name="extraId" ColumnName="extraId" />
+          <ScalarProperty Name="dailyId" ColumnName="dailyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyType">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.DailyType">
+        <MappingFragment StoreEntitySet="DailyType">
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="iconCss" ColumnName="iconCss" />
+          <ScalarProperty Name="defaultOptionId" ColumnName="defaultOptionId" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="isFavorite" ColumnName="isFavorite" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="nextTypeId" ColumnName="nextTypeId" />
+          <ScalarProperty Name="parentTypeId" ColumnName="parentTypeId" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyTypeExtra">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.DailyTypeExtra">
+        <MappingFragment StoreEntitySet="DailyTypeExtra">
+          <ScalarProperty Name="inputData" ColumnName="inputData" />
+          <ScalarProperty Name="inputType" ColumnName="inputType" />
+          <ScalarProperty Name="isRequired" ColumnName="isRequired" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="extraId" ColumnName="extraId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyTypeOption">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.DailyTypeOption">
+        <MappingFragment StoreEntitySet="DailyTypeOption">
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="optionId" ColumnName="optionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Finance">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.Finance">
+        <MappingFragment StoreEntitySet="Finance">
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="receiptId" ColumnName="receiptId" />
+          <ScalarProperty Name="receiptSum" ColumnName="receiptSum" />
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+          <ScalarProperty Name="shopId" ColumnName="shopId" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="receiptDateTime" ColumnName="receiptDateTime" />
+          <ScalarProperty Name="financeId" ColumnName="financeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FinanceAccount">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.FinanceAccount">
+        <MappingFragment StoreEntitySet="FinanceAccount">
+          <ScalarProperty Name="C_title" ColumnName="_title" />
+          <ScalarProperty Name="C_sortOrder" ColumnName="_sortOrder" />
+          <ScalarProperty Name="C_lvl" ColumnName="_lvl" />
+          <ScalarProperty Name="sumGroupTitle" ColumnName="sumGroupTitle" />
+          <ScalarProperty Name="sumActual" ColumnName="sumActual" />
+          <ScalarProperty Name="sumMovement" ColumnName="sumMovement" />
+          <ScalarProperty Name="sumInitial" ColumnName="sumInitial" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="parentAccountId" ColumnName="parentAccountId" />
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FinanceAccountType">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.FinanceAccountType">
+        <MappingFragment StoreEntitySet="FinanceAccountType">
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FinanceLine">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.FinanceLine">
+        <MappingFragment StoreEntitySet="FinanceLine">
+          <ScalarProperty Name="validateDateTime" ColumnName="validateDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="counterAccountId" ColumnName="counterAccountId" />
+          <ScalarProperty Name="financeId" ColumnName="financeId" />
+          <ScalarProperty Name="lineId" ColumnName="lineId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Info">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.Info">
+        <MappingFragment StoreEntitySet="Info">
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="infoId" ColumnName="infoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InfoCategory">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.InfoCategory">
+        <MappingFragment StoreEntitySet="InfoCategory">
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="parentCategoryId" ColumnName="parentCategoryId" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InfoEntry">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.InfoEntry">
+        <MappingFragment StoreEntitySet="InfoEntry">
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="entry" ColumnName="entry" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="infoId" ColumnName="infoId" />
+          <ScalarProperty Name="entryId" ColumnName="entryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InfoEntryType">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.InfoEntryType">
+        <MappingFragment StoreEntitySet="InfoEntryType">
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SysUser">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.SysUser">
+        <MappingFragment StoreEntitySet="SysUser">
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="modifyDateTime" ColumnName="modifyDateTime" />
+          <ScalarProperty Name="statAwakenMs" ColumnName="statAwakenMs" />
+          <ScalarProperty Name="statSleepMs" ColumnName="statSleepMs" />
+          <ScalarProperty Name="isAwaken" ColumnName="isAwaken" />
+          <ScalarProperty Name="statCigQty" ColumnName="statCigQty" />
+          <ScalarProperty Name="statGoodNight" ColumnName="statGoodNight" />
+          <ScalarProperty Name="statGoodMorning" ColumnName="statGoodMorning" />
+          <ScalarProperty Name="statLastLogon" ColumnName="statLastLogon" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Work">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.Work">
+        <MappingFragment StoreEntitySet="Work">
+          <ScalarProperty Name="archiveUserId" ColumnName="archiveUserId" />
+          <ScalarProperty Name="archiveDateTime" ColumnName="archiveDateTime" />
+          <ScalarProperty Name="finishedUserId" ColumnName="finishedUserId" />
+          <ScalarProperty Name="finishedDateTime" ColumnName="finishedDateTime" />
+          <ScalarProperty Name="deleteDateTime" ColumnName="deleteDateTime" />
+          <ScalarProperty Name="deleteUserId" ColumnName="deleteUserId" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="systemRemark" ColumnName="systemRemark" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="endDateTime" ColumnName="endDateTime" />
+          <ScalarProperty Name="startDateTime" ColumnName="startDateTime" />
+          <ScalarProperty Name="workId" ColumnName="workId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkAddress">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.WorkAddress">
+        <MappingFragment StoreEntitySet="WorkAddress">
+          <ScalarProperty Name="isArchived" ColumnName="isArchived" />
+          <ScalarProperty Name="locationCode" ColumnName="locationCode" />
+          <ScalarProperty Name="systemRemark" ColumnName="systemRemark" />
+          <ScalarProperty Name="gpsPlusCode" ColumnName="gpsPlusCode" />
+          <ScalarProperty Name="gpsAddress" ColumnName="gpsAddress" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="addressId" ColumnName="addressId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkStatusEnum">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.WorkStatusEnum">
+        <MappingFragment StoreEntitySet="WorkStatusEnum">
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="statusId" ColumnName="statusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkTask">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.WorkTask">
+        <MappingFragment StoreEntitySet="WorkTask">
+          <ScalarProperty Name="addressSetup" ColumnName="addressSetup" />
+          <ScalarProperty Name="freighterSetup" ColumnName="freighterSetup" />
+          <ScalarProperty Name="vehicleText" ColumnName="vehicleText" />
+          <ScalarProperty Name="transportId" ColumnName="transportId" />
+          <ScalarProperty Name="reportColumnNumber" ColumnName="reportColumnNumber" />
+          <ScalarProperty Name="isFinished" ColumnName="isFinished" />
+          <ScalarProperty Name="deleteUserId" ColumnName="deleteUserId" />
+          <ScalarProperty Name="deleteDateTime" ColumnName="deleteDateTime" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="systemRemark" ColumnName="systemRemark" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="trailerNumberplate" ColumnName="trailerNumberplate" />
+          <ScalarProperty Name="dollyNumberplate" ColumnName="dollyNumberplate" />
+          <ScalarProperty Name="linkNumberplate" ColumnName="linkNumberplate" />
+          <ScalarProperty Name="vehicleNumberplate" ColumnName="vehicleNumberplate" />
+          <ScalarProperty Name="addressText" ColumnName="addressText" />
+          <ScalarProperty Name="endDateTime" ColumnName="endDateTime" />
+          <ScalarProperty Name="startDateTime" ColumnName="startDateTime" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="workId" ColumnName="workId" />
+          <ScalarProperty Name="taskId" ColumnName="taskId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkTaskDocumentation">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.WorkTaskDocumentation">
+        <MappingFragment StoreEntitySet="WorkTaskDocumentation">
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="registerDateTime" ColumnName="registerDateTime" />
+          <ScalarProperty Name="taskId" ColumnName="taskId" />
+          <ScalarProperty Name="workId" ColumnName="workId" />
+          <ScalarProperty Name="documentationId" ColumnName="documentationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkTaskTemplate">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.WorkTaskTemplate">
+        <MappingFragment StoreEntitySet="WorkTaskTemplate">
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="reportColumnNumber" ColumnName="reportColumnNumber" />
+          <ScalarProperty Name="systemRemark" ColumnName="systemRemark" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="trailerNumberplate" ColumnName="trailerNumberplate" />
+          <ScalarProperty Name="dollyNumberplate" ColumnName="dollyNumberplate" />
+          <ScalarProperty Name="linkNumberplate" ColumnName="linkNumberplate" />
+          <ScalarProperty Name="vehicleNumberplate" ColumnName="vehicleNumberplate" />
+          <ScalarProperty Name="addressText" ColumnName="addressText" />
+          <ScalarProperty Name="endDateTime" ColumnName="endDateTime" />
+          <ScalarProperty Name="startDateTime" ColumnName="startDateTime" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="templateId" ColumnName="templateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkTaskType">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.WorkTaskType">
+        <MappingFragment StoreEntitySet="WorkTaskType">
+          <ScalarProperty Name="requiredFields" ColumnName="requiredFields" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="btnEndText" ColumnName="btnEndText" />
+          <ScalarProperty Name="btnStartText" ColumnName="btnStartText" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="actionType" ColumnName="actionType" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkVehicle">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.WorkVehicle">
+        <MappingFragment StoreEntitySet="WorkVehicle">
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="lastLocation" ColumnName="lastLocation" />
+          <ScalarProperty Name="isArchived" ColumnName="isArchived" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="numberplate" ColumnName="numberplate" />
+          <ScalarProperty Name="vehicleId" ColumnName="vehicleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkVehicleType">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.WorkVehicleType">
+        <MappingFragment StoreEntitySet="WorkVehicleType">
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Daily_Days">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.vw_Daily_Days">
+        <MappingFragment StoreEntitySet="vw_Daily_Days">
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="elapsedTime" ColumnName="elapsedTime" />
+          <ScalarProperty Name="endDateTime" ColumnName="endDateTime" />
+          <ScalarProperty Name="startDateTime" ColumnName="startDateTime" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Daily_Overview">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.vw_Daily_Overview">
+        <MappingFragment StoreEntitySet="vw_Daily_Overview">
+          <ScalarProperty Name="qtyMorning" ColumnName="qtyMorning" />
+          <ScalarProperty Name="qtyMidnight" ColumnName="qtyMidnight" />
+          <ScalarProperty Name="qty24h" ColumnName="qty24h" />
+          <ScalarProperty Name="lastTimeOptionId" ColumnName="lastTimeOptionId" />
+          <ScalarProperty Name="lastTimeTypeId" ColumnName="lastTimeTypeId" />
+          <ScalarProperty Name="optionTitle" ColumnName="optionTitle" />
+          <ScalarProperty Name="typeTitle" ColumnName="typeTitle" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="extrasQty" ColumnName="extrasQty" />
+          <ScalarProperty Name="optionId" ColumnName="optionId" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+          <ScalarProperty Name="registerDateTime" ColumnName="registerDateTime" />
+          <ScalarProperty Name="dailyId" ColumnName="dailyId" />
+          <ScalarProperty Name="rowNo" ColumnName="rowNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Daily_Statistics">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.vw_Daily_Statistics">
+        <MappingFragment StoreEntitySet="vw_Daily_Statistics">
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="lastTimeOptionId" ColumnName="lastTimeOptionId" />
+          <ScalarProperty Name="lastTimeTypeId" ColumnName="lastTimeTypeId" />
+          <ScalarProperty Name="qtyMidnight" ColumnName="qtyMidnight" />
+          <ScalarProperty Name="qty24h" ColumnName="qty24h" />
+          <ScalarProperty Name="qtyMorning" ColumnName="qtyMorning" />
+          <ScalarProperty Name="optionTitle" ColumnName="optionTitle" />
+          <ScalarProperty Name="optionId" ColumnName="optionId" />
+          <ScalarProperty Name="typeTitle" ColumnName="typeTitle" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_DailyType_Tree">
+      <EntityTypeMapping TypeName="haulmanager_eu_db_lestitModel.vw_DailyType_Tree">
+        <MappingFragment StoreEntitySet="vw_DailyType_Tree">
+          <ScalarProperty Name="breadcrum" ColumnName="breadcrum" />
+          <ScalarProperty Name="qtyOptions" ColumnName="qtyOptions" />
+          <ScalarProperty Name="optionList" ColumnName="optionList" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="iconCss" ColumnName="iconCss" />
+          <ScalarProperty Name="defaultOptionId" ColumnName="defaultOptionId" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+          <ScalarProperty Name="isFavorite" ColumnName="isFavorite" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+          <ScalarProperty Name="nextTypeId" ColumnName="nextTypeId" />
+          <ScalarProperty Name="parentTypeId" ColumnName="parentTypeId" />
+          <ScalarProperty Name="typeId" ColumnName="typeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

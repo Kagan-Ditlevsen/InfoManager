@@ -1,0 +1,1815 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="infomanager_dk_db_mainModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Daily">
+          <Key>
+            <PropertyRef Name="dailyId" />
+          </Key>
+          <Property Name="dailyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="registerDateTime" Type="datetime" Nullable="false" />
+          <Property Name="typeId" Type="int" Nullable="false" />
+          <Property Name="optionId" Type="int" />
+          <Property Name="remark" Type="nvarchar(max)" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DailyInfo">
+          <Key>
+            <PropertyRef Name="dailyId" />
+            <PropertyRef Name="extraId" />
+          </Key>
+          <Property Name="dailyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="extraId" Type="int" Nullable="false" />
+          <Property Name="entry" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DailyType">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="int" Nullable="false" />
+          <Property Name="parentTypeId" Type="int" />
+          <Property Name="nextTypeId" Type="int" />
+          <Property Name="internalTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="isFavorite" Type="bit" Nullable="false" />
+          <Property Name="sortOrder" Type="int" Nullable="false" />
+          <Property Name="defaultOptionId" Type="int" />
+          <Property Name="iconCss" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DailyTypeExtra">
+          <Key>
+            <PropertyRef Name="extraId" />
+          </Key>
+          <Property Name="extraId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typeId" Type="int" Nullable="false" />
+          <Property Name="internalTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sortOrder" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="isRequired" Type="bit" Nullable="false" />
+          <Property Name="inputType" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="inputData" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DailyTypeOption">
+          <Key>
+            <PropertyRef Name="optionId" />
+          </Key>
+          <Property Name="optionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typeId" Type="int" Nullable="false" />
+          <Property Name="internalTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sortOrder" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Finance">
+          <Key>
+            <PropertyRef Name="financeId" />
+          </Key>
+          <Property Name="financeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="receiptDateTime" Type="datetime" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="shopId" Type="nvarchar" MaxLength="50" />
+          <Property Name="accountId" Type="int" />
+          <Property Name="receiptSum" Type="money" Nullable="false" />
+          <Property Name="receiptId" Type="nvarchar" MaxLength="50" />
+          <Property Name="remark" Type="nvarchar(max)" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FinanceAccount">
+          <Key>
+            <PropertyRef Name="accountId" />
+          </Key>
+          <Property Name="accountId" Type="int" Nullable="false" />
+          <Property Name="parentAccountId" Type="int" />
+          <Property Name="typeId" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="sumInitial" Type="money" Nullable="false" />
+          <Property Name="sumMovement" Type="money" Nullable="false" />
+          <Property Name="sumActual" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="sumGroupTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="_lvl" Type="tinyint" />
+          <Property Name="_sortOrder" Type="varchar(max)" />
+          <Property Name="_title" Type="nvarchar" MaxLength="4000" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="FinanceAccountType">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="internalTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FinanceLine">
+          <Key>
+            <PropertyRef Name="lineId" />
+          </Key>
+          <Property Name="lineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="financeId" Type="int" Nullable="false" />
+          <Property Name="counterAccountId" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="amount" Type="money" Nullable="false" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" Nullable="false" />
+          <Property Name="validateDateTime" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="FinDummy">
+          <Key>
+            <PropertyRef Name="lineId" />
+          </Key>
+          <Property Name="lineId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="registerDateTime" Type="smalldatetime" Nullable="false" />
+          <Property Name="text" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="accSalary" Type="money" />
+          <Property Name="accBudget" Type="money" />
+          <Property Name="accSaving" Type="money" />
+          <Property Name="accCash" Type="money" />
+          <Property Name="accCoop" Type="money" />
+          <Property Name="accHoliday" Type="money" />
+          <Property Name="accountId" Type="int" />
+          <Property Name="remark" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Info">
+          <Key>
+            <PropertyRef Name="infoId" />
+          </Key>
+          <Property Name="infoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryId" Type="int" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="remark" Type="nvarchar(max)" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InfoCategory">
+          <Key>
+            <PropertyRef Name="categoryId" />
+          </Key>
+          <Property Name="categoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="parentCategoryId" Type="int" />
+          <Property Name="internalTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sortOrder" Type="int" Nullable="false" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" />
+        </EntityType>
+        <EntityType Name="InfoEntry">
+          <Key>
+            <PropertyRef Name="entryId" />
+          </Key>
+          <Property Name="entryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="infoId" Type="int" Nullable="false" />
+          <Property Name="typeId" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="entry" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="sortOrder" Type="int" Nullable="false" />
+          <Property Name="remark" Type="nvarchar(max)" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" />
+        </EntityType>
+        <EntityType Name="InfoEntryType">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="int" Nullable="false" />
+          <Property Name="internalTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" />
+        </EntityType>
+        <EntityType Name="SysUser">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="emailAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="statLastLogon" Type="smalldatetime" />
+          <Property Name="statGoodMorning" Type="smalldatetime" />
+          <Property Name="statGoodNight" Type="smalldatetime" />
+          <Property Name="statCigQty" Type="int" />
+          <Property Name="isAwaken" Type="int" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="statSleepMs" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="statAwakenMs" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="modifyDateTime" Type="smalldatetime" />
+          <Property Name="createDateTime" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysUserTimesheet">
+          <Key>
+            <PropertyRef Name="timesheetId" />
+          </Key>
+          <Property Name="timesheetId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="startDateTime" Type="smalldatetime" />
+          <Property Name="endDateTime" Type="smalldatetime" />
+          <Property Name="remark" Type="nvarchar(max)" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Work">
+          <Key>
+            <PropertyRef Name="workId" />
+          </Key>
+          <Property Name="workId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="startDateTime" Type="datetime" />
+          <Property Name="endDateTime" Type="datetime" />
+          <Property Name="remark" Type="nvarchar(max)" />
+          <Property Name="systemRemark" Type="nvarchar(max)" />
+          <Property Name="status" Type="int" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" Nullable="false" />
+          <Property Name="deleteUserId" Type="int" />
+          <Property Name="deleteDateTime" Type="datetime" />
+          <Property Name="finishedDateTime" Type="datetime" />
+          <Property Name="finishedUserId" Type="int" />
+          <Property Name="archiveDateTime" Type="datetime" />
+          <Property Name="archiveUserId" Type="int" />
+        </EntityType>
+        <EntityType Name="WorkAddress">
+          <Key>
+            <PropertyRef Name="addressId" />
+          </Key>
+          <Property Name="addressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="gpsAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="gpsPlusCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="systemRemark" Type="nvarchar(max)" />
+          <Property Name="locationCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="isArchived" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkStatusEnum">
+          <Key>
+            <PropertyRef Name="statusId" />
+          </Key>
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="internalTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkTask">
+          <Key>
+            <PropertyRef Name="taskId" />
+          </Key>
+          <Property Name="taskId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="workId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="typeId" Type="int" Nullable="false" />
+          <Property Name="sortOrder" Type="int" Nullable="false" />
+          <Property Name="startDateTime" Type="smalldatetime" />
+          <Property Name="endDateTime" Type="smalldatetime" />
+          <Property Name="addressText" Type="nvarchar" MaxLength="100" />
+          <Property Name="vehicleText" Type="nvarchar" MaxLength="10" />
+          <Property Name="vehicleNumberplate" Type="varchar" MaxLength="50" />
+          <Property Name="linkNumberplate" Type="varchar" MaxLength="50" />
+          <Property Name="dollyNumberplate" Type="varchar" MaxLength="50" />
+          <Property Name="trailerNumberplate" Type="varchar" MaxLength="50" />
+          <Property Name="remark" Type="nvarchar(max)" />
+          <Property Name="systemRemark" Type="nvarchar(max)" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" Nullable="false" />
+          <Property Name="deleteDateTime" Type="datetime" />
+          <Property Name="deleteUserId" Type="int" />
+          <Property Name="isFinished" Type="bit" StoreGeneratedPattern="Computed" />
+          <Property Name="reportColumnNumber" Type="tinyint" Nullable="false" />
+          <Property Name="transportId" Type="nvarchar" MaxLength="100" />
+          <Property Name="freighterSetup" Type="nvarchar(max)" />
+          <Property Name="addressSetup" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="WorkTaskDocumentation">
+          <Key>
+            <PropertyRef Name="documentationId" />
+          </Key>
+          <Property Name="documentationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="workId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="taskId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="registerDateTime" Type="smalldatetime" Nullable="false" />
+          <Property Name="remark" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkTaskTemplate">
+          <Key>
+            <PropertyRef Name="templateId" />
+            <PropertyRef Name="sortOrder" />
+          </Key>
+          <Property Name="templateId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sortOrder" Type="int" Nullable="false" />
+          <Property Name="typeId" Type="int" Nullable="false" />
+          <Property Name="startDateTime" Type="smalldatetime" />
+          <Property Name="endDateTime" Type="smalldatetime" />
+          <Property Name="addressText" Type="nvarchar" MaxLength="100" />
+          <Property Name="vehicleNumberplate" Type="varchar" MaxLength="50" />
+          <Property Name="linkNumberplate" Type="varchar" MaxLength="50" />
+          <Property Name="dollyNumberplate" Type="varchar" MaxLength="50" />
+          <Property Name="trailerNumberplate" Type="varchar" MaxLength="50" />
+          <Property Name="remark" Type="nvarchar(max)" />
+          <Property Name="systemRemark" Type="nvarchar(max)" />
+          <Property Name="reportColumnNumber" Type="tinyint" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkTaskType">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="int" Nullable="false" />
+          <Property Name="actionType" Type="char" MaxLength="1" />
+          <Property Name="internalTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="btnStartText" Type="varchar" MaxLength="50" />
+          <Property Name="btnEndText" Type="varchar" MaxLength="50" />
+          <Property Name="icon" Type="varchar" MaxLength="50" />
+          <Property Name="requiredFields" Type="int" />
+        </EntityType>
+        <EntityType Name="WorkVehicle">
+          <Key>
+            <PropertyRef Name="vehicleId" />
+          </Key>
+          <Property Name="vehicleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numberplate" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="typeId" Type="int" Nullable="false" />
+          <Property Name="isArchived" Type="bit" Nullable="false" />
+          <Property Name="isTemporary" Type="bit" Nullable="false" />
+          <Property Name="lastLocation" Type="nvarchar" MaxLength="100" />
+          <Property Name="remark" Type="nvarchar(max)" />
+          <Property Name="createDateTime" Type="datetime" Nullable="false" />
+          <Property Name="createUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkVehicleType">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="int" Nullable="false" />
+          <Property Name="icon" Type="varchar" MaxLength="50" />
+          <Property Name="internalTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Daily_DailyType">
+          <End Role="DailyType" Type="Self.DailyType" Multiplicity="1" />
+          <End Role="Daily" Type="Self.Daily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DailyType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="Daily">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Daily_DailyTypeOption">
+          <End Role="DailyTypeOption" Type="Self.DailyTypeOption" Multiplicity="0..1" />
+          <End Role="Daily" Type="Self.Daily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DailyTypeOption">
+              <PropertyRef Name="optionId" />
+            </Principal>
+            <Dependent Role="Daily">
+              <PropertyRef Name="optionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyInfo_Daily">
+          <End Role="Daily" Type="Self.Daily" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DailyInfo" Type="Self.DailyInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Daily">
+              <PropertyRef Name="dailyId" />
+            </Principal>
+            <Dependent Role="DailyInfo">
+              <PropertyRef Name="dailyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyInfo_DailyTypeExtra">
+          <End Role="DailyTypeExtra" Type="Self.DailyTypeExtra" Multiplicity="1" />
+          <End Role="DailyInfo" Type="Self.DailyInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DailyTypeExtra">
+              <PropertyRef Name="extraId" />
+            </Principal>
+            <Dependent Role="DailyInfo">
+              <PropertyRef Name="extraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyTypeExtra_DailyType">
+          <End Role="DailyType" Type="Self.DailyType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DailyTypeExtra" Type="Self.DailyTypeExtra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DailyType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="DailyTypeExtra">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyTypeOption_DailyType">
+          <End Role="DailyType" Type="Self.DailyType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DailyTypeOption" Type="Self.DailyTypeOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DailyType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="DailyTypeOption">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinanceAccount_FinanceAccountType">
+          <End Role="FinanceAccountType" Type="Self.FinanceAccountType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FinanceAccount" Type="Self.FinanceAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinanceAccountType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="FinanceAccount">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinanceLine_Finance">
+          <End Role="Finance" Type="Self.Finance" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FinanceLine" Type="Self.FinanceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Finance">
+              <PropertyRef Name="financeId" />
+            </Principal>
+            <Dependent Role="FinanceLine">
+              <PropertyRef Name="financeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinanceLine_FinanceAccount">
+          <End Role="FinanceAccount" Type="Self.FinanceAccount" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FinanceLine" Type="Self.FinanceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinanceAccount">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="FinanceLine">
+              <PropertyRef Name="counterAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Info_InfoCategory">
+          <End Role="InfoCategory" Type="Self.InfoCategory" Multiplicity="0..1" />
+          <End Role="Info" Type="Self.Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfoCategory">
+              <PropertyRef Name="categoryId" />
+            </Principal>
+            <Dependent Role="Info">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InfoEntry_Info">
+          <End Role="Info" Type="Self.Info" Multiplicity="1" />
+          <End Role="InfoEntry" Type="Self.InfoEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Info">
+              <PropertyRef Name="infoId" />
+            </Principal>
+            <Dependent Role="InfoEntry">
+              <PropertyRef Name="infoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InfoEntry_InfoEntryType">
+          <End Role="InfoEntryType" Type="Self.InfoEntryType" Multiplicity="1" />
+          <End Role="InfoEntry" Type="Self.InfoEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfoEntryType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="InfoEntry">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUserTimesheet_SysUser">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+          <End Role="SysUserTimesheet" Type="Self.SysUserTimesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="SysUserTimesheet">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTask_Work">
+          <End Role="Work" Type="Self.Work" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkTask" Type="Self.WorkTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work">
+              <PropertyRef Name="workId" />
+            </Principal>
+            <Dependent Role="WorkTask">
+              <PropertyRef Name="workId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTask_WorkTaskType">
+          <End Role="WorkTaskType" Type="Self.WorkTaskType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkTask" Type="Self.WorkTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTaskType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="WorkTask">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTaskDocumentation_Work">
+          <End Role="Work" Type="Self.Work" Multiplicity="1" />
+          <End Role="WorkTaskDocumentation" Type="Self.WorkTaskDocumentation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work">
+              <PropertyRef Name="workId" />
+            </Principal>
+            <Dependent Role="WorkTaskDocumentation">
+              <PropertyRef Name="workId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTaskDocumentation_WorkTask">
+          <End Role="WorkTask" Type="Self.WorkTask" Multiplicity="1" />
+          <End Role="WorkTaskDocumentation" Type="Self.WorkTaskDocumentation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTask">
+              <PropertyRef Name="taskId" />
+            </Principal>
+            <Dependent Role="WorkTaskDocumentation">
+              <PropertyRef Name="taskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTaskTemplate_WorkTaskType">
+          <End Role="WorkTaskType" Type="Self.WorkTaskType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkTaskTemplate" Type="Self.WorkTaskTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTaskType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="WorkTaskTemplate">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkVehicle_WorkVehicleType">
+          <End Role="WorkVehicleType" Type="Self.WorkVehicleType" Multiplicity="1" />
+          <End Role="WorkVehicle" Type="Self.WorkVehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkVehicleType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="WorkVehicle">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="infomanager_dk_db_mainModelStoreContainer">
+          <EntitySet Name="Daily" EntityType="Self.Daily" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyInfo" EntityType="Self.DailyInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyType" EntityType="Self.DailyType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyTypeExtra" EntityType="Self.DailyTypeExtra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyTypeOption" EntityType="Self.DailyTypeOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Finance" EntityType="Self.Finance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinanceAccount" EntityType="Self.FinanceAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinanceAccountType" EntityType="Self.FinanceAccountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinanceLine" EntityType="Self.FinanceLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinDummy" EntityType="Self.FinDummy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Info" EntityType="Self.Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InfoCategory" EntityType="Self.InfoCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InfoEntry" EntityType="Self.InfoEntry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InfoEntryType" EntityType="Self.InfoEntryType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysUser" EntityType="Self.SysUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysUserTimesheet" EntityType="Self.SysUserTimesheet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Work" EntityType="Self.Work" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkAddress" EntityType="Self.WorkAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkStatusEnum" EntityType="Self.WorkStatusEnum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkTask" EntityType="Self.WorkTask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkTaskDocumentation" EntityType="Self.WorkTaskDocumentation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkTaskTemplate" EntityType="Self.WorkTaskTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkTaskType" EntityType="Self.WorkTaskType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkVehicle" EntityType="Self.WorkVehicle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkVehicleType" EntityType="Self.WorkVehicleType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Daily_DailyType" Association="Self.FK_Daily_DailyType">
+            <End Role="DailyType" EntitySet="DailyType" />
+            <End Role="Daily" EntitySet="Daily" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Daily_DailyTypeOption" Association="Self.FK_Daily_DailyTypeOption">
+            <End Role="DailyTypeOption" EntitySet="DailyTypeOption" />
+            <End Role="Daily" EntitySet="Daily" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyInfo_Daily" Association="Self.FK_DailyInfo_Daily">
+            <End Role="Daily" EntitySet="Daily" />
+            <End Role="DailyInfo" EntitySet="DailyInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyInfo_DailyTypeExtra" Association="Self.FK_DailyInfo_DailyTypeExtra">
+            <End Role="DailyTypeExtra" EntitySet="DailyTypeExtra" />
+            <End Role="DailyInfo" EntitySet="DailyInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyTypeExtra_DailyType" Association="Self.FK_DailyTypeExtra_DailyType">
+            <End Role="DailyType" EntitySet="DailyType" />
+            <End Role="DailyTypeExtra" EntitySet="DailyTypeExtra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyTypeOption_DailyType" Association="Self.FK_DailyTypeOption_DailyType">
+            <End Role="DailyType" EntitySet="DailyType" />
+            <End Role="DailyTypeOption" EntitySet="DailyTypeOption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinanceAccount_FinanceAccountType" Association="Self.FK_FinanceAccount_FinanceAccountType">
+            <End Role="FinanceAccountType" EntitySet="FinanceAccountType" />
+            <End Role="FinanceAccount" EntitySet="FinanceAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinanceLine_Finance" Association="Self.FK_FinanceLine_Finance">
+            <End Role="Finance" EntitySet="Finance" />
+            <End Role="FinanceLine" EntitySet="FinanceLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinanceLine_FinanceAccount" Association="Self.FK_FinanceLine_FinanceAccount">
+            <End Role="FinanceAccount" EntitySet="FinanceAccount" />
+            <End Role="FinanceLine" EntitySet="FinanceLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Info_InfoCategory" Association="Self.FK_Info_InfoCategory">
+            <End Role="InfoCategory" EntitySet="InfoCategory" />
+            <End Role="Info" EntitySet="Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfoEntry_Info" Association="Self.FK_InfoEntry_Info">
+            <End Role="Info" EntitySet="Info" />
+            <End Role="InfoEntry" EntitySet="InfoEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfoEntry_InfoEntryType" Association="Self.FK_InfoEntry_InfoEntryType">
+            <End Role="InfoEntryType" EntitySet="InfoEntryType" />
+            <End Role="InfoEntry" EntitySet="InfoEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUserTimesheet_SysUser" Association="Self.FK_SysUserTimesheet_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserTimesheet" EntitySet="SysUserTimesheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTask_Work" Association="Self.FK_WorkTask_Work">
+            <End Role="Work" EntitySet="Work" />
+            <End Role="WorkTask" EntitySet="WorkTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTask_WorkTaskType" Association="Self.FK_WorkTask_WorkTaskType">
+            <End Role="WorkTaskType" EntitySet="WorkTaskType" />
+            <End Role="WorkTask" EntitySet="WorkTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTaskDocumentation_Work" Association="Self.FK_WorkTaskDocumentation_Work">
+            <End Role="Work" EntitySet="Work" />
+            <End Role="WorkTaskDocumentation" EntitySet="WorkTaskDocumentation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTaskDocumentation_WorkTask" Association="Self.FK_WorkTaskDocumentation_WorkTask">
+            <End Role="WorkTask" EntitySet="WorkTask" />
+            <End Role="WorkTaskDocumentation" EntitySet="WorkTaskDocumentation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTaskTemplate_WorkTaskType" Association="Self.FK_WorkTaskTemplate_WorkTaskType">
+            <End Role="WorkTaskType" EntitySet="WorkTaskType" />
+            <End Role="WorkTaskTemplate" EntitySet="WorkTaskTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkVehicle_WorkVehicleType" Association="Self.FK_WorkVehicle_WorkVehicleType">
+            <End Role="WorkVehicleType" EntitySet="WorkVehicleType" />
+            <End Role="WorkVehicle" EntitySet="WorkVehicle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="infomanager_dk_db_mainModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Daily">
+          <Key>
+            <PropertyRef Name="dailyId" />
+          </Key>
+          <Property Name="dailyId" Type="Guid" Nullable="false" />
+          <Property Name="registerDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="optionId" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DailyType" Relationship="Self.FK_Daily_DailyType" FromRole="Daily" ToRole="DailyType" />
+          <NavigationProperty Name="DailyTypeOption" Relationship="Self.FK_Daily_DailyTypeOption" FromRole="Daily" ToRole="DailyTypeOption" />
+          <NavigationProperty Name="DailyInfo" Relationship="Self.FK_DailyInfo_Daily" FromRole="Daily" ToRole="DailyInfo" />
+        </EntityType>
+        <EntityType Name="DailyInfo">
+          <Key>
+            <PropertyRef Name="dailyId" />
+            <PropertyRef Name="extraId" />
+          </Key>
+          <Property Name="dailyId" Type="Guid" Nullable="false" />
+          <Property Name="extraId" Type="Int32" Nullable="false" />
+          <Property Name="entry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Daily" Relationship="Self.FK_DailyInfo_Daily" FromRole="DailyInfo" ToRole="Daily" />
+          <NavigationProperty Name="DailyTypeExtra" Relationship="Self.FK_DailyInfo_DailyTypeExtra" FromRole="DailyInfo" ToRole="DailyTypeExtra" />
+        </EntityType>
+        <EntityType Name="DailyType">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="parentTypeId" Type="Int32" />
+          <Property Name="nextTypeId" Type="Int32" />
+          <Property Name="internalTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="isFavorite" Type="Boolean" Nullable="false" />
+          <Property Name="sortOrder" Type="Int32" Nullable="false" />
+          <Property Name="defaultOptionId" Type="Int32" />
+          <Property Name="iconCss" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Daily" Relationship="Self.FK_Daily_DailyType" FromRole="DailyType" ToRole="Daily" />
+          <NavigationProperty Name="DailyTypeExtra" Relationship="Self.FK_DailyTypeExtra_DailyType" FromRole="DailyType" ToRole="DailyTypeExtra" />
+          <NavigationProperty Name="DailyTypeOption" Relationship="Self.FK_DailyTypeOption_DailyType" FromRole="DailyType" ToRole="DailyTypeOption" />
+        </EntityType>
+        <EntityType Name="DailyTypeExtra">
+          <Key>
+            <PropertyRef Name="extraId" />
+          </Key>
+          <Property Name="extraId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="internalTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sortOrder" Type="Int32" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="isRequired" Type="Boolean" Nullable="false" />
+          <Property Name="inputType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="inputData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DailyInfo" Relationship="Self.FK_DailyInfo_DailyTypeExtra" FromRole="DailyTypeExtra" ToRole="DailyInfo" />
+          <NavigationProperty Name="DailyType" Relationship="Self.FK_DailyTypeExtra_DailyType" FromRole="DailyTypeExtra" ToRole="DailyType" />
+        </EntityType>
+        <EntityType Name="DailyTypeOption">
+          <Key>
+            <PropertyRef Name="optionId" />
+          </Key>
+          <Property Name="optionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="internalTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sortOrder" Type="Int32" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Daily" Relationship="Self.FK_Daily_DailyTypeOption" FromRole="DailyTypeOption" ToRole="Daily" />
+          <NavigationProperty Name="DailyType" Relationship="Self.FK_DailyTypeOption_DailyType" FromRole="DailyTypeOption" ToRole="DailyType" />
+        </EntityType>
+        <EntityType Name="Finance">
+          <Key>
+            <PropertyRef Name="financeId" />
+          </Key>
+          <Property Name="financeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="receiptDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="shopId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="accountId" Type="Int32" />
+          <Property Name="receiptSum" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="receiptId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FinanceLine" Relationship="Self.FK_FinanceLine_Finance" FromRole="Finance" ToRole="FinanceLine" />
+        </EntityType>
+        <EntityType Name="FinanceAccount">
+          <Key>
+            <PropertyRef Name="accountId" />
+          </Key>
+          <Property Name="accountId" Type="Int32" Nullable="false" />
+          <Property Name="parentAccountId" Type="Int32" />
+          <Property Name="typeId" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sumInitial" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="sumMovement" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="sumActual" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="sumGroupTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_lvl" Type="Byte" />
+          <Property Name="C_sortOrder" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="C_title" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="FinanceAccountType" Relationship="Self.FK_FinanceAccount_FinanceAccountType" FromRole="FinanceAccount" ToRole="FinanceAccountType" />
+          <NavigationProperty Name="FinanceLine" Relationship="Self.FK_FinanceLine_FinanceAccount" FromRole="FinanceAccount" ToRole="FinanceLine" />
+        </EntityType>
+        <EntityType Name="FinanceAccountType">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="internalTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="FinanceAccount" Relationship="Self.FK_FinanceAccount_FinanceAccountType" FromRole="FinanceAccountType" ToRole="FinanceAccount" />
+        </EntityType>
+        <EntityType Name="FinanceLine">
+          <Key>
+            <PropertyRef Name="lineId" />
+          </Key>
+          <Property Name="lineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="financeId" Type="Int32" Nullable="false" />
+          <Property Name="counterAccountId" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" Nullable="false" />
+          <Property Name="validateDateTime" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Finance" Relationship="Self.FK_FinanceLine_Finance" FromRole="FinanceLine" ToRole="Finance" />
+          <NavigationProperty Name="FinanceAccount" Relationship="Self.FK_FinanceLine_FinanceAccount" FromRole="FinanceLine" ToRole="FinanceAccount" />
+        </EntityType>
+        <EntityType Name="FinDummy">
+          <Key>
+            <PropertyRef Name="lineId" />
+          </Key>
+          <Property Name="lineId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="registerDateTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="text" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="accSalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="accBudget" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="accSaving" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="accCash" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="accCoop" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="accHoliday" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="accountId" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Info">
+          <Key>
+            <PropertyRef Name="infoId" />
+          </Key>
+          <Property Name="infoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryId" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InfoCategory" Relationship="Self.FK_Info_InfoCategory" FromRole="Info" ToRole="InfoCategory" />
+          <NavigationProperty Name="InfoEntry" Relationship="Self.FK_InfoEntry_Info" FromRole="Info" ToRole="InfoEntry" />
+        </EntityType>
+        <EntityType Name="InfoCategory">
+          <Key>
+            <PropertyRef Name="categoryId" />
+          </Key>
+          <Property Name="categoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parentCategoryId" Type="Int32" />
+          <Property Name="internalTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sortOrder" Type="Int32" Nullable="false" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" />
+          <NavigationProperty Name="Info" Relationship="Self.FK_Info_InfoCategory" FromRole="InfoCategory" ToRole="Info" />
+        </EntityType>
+        <EntityType Name="InfoEntry">
+          <Key>
+            <PropertyRef Name="entryId" />
+          </Key>
+          <Property Name="entryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="infoId" Type="Int32" Nullable="false" />
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="entry" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sortOrder" Type="Int32" Nullable="false" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" />
+          <NavigationProperty Name="Info" Relationship="Self.FK_InfoEntry_Info" FromRole="InfoEntry" ToRole="Info" />
+          <NavigationProperty Name="InfoEntryType" Relationship="Self.FK_InfoEntry_InfoEntryType" FromRole="InfoEntry" ToRole="InfoEntryType" />
+        </EntityType>
+        <EntityType Name="InfoEntryType">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="internalTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" />
+          <NavigationProperty Name="InfoEntry" Relationship="Self.FK_InfoEntry_InfoEntryType" FromRole="InfoEntryType" ToRole="InfoEntry" />
+        </EntityType>
+        <EntityType Name="SysUser">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="statLastLogon" Type="DateTime" Precision="0" />
+          <Property Name="statGoodMorning" Type="DateTime" Precision="0" />
+          <Property Name="statGoodNight" Type="DateTime" Precision="0" />
+          <Property Name="statCigQty" Type="Int32" />
+          <Property Name="isAwaken" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="statSleepMs" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="statAwakenMs" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="modifyDateTime" Type="DateTime" Precision="0" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="SysUserTimesheet" Relationship="Self.FK_SysUserTimesheet_SysUser" FromRole="SysUser" ToRole="SysUserTimesheet" />
+        </EntityType>
+        <EntityType Name="SysUserTimesheet">
+          <Key>
+            <PropertyRef Name="timesheetId" />
+          </Key>
+          <Property Name="timesheetId" Type="Guid" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="startDateTime" Type="DateTime" Precision="0" />
+          <Property Name="endDateTime" Type="DateTime" Precision="0" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SysUser" Relationship="Self.FK_SysUserTimesheet_SysUser" FromRole="SysUserTimesheet" ToRole="SysUser" />
+        </EntityType>
+        <EntityType Name="Work">
+          <Key>
+            <PropertyRef Name="workId" />
+          </Key>
+          <Property Name="workId" Type="Guid" Nullable="false" />
+          <Property Name="startDateTime" Type="DateTime" Precision="3" />
+          <Property Name="endDateTime" Type="DateTime" Precision="3" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="systemRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" Nullable="false" />
+          <Property Name="deleteUserId" Type="Int32" />
+          <Property Name="deleteDateTime" Type="DateTime" Precision="3" />
+          <Property Name="finishedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="finishedUserId" Type="Int32" />
+          <Property Name="archiveDateTime" Type="DateTime" Precision="3" />
+          <Property Name="archiveUserId" Type="Int32" />
+          <NavigationProperty Name="WorkTask" Relationship="Self.FK_WorkTask_Work" FromRole="Work" ToRole="WorkTask" />
+          <NavigationProperty Name="WorkTaskDocumentation" Relationship="Self.FK_WorkTaskDocumentation_Work" FromRole="Work" ToRole="WorkTaskDocumentation" />
+        </EntityType>
+        <EntityType Name="WorkAddress">
+          <Key>
+            <PropertyRef Name="addressId" />
+          </Key>
+          <Property Name="addressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gpsAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="gpsPlusCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="systemRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="locationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isArchived" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkStatusEnum">
+          <Key>
+            <PropertyRef Name="statusId" />
+          </Key>
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="internalTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkTask">
+          <Key>
+            <PropertyRef Name="taskId" />
+          </Key>
+          <Property Name="taskId" Type="Guid" Nullable="false" />
+          <Property Name="workId" Type="Guid" Nullable="false" />
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="sortOrder" Type="Int32" Nullable="false" />
+          <Property Name="startDateTime" Type="DateTime" Precision="0" />
+          <Property Name="endDateTime" Type="DateTime" Precision="0" />
+          <Property Name="addressText" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="vehicleText" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="vehicleNumberplate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="linkNumberplate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dollyNumberplate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="trailerNumberplate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="systemRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" Nullable="false" />
+          <Property Name="deleteDateTime" Type="DateTime" Precision="3" />
+          <Property Name="deleteUserId" Type="Int32" />
+          <Property Name="isFinished" Type="Boolean" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="reportColumnNumber" Type="Byte" Nullable="false" />
+          <Property Name="transportId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="freighterSetup" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="addressSetup" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Work" Relationship="Self.FK_WorkTask_Work" FromRole="WorkTask" ToRole="Work" />
+          <NavigationProperty Name="WorkTaskType" Relationship="Self.FK_WorkTask_WorkTaskType" FromRole="WorkTask" ToRole="WorkTaskType" />
+          <NavigationProperty Name="WorkTaskDocumentation" Relationship="Self.FK_WorkTaskDocumentation_WorkTask" FromRole="WorkTask" ToRole="WorkTaskDocumentation" />
+        </EntityType>
+        <EntityType Name="WorkTaskDocumentation">
+          <Key>
+            <PropertyRef Name="documentationId" />
+          </Key>
+          <Property Name="documentationId" Type="Guid" Nullable="false" />
+          <Property Name="workId" Type="Guid" Nullable="false" />
+          <Property Name="taskId" Type="Guid" Nullable="false" />
+          <Property Name="registerDateTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Work" Relationship="Self.FK_WorkTaskDocumentation_Work" FromRole="WorkTaskDocumentation" ToRole="Work" />
+          <NavigationProperty Name="WorkTask" Relationship="Self.FK_WorkTaskDocumentation_WorkTask" FromRole="WorkTaskDocumentation" ToRole="WorkTask" />
+        </EntityType>
+        <EntityType Name="WorkTaskTemplate">
+          <Key>
+            <PropertyRef Name="templateId" />
+            <PropertyRef Name="sortOrder" />
+          </Key>
+          <Property Name="templateId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sortOrder" Type="Int32" Nullable="false" />
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="startDateTime" Type="DateTime" Precision="0" />
+          <Property Name="endDateTime" Type="DateTime" Precision="0" />
+          <Property Name="addressText" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="vehicleNumberplate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="linkNumberplate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dollyNumberplate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="trailerNumberplate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="systemRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="reportColumnNumber" Type="Byte" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WorkTaskType" Relationship="Self.FK_WorkTaskTemplate_WorkTaskType" FromRole="WorkTaskTemplate" ToRole="WorkTaskType" />
+        </EntityType>
+        <EntityType Name="WorkTaskType">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="actionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="internalTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="btnStartText" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="btnEndText" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="requiredFields" Type="Int32" />
+          <NavigationProperty Name="WorkTask" Relationship="Self.FK_WorkTask_WorkTaskType" FromRole="WorkTaskType" ToRole="WorkTask" />
+          <NavigationProperty Name="WorkTaskTemplate" Relationship="Self.FK_WorkTaskTemplate_WorkTaskType" FromRole="WorkTaskType" ToRole="WorkTaskTemplate" />
+        </EntityType>
+        <EntityType Name="WorkVehicle">
+          <Key>
+            <PropertyRef Name="vehicleId" />
+          </Key>
+          <Property Name="vehicleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numberplate" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="isArchived" Type="Boolean" Nullable="false" />
+          <Property Name="isTemporary" Type="Boolean" Nullable="false" />
+          <Property Name="lastLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="createDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WorkVehicleType" Relationship="Self.FK_WorkVehicle_WorkVehicleType" FromRole="WorkVehicle" ToRole="WorkVehicleType" />
+        </EntityType>
+        <EntityType Name="WorkVehicleType">
+          <Key>
+            <PropertyRef Name="typeId" />
+          </Key>
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <Property Name="icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="internalTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="WorkVehicle" Relationship="Self.FK_WorkVehicle_WorkVehicleType" FromRole="WorkVehicleType" ToRole="WorkVehicle" />
+        </EntityType>
+        <Association Name="FK_Daily_DailyType">
+          <End Role="DailyType" Type="Self.DailyType" Multiplicity="1" />
+          <End Role="Daily" Type="Self.Daily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DailyType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="Daily">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Daily_DailyTypeOption">
+          <End Role="DailyTypeOption" Type="Self.DailyTypeOption" Multiplicity="0..1" />
+          <End Role="Daily" Type="Self.Daily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DailyTypeOption">
+              <PropertyRef Name="optionId" />
+            </Principal>
+            <Dependent Role="Daily">
+              <PropertyRef Name="optionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyInfo_Daily">
+          <End Role="Daily" Type="Self.Daily" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DailyInfo" Type="Self.DailyInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Daily">
+              <PropertyRef Name="dailyId" />
+            </Principal>
+            <Dependent Role="DailyInfo">
+              <PropertyRef Name="dailyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyInfo_DailyTypeExtra">
+          <End Role="DailyTypeExtra" Type="Self.DailyTypeExtra" Multiplicity="1" />
+          <End Role="DailyInfo" Type="Self.DailyInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DailyTypeExtra">
+              <PropertyRef Name="extraId" />
+            </Principal>
+            <Dependent Role="DailyInfo">
+              <PropertyRef Name="extraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyTypeExtra_DailyType">
+          <End Role="DailyType" Type="Self.DailyType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DailyTypeExtra" Type="Self.DailyTypeExtra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DailyType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="DailyTypeExtra">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DailyTypeOption_DailyType">
+          <End Role="DailyType" Type="Self.DailyType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DailyTypeOption" Type="Self.DailyTypeOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DailyType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="DailyTypeOption">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinanceLine_Finance">
+          <End Role="Finance" Type="Self.Finance" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FinanceLine" Type="Self.FinanceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Finance">
+              <PropertyRef Name="financeId" />
+            </Principal>
+            <Dependent Role="FinanceLine">
+              <PropertyRef Name="financeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinanceAccount_FinanceAccountType">
+          <End Role="FinanceAccountType" Type="Self.FinanceAccountType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FinanceAccount" Type="Self.FinanceAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinanceAccountType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="FinanceAccount">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinanceLine_FinanceAccount">
+          <End Role="FinanceAccount" Type="Self.FinanceAccount" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FinanceLine" Type="Self.FinanceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinanceAccount">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="FinanceLine">
+              <PropertyRef Name="counterAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Info_InfoCategory">
+          <End Role="InfoCategory" Type="Self.InfoCategory" Multiplicity="0..1" />
+          <End Role="Info" Type="Self.Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfoCategory">
+              <PropertyRef Name="categoryId" />
+            </Principal>
+            <Dependent Role="Info">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InfoEntry_Info">
+          <End Role="Info" Type="Self.Info" Multiplicity="1" />
+          <End Role="InfoEntry" Type="Self.InfoEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Info">
+              <PropertyRef Name="infoId" />
+            </Principal>
+            <Dependent Role="InfoEntry">
+              <PropertyRef Name="infoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InfoEntry_InfoEntryType">
+          <End Role="InfoEntryType" Type="Self.InfoEntryType" Multiplicity="1" />
+          <End Role="InfoEntry" Type="Self.InfoEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfoEntryType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="InfoEntry">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUserTimesheet_SysUser">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+          <End Role="SysUserTimesheet" Type="Self.SysUserTimesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="SysUserTimesheet">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTask_Work">
+          <End Role="Work" Type="Self.Work" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkTask" Type="Self.WorkTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work">
+              <PropertyRef Name="workId" />
+            </Principal>
+            <Dependent Role="WorkTask">
+              <PropertyRef Name="workId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTaskDocumentation_Work">
+          <End Role="Work" Type="Self.Work" Multiplicity="1" />
+          <End Role="WorkTaskDocumentation" Type="Self.WorkTaskDocumentation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work">
+              <PropertyRef Name="workId" />
+            </Principal>
+            <Dependent Role="WorkTaskDocumentation">
+              <PropertyRef Name="workId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTask_WorkTaskType">
+          <End Role="WorkTaskType" Type="Self.WorkTaskType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkTask" Type="Self.WorkTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTaskType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="WorkTask">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTaskDocumentation_WorkTask">
+          <End Role="WorkTask" Type="Self.WorkTask" Multiplicity="1" />
+          <End Role="WorkTaskDocumentation" Type="Self.WorkTaskDocumentation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTask">
+              <PropertyRef Name="taskId" />
+            </Principal>
+            <Dependent Role="WorkTaskDocumentation">
+              <PropertyRef Name="taskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTaskTemplate_WorkTaskType">
+          <End Role="WorkTaskType" Type="Self.WorkTaskType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkTaskTemplate" Type="Self.WorkTaskTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkTaskType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="WorkTaskTemplate">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkVehicle_WorkVehicleType">
+          <End Role="WorkVehicleType" Type="Self.WorkVehicleType" Multiplicity="1" />
+          <End Role="WorkVehicle" Type="Self.WorkVehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkVehicleType">
+              <PropertyRef Name="typeId" />
+            </Principal>
+            <Dependent Role="WorkVehicle">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="infomanager_dk_db_mainEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Daily" EntityType="Self.Daily" />
+          <EntitySet Name="DailyInfo" EntityType="Self.DailyInfo" />
+          <EntitySet Name="DailyType" EntityType="Self.DailyType" />
+          <EntitySet Name="DailyTypeExtra" EntityType="Self.DailyTypeExtra" />
+          <EntitySet Name="DailyTypeOption" EntityType="Self.DailyTypeOption" />
+          <EntitySet Name="Finance" EntityType="Self.Finance" />
+          <EntitySet Name="FinanceAccount" EntityType="Self.FinanceAccount" />
+          <EntitySet Name="FinanceAccountType" EntityType="Self.FinanceAccountType" />
+          <EntitySet Name="FinanceLine" EntityType="Self.FinanceLine" />
+          <EntitySet Name="FinDummy" EntityType="Self.FinDummy" />
+          <EntitySet Name="Info" EntityType="Self.Info" />
+          <EntitySet Name="InfoCategory" EntityType="Self.InfoCategory" />
+          <EntitySet Name="InfoEntry" EntityType="Self.InfoEntry" />
+          <EntitySet Name="InfoEntryType" EntityType="Self.InfoEntryType" />
+          <EntitySet Name="SysUser" EntityType="Self.SysUser" />
+          <EntitySet Name="SysUserTimesheet" EntityType="Self.SysUserTimesheet" />
+          <EntitySet Name="Work" EntityType="Self.Work" />
+          <EntitySet Name="WorkAddress" EntityType="Self.WorkAddress" />
+          <EntitySet Name="WorkStatusEnum" EntityType="Self.WorkStatusEnum" />
+          <EntitySet Name="WorkTask" EntityType="Self.WorkTask" />
+          <EntitySet Name="WorkTaskDocumentation" EntityType="Self.WorkTaskDocumentation" />
+          <EntitySet Name="WorkTaskTemplate" EntityType="Self.WorkTaskTemplate" />
+          <EntitySet Name="WorkTaskType" EntityType="Self.WorkTaskType" />
+          <EntitySet Name="WorkVehicle" EntityType="Self.WorkVehicle" />
+          <EntitySet Name="WorkVehicleType" EntityType="Self.WorkVehicleType" />
+          <AssociationSet Name="FK_Daily_DailyType" Association="Self.FK_Daily_DailyType">
+            <End Role="DailyType" EntitySet="DailyType" />
+            <End Role="Daily" EntitySet="Daily" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Daily_DailyTypeOption" Association="Self.FK_Daily_DailyTypeOption">
+            <End Role="DailyTypeOption" EntitySet="DailyTypeOption" />
+            <End Role="Daily" EntitySet="Daily" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyInfo_Daily" Association="Self.FK_DailyInfo_Daily">
+            <End Role="Daily" EntitySet="Daily" />
+            <End Role="DailyInfo" EntitySet="DailyInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyInfo_DailyTypeExtra" Association="Self.FK_DailyInfo_DailyTypeExtra">
+            <End Role="DailyTypeExtra" EntitySet="DailyTypeExtra" />
+            <End Role="DailyInfo" EntitySet="DailyInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyTypeExtra_DailyType" Association="Self.FK_DailyTypeExtra_DailyType">
+            <End Role="DailyType" EntitySet="DailyType" />
+            <End Role="DailyTypeExtra" EntitySet="DailyTypeExtra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DailyTypeOption_DailyType" Association="Self.FK_DailyTypeOption_DailyType">
+            <End Role="DailyType" EntitySet="DailyType" />
+            <End Role="DailyTypeOption" EntitySet="DailyTypeOption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinanceLine_Finance" Association="Self.FK_FinanceLine_Finance">
+            <End Role="Finance" EntitySet="Finance" />
+            <End Role="FinanceLine" EntitySet="FinanceLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinanceAccount_FinanceAccountType" Association="Self.FK_FinanceAccount_FinanceAccountType">
+            <End Role="FinanceAccountType" EntitySet="FinanceAccountType" />
+            <End Role="FinanceAccount" EntitySet="FinanceAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinanceLine_FinanceAccount" Association="Self.FK_FinanceLine_FinanceAccount">
+            <End Role="FinanceAccount" EntitySet="FinanceAccount" />
+            <End Role="FinanceLine" EntitySet="FinanceLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Info_InfoCategory" Association="Self.FK_Info_InfoCategory">
+            <End Role="InfoCategory" EntitySet="InfoCategory" />
+            <End Role="Info" EntitySet="Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfoEntry_Info" Association="Self.FK_InfoEntry_Info">
+            <End Role="Info" EntitySet="Info" />
+            <End Role="InfoEntry" EntitySet="InfoEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfoEntry_InfoEntryType" Association="Self.FK_InfoEntry_InfoEntryType">
+            <End Role="InfoEntryType" EntitySet="InfoEntryType" />
+            <End Role="InfoEntry" EntitySet="InfoEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUserTimesheet_SysUser" Association="Self.FK_SysUserTimesheet_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserTimesheet" EntitySet="SysUserTimesheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTask_Work" Association="Self.FK_WorkTask_Work">
+            <End Role="Work" EntitySet="Work" />
+            <End Role="WorkTask" EntitySet="WorkTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTaskDocumentation_Work" Association="Self.FK_WorkTaskDocumentation_Work">
+            <End Role="Work" EntitySet="Work" />
+            <End Role="WorkTaskDocumentation" EntitySet="WorkTaskDocumentation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTask_WorkTaskType" Association="Self.FK_WorkTask_WorkTaskType">
+            <End Role="WorkTaskType" EntitySet="WorkTaskType" />
+            <End Role="WorkTask" EntitySet="WorkTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTaskDocumentation_WorkTask" Association="Self.FK_WorkTaskDocumentation_WorkTask">
+            <End Role="WorkTask" EntitySet="WorkTask" />
+            <End Role="WorkTaskDocumentation" EntitySet="WorkTaskDocumentation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTaskTemplate_WorkTaskType" Association="Self.FK_WorkTaskTemplate_WorkTaskType">
+            <End Role="WorkTaskType" EntitySet="WorkTaskType" />
+            <End Role="WorkTaskTemplate" EntitySet="WorkTaskTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkVehicle_WorkVehicleType" Association="Self.FK_WorkVehicle_WorkVehicleType">
+            <End Role="WorkVehicleType" EntitySet="WorkVehicleType" />
+            <End Role="WorkVehicle" EntitySet="WorkVehicle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="infomanager_dk_db_mainModelStoreContainer" CdmEntityContainer="infomanager_dk_db_mainEntities">
+          <EntitySetMapping Name="Daily">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.Daily">
+              <MappingFragment StoreEntitySet="Daily">
+                <ScalarProperty Name="dailyId" ColumnName="dailyId" />
+                <ScalarProperty Name="registerDateTime" ColumnName="registerDateTime" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="optionId" ColumnName="optionId" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyInfo">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.DailyInfo">
+              <MappingFragment StoreEntitySet="DailyInfo">
+                <ScalarProperty Name="dailyId" ColumnName="dailyId" />
+                <ScalarProperty Name="extraId" ColumnName="extraId" />
+                <ScalarProperty Name="entry" ColumnName="entry" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyType">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.DailyType">
+              <MappingFragment StoreEntitySet="DailyType">
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="parentTypeId" ColumnName="parentTypeId" />
+                <ScalarProperty Name="nextTypeId" ColumnName="nextTypeId" />
+                <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="isFavorite" ColumnName="isFavorite" />
+                <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+                <ScalarProperty Name="defaultOptionId" ColumnName="defaultOptionId" />
+                <ScalarProperty Name="iconCss" ColumnName="iconCss" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyTypeExtra">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.DailyTypeExtra">
+              <MappingFragment StoreEntitySet="DailyTypeExtra">
+                <ScalarProperty Name="extraId" ColumnName="extraId" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+                <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="isRequired" ColumnName="isRequired" />
+                <ScalarProperty Name="inputType" ColumnName="inputType" />
+                <ScalarProperty Name="inputData" ColumnName="inputData" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyTypeOption">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.DailyTypeOption">
+              <MappingFragment StoreEntitySet="DailyTypeOption">
+                <ScalarProperty Name="optionId" ColumnName="optionId" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+                <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Finance">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.Finance">
+              <MappingFragment StoreEntitySet="Finance">
+                <ScalarProperty Name="financeId" ColumnName="financeId" />
+                <ScalarProperty Name="receiptDateTime" ColumnName="receiptDateTime" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="shopId" ColumnName="shopId" />
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="receiptSum" ColumnName="receiptSum" />
+                <ScalarProperty Name="receiptId" ColumnName="receiptId" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinanceAccount">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.FinanceAccount">
+              <MappingFragment StoreEntitySet="FinanceAccount">
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="parentAccountId" ColumnName="parentAccountId" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="sumInitial" ColumnName="sumInitial" />
+                <ScalarProperty Name="sumMovement" ColumnName="sumMovement" />
+                <ScalarProperty Name="sumActual" ColumnName="sumActual" />
+                <ScalarProperty Name="sumGroupTitle" ColumnName="sumGroupTitle" />
+                <ScalarProperty Name="C_lvl" ColumnName="_lvl" />
+                <ScalarProperty Name="C_sortOrder" ColumnName="_sortOrder" />
+                <ScalarProperty Name="C_title" ColumnName="_title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinanceAccountType">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.FinanceAccountType">
+              <MappingFragment StoreEntitySet="FinanceAccountType">
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinanceLine">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.FinanceLine">
+              <MappingFragment StoreEntitySet="FinanceLine">
+                <ScalarProperty Name="lineId" ColumnName="lineId" />
+                <ScalarProperty Name="financeId" ColumnName="financeId" />
+                <ScalarProperty Name="counterAccountId" ColumnName="counterAccountId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+                <ScalarProperty Name="validateDateTime" ColumnName="validateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinDummy">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.FinDummy">
+              <MappingFragment StoreEntitySet="FinDummy">
+                <ScalarProperty Name="lineId" ColumnName="lineId" />
+                <ScalarProperty Name="registerDateTime" ColumnName="registerDateTime" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="accSalary" ColumnName="accSalary" />
+                <ScalarProperty Name="accBudget" ColumnName="accBudget" />
+                <ScalarProperty Name="accSaving" ColumnName="accSaving" />
+                <ScalarProperty Name="accCash" ColumnName="accCash" />
+                <ScalarProperty Name="accCoop" ColumnName="accCoop" />
+                <ScalarProperty Name="accHoliday" ColumnName="accHoliday" />
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Info">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.Info">
+              <MappingFragment StoreEntitySet="Info">
+                <ScalarProperty Name="infoId" ColumnName="infoId" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfoCategory">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.InfoCategory">
+              <MappingFragment StoreEntitySet="InfoCategory">
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="parentCategoryId" ColumnName="parentCategoryId" />
+                <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+                <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfoEntry">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.InfoEntry">
+              <MappingFragment StoreEntitySet="InfoEntry">
+                <ScalarProperty Name="entryId" ColumnName="entryId" />
+                <ScalarProperty Name="infoId" ColumnName="infoId" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="entry" ColumnName="entry" />
+                <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfoEntryType">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.InfoEntryType">
+              <MappingFragment StoreEntitySet="InfoEntryType">
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysUser">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.SysUser">
+              <MappingFragment StoreEntitySet="SysUser">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="statLastLogon" ColumnName="statLastLogon" />
+                <ScalarProperty Name="statGoodMorning" ColumnName="statGoodMorning" />
+                <ScalarProperty Name="statGoodNight" ColumnName="statGoodNight" />
+                <ScalarProperty Name="statCigQty" ColumnName="statCigQty" />
+                <ScalarProperty Name="isAwaken" ColumnName="isAwaken" />
+                <ScalarProperty Name="statSleepMs" ColumnName="statSleepMs" />
+                <ScalarProperty Name="statAwakenMs" ColumnName="statAwakenMs" />
+                <ScalarProperty Name="modifyDateTime" ColumnName="modifyDateTime" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysUserTimesheet">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.SysUserTimesheet">
+              <MappingFragment StoreEntitySet="SysUserTimesheet">
+                <ScalarProperty Name="timesheetId" ColumnName="timesheetId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="startDateTime" ColumnName="startDateTime" />
+                <ScalarProperty Name="endDateTime" ColumnName="endDateTime" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Work">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.Work">
+              <MappingFragment StoreEntitySet="Work">
+                <ScalarProperty Name="workId" ColumnName="workId" />
+                <ScalarProperty Name="startDateTime" ColumnName="startDateTime" />
+                <ScalarProperty Name="endDateTime" ColumnName="endDateTime" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="systemRemark" ColumnName="systemRemark" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+                <ScalarProperty Name="deleteUserId" ColumnName="deleteUserId" />
+                <ScalarProperty Name="deleteDateTime" ColumnName="deleteDateTime" />
+                <ScalarProperty Name="finishedDateTime" ColumnName="finishedDateTime" />
+                <ScalarProperty Name="finishedUserId" ColumnName="finishedUserId" />
+                <ScalarProperty Name="archiveDateTime" ColumnName="archiveDateTime" />
+                <ScalarProperty Name="archiveUserId" ColumnName="archiveUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkAddress">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkAddress">
+              <MappingFragment StoreEntitySet="WorkAddress">
+                <ScalarProperty Name="addressId" ColumnName="addressId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="gpsAddress" ColumnName="gpsAddress" />
+                <ScalarProperty Name="gpsPlusCode" ColumnName="gpsPlusCode" />
+                <ScalarProperty Name="systemRemark" ColumnName="systemRemark" />
+                <ScalarProperty Name="locationCode" ColumnName="locationCode" />
+                <ScalarProperty Name="isArchived" ColumnName="isArchived" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkStatusEnum">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkStatusEnum">
+              <MappingFragment StoreEntitySet="WorkStatusEnum">
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkTask">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkTask">
+              <MappingFragment StoreEntitySet="WorkTask">
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+                <ScalarProperty Name="workId" ColumnName="workId" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+                <ScalarProperty Name="startDateTime" ColumnName="startDateTime" />
+                <ScalarProperty Name="endDateTime" ColumnName="endDateTime" />
+                <ScalarProperty Name="addressText" ColumnName="addressText" />
+                <ScalarProperty Name="vehicleText" ColumnName="vehicleText" />
+                <ScalarProperty Name="vehicleNumberplate" ColumnName="vehicleNumberplate" />
+                <ScalarProperty Name="linkNumberplate" ColumnName="linkNumberplate" />
+                <ScalarProperty Name="dollyNumberplate" ColumnName="dollyNumberplate" />
+                <ScalarProperty Name="trailerNumberplate" ColumnName="trailerNumberplate" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="systemRemark" ColumnName="systemRemark" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+                <ScalarProperty Name="deleteDateTime" ColumnName="deleteDateTime" />
+                <ScalarProperty Name="deleteUserId" ColumnName="deleteUserId" />
+                <ScalarProperty Name="isFinished" ColumnName="isFinished" />
+                <ScalarProperty Name="reportColumnNumber" ColumnName="reportColumnNumber" />
+                <ScalarProperty Name="transportId" ColumnName="transportId" />
+                <ScalarProperty Name="freighterSetup" ColumnName="freighterSetup" />
+                <ScalarProperty Name="addressSetup" ColumnName="addressSetup" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkTaskDocumentation">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkTaskDocumentation">
+              <MappingFragment StoreEntitySet="WorkTaskDocumentation">
+                <ScalarProperty Name="documentationId" ColumnName="documentationId" />
+                <ScalarProperty Name="workId" ColumnName="workId" />
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+                <ScalarProperty Name="registerDateTime" ColumnName="registerDateTime" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkTaskTemplate">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkTaskTemplate">
+              <MappingFragment StoreEntitySet="WorkTaskTemplate">
+                <ScalarProperty Name="templateId" ColumnName="templateId" />
+                <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="startDateTime" ColumnName="startDateTime" />
+                <ScalarProperty Name="endDateTime" ColumnName="endDateTime" />
+                <ScalarProperty Name="addressText" ColumnName="addressText" />
+                <ScalarProperty Name="vehicleNumberplate" ColumnName="vehicleNumberplate" />
+                <ScalarProperty Name="linkNumberplate" ColumnName="linkNumberplate" />
+                <ScalarProperty Name="dollyNumberplate" ColumnName="dollyNumberplate" />
+                <ScalarProperty Name="trailerNumberplate" ColumnName="trailerNumberplate" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="systemRemark" ColumnName="systemRemark" />
+                <ScalarProperty Name="reportColumnNumber" ColumnName="reportColumnNumber" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkTaskType">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkTaskType">
+              <MappingFragment StoreEntitySet="WorkTaskType">
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="actionType" ColumnName="actionType" />
+                <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+                <ScalarProperty Name="btnStartText" ColumnName="btnStartText" />
+                <ScalarProperty Name="btnEndText" ColumnName="btnEndText" />
+                <ScalarProperty Name="icon" ColumnName="icon" />
+                <ScalarProperty Name="requiredFields" ColumnName="requiredFields" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkVehicle">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkVehicle">
+              <MappingFragment StoreEntitySet="WorkVehicle">
+                <ScalarProperty Name="vehicleId" ColumnName="vehicleId" />
+                <ScalarProperty Name="numberplate" ColumnName="numberplate" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="isArchived" ColumnName="isArchived" />
+                <ScalarProperty Name="isTemporary" ColumnName="isTemporary" />
+                <ScalarProperty Name="lastLocation" ColumnName="lastLocation" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="createDateTime" ColumnName="createDateTime" />
+                <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkVehicleType">
+            <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.WorkVehicleType">
+              <MappingFragment StoreEntitySet="WorkVehicleType">
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="icon" ColumnName="icon" />
+                <ScalarProperty Name="internalTitle" ColumnName="internalTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

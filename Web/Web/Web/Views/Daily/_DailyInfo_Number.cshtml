@@ -1,0 +1,15 @@
+﻿@model DailyInfo
+@{
+    DailyTypeExtra dte = Common.DailyTypeExtra.Single(x => x.extraId == Model.extraId);
+}
+@Form.Controls.Text(new Form.Text()
+{
+    InputType = Form.TextInputType.Number,
+
+    Id = "sidebar_extraId_" + Model.extraId,
+    IdName = "extraId_" + Model.extraId,
+    Title = dte.internalTitle,
+    LabelText = dte.internalTitle,
+    Required = dte.isRequired,
+    Value = Model.entry
+})

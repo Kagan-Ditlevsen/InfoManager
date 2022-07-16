@@ -1,0 +1,2 @@
+D:\Github\InfoManager\Web\Web\Web\obj\Debug\InfoMan5.csproj.AssemblyReference.cache
+D:\Github\InfoManager\Web\Web\Web\obj\Debug\InfoMan5.csproj.CoreCompileInputs.cache

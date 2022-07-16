@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Daily Dashboard";
+    ViewBag.Icon = "pills";
+}
+<div class="">
+    @Html.Partial("_DailyList", new InfoMan.ViewModels.Daily_DailyList() { ShowQty = 999, ShowFooter = false, ShowFilter = true })
+</div>
+@section scripts {
+    <script>
+        $(function () {
+            Skd.SetEvents();
+        });
+    </script>
+}
+@section styles {
+    <style>
+    </style>
+}

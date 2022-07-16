@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Design";
+}
+<link href="~/Scripts/SkdWebHelper/Skd-Dark.Bootstrap.css" rel="stylesheet" />
+<link href="~/Scripts/SkdWebHelper/Skd-Dark.css" rel="stylesheet" />
+
+<div id="dailyCancel">
+    <div class="daily-text">eorigjeori gjeorigj</div>
+    <div class="btn-group w-100 daily-cancel">
+        <button class="btn btn-sm btn-danger text-nowrap p-0" style="overflow: hidden;">&nbsp;</button>
+        <button class="btn btn-sm btn-success text-nowrap p-0" style="overflow: hidden;">Cancel</button>
+    </div>
+</div>
+@section scripts {
+    <script>
+        $(function (e) {
+            let cancelWidth = 0;
+            var cancelInterval = window.setInterval(function (e) {
+                if (cancelWidth == 71) {
+                    window.clearInterval(cancelInterval);
+                    return;
+                }
+                $(".daily-cancel :first-child").css("width", cancelWidth + "%");
+                $(".daily-cancel :last-child").css("width", (100 - cancelWidth) + "%");
+                cancelWidth += 1;
+                if (cancelWidth == 50) {
+                    $(".daily-cancel :first-child").text("Cancel");
+                    $(".daily-cancel :last-child").html("&nbsp;");
+                }
+            }, 25)
+        });
+    </script>
+}
+@section styles {
+    <style>
+        #dailyCancel .daily-cancel button {
+            height: 50vh;
+            font-size: 3rem;
+        }
+        #dailyCancel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 90vw;
+            height: calc(100% - 16rem);
+            padding: 5vw;
+            margin-top: 5rem;
+            margin-left: 5vw;
+            margin-right: 5vw;
+            font-size: 3rem;
+            background: var(--bs-warning);
+            color: var(--bs-dark);
+        }
+    </style>
+}

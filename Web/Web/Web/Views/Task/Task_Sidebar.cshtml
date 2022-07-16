@@ -1,0 +1,87 @@
+﻿@{
+    List<Info> infoes = new List<Info>();
+    using (var db = new Db())
+    {
+        infoes = db.Info.Where(x => x.createUserId == Common.User.userId)
+            .OrderBy(x => x.title)
+            .ToList();
+    }
+
+    Layout = "~/Views/Shared/_Layout_SkdSidebar.cshtml";
+    ViewBag.Title = "Task [" + infoes.Count().ToString() + "]";
+    ViewBag.Icon = "tasks";
+}
+<nav class="nav nav-tabs">
+    <a class="nav-link btn-sm btn-secondary" tab-id="1">Overview</a>
+    <a class="nav-link btn-sm btn-secondary" tab-id="2">Edit</a>
+</nav>
+<div class="skd-tabs">
+    <div id="sidebarTab1" class="skd-tab skd-table">
+        <h5>Infoes</h5>
+        @foreach (var info in infoes)
+        {
+            <div class="d-flex">
+                <div class="col-auto">@info.infoId</div>
+                <div class="col">@info.title</div>
+            </div>
+        }
+        <h5>Categories</h5>
+        @foreach (var cat in Common.InfoCategories)
+        {
+            <div class="d-flex">
+                <div class="col-auto">@cat.categoryId</div>
+                <div class="col-auto">@cat.parentCategoryId</div>
+                <div class="col">@cat.internalTitle</div>
+            </div>
+        }
+    </div>
+    <div id="sidebarTab2" class="skd-tab skd-table">
+        <form id="sidebarTaskAdd" class="skd-form" action="/Task/ToDo_Add" method="post" novalidate>
+            @Html.AntiForgeryToken()
+            @Form.Controls.Text(new Form.Text() { Id = "taskAdd_title", IdName = "title", Title = "Task Title", Required = true })
+            <div id="footer_container" class="d-flex mt-3 mb-3">
+                <div class="col-auto ps-0">
+                </div>
+                <div class="col px-0"></div>
+                <div class="col-auto pe-0">
+                    @Form.Controls.ButtonSubmit(new Form.ButtonSubmit() { Title = "Add Task" })
+                </div>
+            </div>
+        </form>
+        <style>
+            #sidebarTab2 label {
+                width: auto;
+            }
+        </style>
+    </div>
+</div>
+<script>
+    var sidebarForm = "#sidebarTaskAdd";
+    $(function () {
+        if (skd_debug) console.warn("-- SIDEBAR --");
+        skd_sidebar_set_active_tab($("[tab-id=2]"));
+
+        $(sidebarForm + " .form-control").on("change", function (e) {
+            $(sidebarForm + " .form-control[disabled]:not([disabled=''])").removeClass("valid error");
+            skd_form_valid($(sidebarForm));
+        });
+
+        $(sidebarForm).off("submit").on("submit", function (e) {
+            if (skd_debug) {
+                return skd_form_debug($(sidebarForm));
+            } else {
+                if (!skd_form_valid($(sidebarForm))) {
+                    if (skd_debug) console.log("form not valid");
+                    return false;
+                }
+                if (skd_debug) console.log("form submit");
+
+                $(sidebarForm).find("[type='submit']").SkdContentSpinner().attr("disabled", "disabled");
+                Skd.PageLoading("Updating entry...", 500);
+            }
+        });
+
+        $(sidebarForm).validate();
+        skd_form_valid(sidebarForm);
+    })
+</script>
