@@ -8,7 +8,7 @@ using Skd.Web;
 using System.Threading;
 using System.Globalization;
 
-namespace InfoMan.Controllers
+namespace dk.infomanager.Controllers
 {
     [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class CommonController : Controller
@@ -17,8 +17,10 @@ namespace InfoMan.Controllers
         {
             if (!requestContext.HttpContext.Request.IsSecureConnection)
             {
-                //Response.Redirect(requestContext.HttpContext.Request.Url.ToString().Replace("http://", "https://"), true);
-                throw new UnauthorizedAccessException("Secure connection is required. Try " + requestContext.HttpContext.Request.Url.ToString().Replace("http://", "https://") + " instead.");
+                throw new Exception(Request.Url.ToString());
+                //Server.TransferRequest(requestContext.HttpContext.Request.Url.ToString().Replace("http://", "https://"), true);
+
+                //throw new UnauthorizedAccessException("Secure connection is required. Try " + requestContext.HttpContext.Request.Url.ToString().Replace("http://", "https://") + " instead.");
             }
 
 

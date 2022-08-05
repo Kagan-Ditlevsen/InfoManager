@@ -1,0 +1,1795 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{56C60A1C-36AB-4F44-8932-77A7AD0E0AE2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>dk.infomanager</RootNamespace>
+    <AssemblyName>dk.infomanager</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44362</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <!--<TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>-->
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.AspNet, Version=1.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.AspNet.1.9.2\lib\net45\Glimpse.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.Core, Version=1.8.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.EF6, Version=1.6.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.EF6.1.6.5\lib\net45\Glimpse.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.Mvc5, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
+    </Reference>
+    <Reference Include="HaulManager.Common">
+      <HintPath>..\..\..\HaulManager\Dll\HaulManager.Common.dll</HintPath>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Reference>
+    <Reference Include="HaulManager.DAL">
+      <HintPath>..\..\..\HaulManager\Dll\HaulManager.DAL.dll</HintPath>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Reference>
+    <Reference Include="HaulManager.Web">
+      <HintPath>..\..\..\HaulManager\Dll\HaulManager.Web.dll</HintPath>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Skd.Common, Version=1.0.8230.21393, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Skd\Skd.Common\Skd.Common\bin\Release\Skd.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Skd.Web, Version=1.0.8232.38453, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Skd\Skd.Web\Skd.Web\bin\Release\Skd.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\DailyController.cs" />
+    <Compile Include="Controllers\DeveloperController.cs" />
+    <Compile Include="Controllers\EconomyController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WorkController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\SystemController.cs" />
+    <Compile Include="Controllers\InfoController.cs" />
+    <Compile Include="GlimpseSecurityPolicy.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Daily.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DailyInfo.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DailyType.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DailyTypeExtra.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DailyTypeOption.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Extend\FinanceAccount.cs" />
+    <Compile Include="Models\Extend\Daily.cs" />
+    <Compile Include="Models\Extend\DailyInfo.cs" />
+    <Compile Include="Models\Extend\DailyTypeExtra.cs" />
+    <Compile Include="Models\Extend\DailyType.cs" />
+    <Compile Include="Models\Extend\DailyTypeOption.cs" />
+    <Compile Include="Models\Extend\WorkTask.cs" />
+    <Compile Include="Models\Extend\WorkVehicle.cs" />
+    <Compile Include="Models\Extend\WorkTaskType.cs" />
+    <Compile Include="Models\Extend\Work.cs" />
+    <Compile Include="Models\Extend\WorkAddress.cs" />
+    <Compile Include="Models\Extend\SysUser.cs" />
+    <Compile Include="Models\Extend\_CommonTables.cs" />
+    <Compile Include="Models\Extend\_Enumeration.cs" />
+    <Compile Include="Models\Extend\Info.cs" />
+    <Compile Include="Models\Extend\InfoCategory.cs" />
+    <Compile Include="Models\Extend\InfoEntry.cs" />
+    <Compile Include="Models\Extend\InfoEntryType.cs" />
+    <Compile Include="Models\Finance.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinanceAccount.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinanceAccountType.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinanceLine.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\fnc_Work_Salary_Result.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Info.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InfoCategory.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InfoEntry.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InfoEntryType.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InfoManagerDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfoManagerDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InfoManagerDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InfoManagerDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfoManagerDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SysUser.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_DailyType_Tree.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_Daily_Days.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_Daily_Overview.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_Daily_Statistics.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Work.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkAddress.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkStatusEnum.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkTask.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkTaskDocumentation.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkTaskTemplate.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkTaskType.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkVehicle.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkVehicleType.cs">
+      <DependentUpon>InfoManagerDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\dayname-da.xml" />
+    <Content Include="App_Data\Skd.Menu.xml" />
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Glimpse.Ado.dll" />
+    <Content Include="bin\Glimpse.AspNet.dll" />
+    <Content Include="bin\Glimpse.Core.dll" />
+    <Content Include="bin\Glimpse.EF6.dll" />
+    <Content Include="bin\Glimpse.Mvc5.dll" />
+    <Content Include="bin\HaulManager.Common.dll" />
+    <Content Include="bin\HaulManager.DAL.dll" />
+    <Content Include="bin\HaulManager.Web.dll" />
+    <Content Include="bin\InfoMan.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\roslyn\csc.exe" />
+    <Content Include="bin\roslyn\csi.exe" />
+    <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
+    <Content Include="bin\roslyn\System.Buffers.dll" />
+    <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
+    <Content Include="bin\roslyn\System.Memory.dll" />
+    <Content Include="bin\roslyn\System.Numerics.Vectors.dll" />
+    <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
+    <Content Include="bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="bin\roslyn\System.Text.Encoding.CodePages.dll" />
+    <Content Include="bin\roslyn\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\roslyn\vbc.exe" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe" />
+    <!-- <Content Include="bin\Skd.Web.dll" /> -->
+    <!--
+	<Content Include="..\..\..\Publish\Skd\Skd.Web.dll">
+      <Link>Skd.Web</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SpecificVersion>False</SpecificVersion>
+    </Content>
+	-->
+    <!-- <Content Include="bin\Skd.Common.dll" /> -->
+    <!-- <Content Include="..\..\..\Publish\Skd\Skd.Common.dll">
+      <Link>Skd.Common</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SpecificVersion>False</SpecificVersion>
+    </Content>
+	-->
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Cursor\help.cur" />
+    <Content Include="Content\Cursor\link.cur" />
+    <Content Include="Content\Cursor\location.cur" />
+    <Content Include="Content\Cursor\no.cur" />
+    <Content Include="Content\Cursor\person.cur" />
+    <Content Include="Content\fontawesome-5.15.3\all.css" />
+    <Content Include="Content\fontawesome-5.15.3\all.min.css" />
+    <Content Include="Content\fontawesome-5.15.3\brands.css" />
+    <Content Include="Content\fontawesome-5.15.3\brands.min.css" />
+    <Content Include="Content\fontawesome-5.15.3\fa-brands-400.svg" />
+    <Content Include="Content\fontawesome-5.15.3\fa-regular-400.svg" />
+    <Content Include="Content\fontawesome-5.15.3\fa-solid-900.svg" />
+    <Content Include="Content\fontawesome-5.15.3\fontawesome.css" />
+    <Content Include="Content\fontawesome-5.15.3\fontawesome.min.css" />
+    <Content Include="Content\fontawesome-5.15.3\regular.css" />
+    <Content Include="Content\fontawesome-5.15.3\regular.min.css" />
+    <Content Include="Content\fontawesome-5.15.3\solid.css" />
+    <Content Include="Content\fontawesome-5.15.3\solid.min.css" />
+    <Content Include="Content\fontawesome-5.15.3\svg-with-js.css" />
+    <Content Include="Content\fontawesome-5.15.3\svg-with-js.min.css" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\address-book.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\address-card.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\angry.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\arrow-alt-circle-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\arrow-alt-circle-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\arrow-alt-circle-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\arrow-alt-circle-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\bell-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\bell.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\bookmark.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\building.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\calendar-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\calendar-check.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\calendar-minus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\calendar-plus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\calendar-times.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\calendar.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\caret-square-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\caret-square-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\caret-square-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\caret-square-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\chart-bar.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\check-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\check-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\clipboard.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\clock.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\clone.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\closed-captioning.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\comment-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\comment-dots.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\comment.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\comments.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\compass.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\copy.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\copyright.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\credit-card.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\dizzy.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\dot-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\edit.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\envelope-open.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\envelope.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\eye-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\eye.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\file-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\file-archive.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\file-audio.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\file-code.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\file-excel.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\file-image.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\file-pdf.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\file-powerpoint.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\file-video.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\file-word.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\file.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\flag.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\flushed.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\folder-open.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\folder.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\font-awesome-logo-full.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\frown-open.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\frown.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\futbol.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\gem.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grimace.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grin-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grin-beam-sweat.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grin-beam.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grin-hearts.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grin-squint-tears.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grin-squint.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grin-stars.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grin-tears.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grin-tongue-squint.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grin-tongue-wink.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grin-tongue.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grin-wink.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\grin.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hand-lizard.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hand-paper.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hand-peace.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hand-point-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hand-point-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hand-point-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hand-point-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hand-pointer.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hand-rock.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hand-scissors.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hand-spock.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\handshake.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hdd.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\heart.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hospital.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\hourglass.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\id-badge.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\id-card.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\image.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\images.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\keyboard.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\kiss-beam.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\kiss-wink-heart.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\kiss.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\laugh-beam.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\laugh-squint.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\laugh-wink.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\laugh.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\lemon.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\life-ring.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\lightbulb.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\list-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\map.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\meh-blank.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\meh-rolling-eyes.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\meh.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\minus-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\money-bill-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\moon.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\newspaper.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\object-group.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\object-ungroup.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\paper-plane.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\pause-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\play-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\plus-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\question-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\registered.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\sad-cry.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\sad-tear.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\save.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\share-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\smile-beam.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\smile-wink.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\smile.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\snowflake.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\star-half.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\star.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\sticky-note.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\stop-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\sun.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\surprise.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\thumbs-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\thumbs-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\times-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\tired.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\trash-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\user-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\user.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\window-close.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\window-maximize.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\window-minimize.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\regular\window-restore.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ad.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\address-book.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\address-card.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\adjust.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\air-freshener.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\align-center.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\align-justify.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\align-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\align-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\allergies.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ambulance.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\american-sign-language-interpreting.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\anchor.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\angle-double-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\angle-double-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\angle-double-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\angle-double-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\angle-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\angle-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\angle-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\angle-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\angry.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ankh.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\apple-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\archive.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\archway.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrow-alt-circle-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrow-alt-circle-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrow-alt-circle-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrow-alt-circle-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrow-circle-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrow-circle-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrow-circle-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrow-circle-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrow-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrow-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrow-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrow-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrows-alt-h.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrows-alt-v.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\arrows-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\assistive-listening-systems.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\asterisk.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\at.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\atlas.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\atom.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\audio-description.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\award.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\baby-carriage.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\baby.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\backspace.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\backward.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bacon.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bacteria.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bacterium.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bahai.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\balance-scale-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\balance-scale-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\balance-scale.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ban.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\band-aid.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\barcode.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bars.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\baseball-ball.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\basketball-ball.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bath.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\battery-empty.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\battery-full.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\battery-half.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\battery-quarter.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\battery-three-quarters.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bed.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\beer.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bell-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bell.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bezier-curve.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bible.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bicycle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\biking.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\binoculars.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\biohazard.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\birthday-cake.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\blender-phone.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\blender.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\blind.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\blog.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bold.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bolt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bomb.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bone.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bong.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\book-dead.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\book-medical.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\book-open.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\book-reader.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\book.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bookmark.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\border-all.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\border-none.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\border-style.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bowling-ball.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\box-open.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\box-tissue.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\box.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\boxes.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\braille.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\brain.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bread-slice.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\briefcase-medical.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\briefcase.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\broadcast-tower.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\broom.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\brush.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bug.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\building.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bullhorn.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bullseye.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\burn.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bus-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\bus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\business-time.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\calculator.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\calendar-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\calendar-check.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\calendar-day.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\calendar-minus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\calendar-plus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\calendar-times.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\calendar-week.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\calendar.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\camera-retro.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\camera.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\campground.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\candy-cane.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cannabis.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\capsules.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\car-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\car-battery.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\car-crash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\car-side.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\car.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\caravan.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\caret-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\caret-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\caret-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\caret-square-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\caret-square-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\caret-square-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\caret-square-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\caret-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\carrot.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cart-arrow-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cart-plus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cash-register.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cat.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\certificate.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chair.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chalkboard-teacher.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chalkboard.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\charging-station.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chart-area.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chart-bar.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chart-line.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chart-pie.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\check-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\check-double.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\check-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\check.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cheese.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chess-bishop.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chess-board.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chess-king.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chess-knight.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chess-pawn.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chess-queen.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chess-rook.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chess.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chevron-circle-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chevron-circle-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chevron-circle-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chevron-circle-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chevron-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chevron-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chevron-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\chevron-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\child.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\church.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\circle-notch.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\city.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\clinic-medical.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\clipboard-check.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\clipboard-list.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\clipboard.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\clock.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\clone.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\closed-captioning.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cloud-download-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cloud-meatball.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cloud-moon-rain.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cloud-moon.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cloud-rain.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cloud-showers-heavy.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cloud-sun-rain.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cloud-sun.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cloud-upload-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cloud.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cocktail.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\code-branch.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\code.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\coffee.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cog.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cogs.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\coins.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\columns.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\comment-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\comment-dollar.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\comment-dots.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\comment-medical.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\comment-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\comment.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\comments-dollar.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\comments.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\compact-disc.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\compass.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\compress-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\compress-arrows-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\compress.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\concierge-bell.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cookie-bite.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cookie.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\copy.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\copyright.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\couch.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\credit-card.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\crop-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\crop.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cross.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\crosshairs.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\crow.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\crown.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\crutch.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cube.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cubes.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\cut.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\database.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\deaf.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\democrat.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\desktop.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dharmachakra.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\diagnoses.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dice-d20.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dice-d6.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dice-five.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dice-four.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dice-one.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dice-six.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dice-three.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dice-two.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dice.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\digital-tachograph.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\directions.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\disease.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\divide.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dizzy.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dna.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dog.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dollar-sign.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dolly-flatbed.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dolly.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\donate.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\door-closed.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\door-open.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dot-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dove.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\download.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\drafting-compass.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dragon.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\draw-polygon.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\drum-steelpan.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\drum.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\drumstick-bite.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dumbbell.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dumpster-fire.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dumpster.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\dungeon.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\edit.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\egg.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\eject.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ellipsis-h.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ellipsis-v.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\envelope-open-text.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\envelope-open.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\envelope-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\envelope.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\equals.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\eraser.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ethernet.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\euro-sign.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\exchange-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\exclamation-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\exclamation-triangle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\exclamation.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\expand-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\expand-arrows-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\expand.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\external-link-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\external-link-square-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\eye-dropper.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\eye-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\eye.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\fan.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\fast-backward.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\fast-forward.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\faucet.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\fax.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\feather-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\feather.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\female.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\fighter-jet.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-archive.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-audio.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-code.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-contract.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-csv.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-download.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-excel.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-export.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-image.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-import.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-invoice-dollar.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-invoice.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-medical-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-medical.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-pdf.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-powerpoint.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-prescription.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-signature.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-upload.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-video.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file-word.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\file.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\fill-drip.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\fill.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\film.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\filter.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\fingerprint.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\fire-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\fire-extinguisher.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\fire.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\first-aid.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\fish.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\fist-raised.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\flag-checkered.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\flag-usa.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\flag.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\flask.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\flushed.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\folder-minus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\folder-open.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\folder-plus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\folder.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\font-awesome-logo-full.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\font.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\football-ball.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\forward.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\frog.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\frown-open.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\frown.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\funnel-dollar.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\futbol.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\gamepad.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\gas-pump.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\gavel.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\gem.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\genderless.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ghost.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\gift.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\gifts.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\glass-cheers.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\glass-martini-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\glass-martini.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\glass-whiskey.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\glasses.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\globe-africa.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\globe-americas.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\globe-asia.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\globe-europe.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\globe.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\golf-ball.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\gopuram.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\graduation-cap.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\greater-than-equal.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\greater-than.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grimace.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grin-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grin-beam-sweat.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grin-beam.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grin-hearts.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grin-squint-tears.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grin-squint.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grin-stars.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grin-tears.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grin-tongue-squint.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grin-tongue-wink.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grin-tongue.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grin-wink.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grin.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grip-horizontal.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grip-lines-vertical.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grip-lines.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\grip-vertical.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\guitar.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\h-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hamburger.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hammer.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hamsa.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-holding-heart.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-holding-medical.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-holding-usd.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-holding-water.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-holding.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-lizard.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-middle-finger.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-paper.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-peace.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-point-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-point-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-point-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-point-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-pointer.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-rock.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-scissors.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-sparkles.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hand-spock.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hands-helping.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hands-wash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hands.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\handshake-alt-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\handshake-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\handshake.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hanukiah.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hard-hat.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hashtag.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hat-cowboy-side.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hat-cowboy.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hat-wizard.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hdd.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\head-side-cough-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\head-side-cough.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\head-side-mask.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\head-side-virus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\heading.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\headphones-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\headphones.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\headset.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\heart-broken.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\heart.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\heartbeat.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\helicopter.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\highlighter.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hiking.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hippo.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\history.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hockey-puck.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\holly-berry.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\home.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\horse-head.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\horse.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hospital-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hospital-symbol.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hospital-user.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hospital.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hot-tub.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hotdog.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hotel.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hourglass-end.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hourglass-half.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hourglass-start.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hourglass.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\house-damage.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\house-user.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\hryvnia.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\i-cursor.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ice-cream.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\icicles.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\icons.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\id-badge.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\id-card-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\id-card.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\igloo.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\image.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\images.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\inbox.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\indent.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\industry.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\infinity.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\info-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\info.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\italic.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\jedi.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\joint.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\journal-whills.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\kaaba.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\key.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\keyboard.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\khanda.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\kiss-beam.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\kiss-wink-heart.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\kiss.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\kiwi-bird.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\landmark.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\language.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\laptop-code.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\laptop-house.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\laptop-medical.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\laptop.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\laugh-beam.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\laugh-squint.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\laugh-wink.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\laugh.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\layer-group.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\leaf.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\lemon.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\less-than-equal.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\less-than.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\level-down-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\level-up-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\life-ring.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\lightbulb.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\link.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\lira-sign.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\list-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\list-ol.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\list-ul.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\list.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\location-arrow.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\lock-open.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\lock.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\long-arrow-alt-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\long-arrow-alt-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\long-arrow-alt-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\long-arrow-alt-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\low-vision.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\luggage-cart.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\lungs-virus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\lungs.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\magic.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\magnet.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mail-bulk.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\male.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\map-marked-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\map-marked.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\map-marker-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\map-marker.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\map-pin.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\map-signs.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\map.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\marker.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mars-double.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mars-stroke-h.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mars-stroke-v.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mars-stroke.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mars.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mask.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\medal.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\medkit.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\meh-blank.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\meh-rolling-eyes.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\meh.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\memory.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\menorah.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mercury.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\meteor.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\microchip.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\microphone-alt-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\microphone-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\microphone-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\microphone.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\microscope.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\minus-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\minus-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\minus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mitten.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mobile-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mobile.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\money-bill-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\money-bill-wave-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\money-bill-wave.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\money-bill.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\money-check-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\money-check.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\monument.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\moon.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mortar-pestle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mosque.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\motorcycle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mountain.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mouse-pointer.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mouse.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\mug-hot.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\music.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\network-wired.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\neuter.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\newspaper.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\not-equal.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\notes-medical.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\object-group.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\object-ungroup.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\oil-can.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\om.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\otter.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\outdent.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pager.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\paint-brush.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\paint-roller.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\palette.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pallet.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\paper-plane.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\paperclip.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\parachute-box.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\paragraph.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\parking.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\passport.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pastafarianism.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\paste.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pause-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pause.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\paw.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\peace.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pen-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pen-fancy.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pen-nib.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pen-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pen.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pencil-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pencil-ruler.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\people-arrows.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\people-carry.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pepper-hot.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\percent.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\percentage.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\person-booth.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\phone-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\phone-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\phone-square-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\phone-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\phone-volume.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\phone.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\photo-video.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\piggy-bank.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pills.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pizza-slice.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\place-of-worship.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\plane-arrival.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\plane-departure.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\plane-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\plane.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\play-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\play.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\plug.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\plus-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\plus-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\plus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\podcast.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\poll-h.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\poll.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\poo-storm.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\poo.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\poop.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\portrait.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pound-sign.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\power-off.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pray.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\praying-hands.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\prescription-bottle-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\prescription-bottle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\prescription.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\print.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\procedures.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\project-diagram.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pump-medical.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\pump-soap.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\puzzle-piece.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\qrcode.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\question-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\question.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\quidditch.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\quote-left.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\quote-right.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\quran.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\radiation-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\radiation.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\rainbow.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\random.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\receipt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\record-vinyl.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\recycle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\redo-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\redo.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\registered.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\remove-format.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\reply-all.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\reply.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\republican.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\restroom.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\retweet.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ribbon.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ring.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\road.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\robot.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\rocket.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\route.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\rss-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\rss.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ruble-sign.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ruler-combined.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ruler-horizontal.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ruler-vertical.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ruler.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\running.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\rupee-sign.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sad-cry.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sad-tear.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\satellite-dish.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\satellite.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\save.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\school.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\screwdriver.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\scroll.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sd-card.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\search-dollar.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\search-location.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\search-minus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\search-plus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\search.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\seedling.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\server.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\shapes.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\share-alt-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\share-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\share-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\share.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\shekel-sign.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\shield-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\shield-virus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ship.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\shipping-fast.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\shoe-prints.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\shopping-bag.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\shopping-basket.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\shopping-cart.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\shower.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\shuttle-van.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sign-in-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sign-language.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sign-out-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sign.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\signal.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\signature.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sim-card.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sink.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sitemap.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\skating.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\skiing-nordic.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\skiing.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\skull-crossbones.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\skull.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sleigh.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sliders-h.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\smile-beam.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\smile-wink.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\smile.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\smog.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\smoking-ban.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\smoking.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sms.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\snowboarding.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\snowflake.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\snowman.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\snowplow.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\soap.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\socks.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\solar-panel.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-alpha-down-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-alpha-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-alpha-up-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-alpha-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-amount-down-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-amount-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-amount-up-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-amount-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-numeric-down-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-numeric-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-numeric-up-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-numeric-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sort.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\spa.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\space-shuttle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\spell-check.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\spider.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\spinner.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\splotch.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\spray-can.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\square-full.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\square-root-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\stamp.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\star-and-crescent.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\star-half-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\star-half.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\star-of-david.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\star-of-life.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\star.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\step-backward.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\step-forward.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\stethoscope.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sticky-note.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\stop-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\stop.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\stopwatch-20.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\stopwatch.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\store-alt-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\store-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\store-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\store.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\stream.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\street-view.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\strikethrough.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\stroopwafel.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\subscript.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\subway.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\suitcase-rolling.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\suitcase.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sun.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\superscript.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\surprise.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\swatchbook.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\swimmer.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\swimming-pool.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\synagogue.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sync-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\sync.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\syringe.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\table-tennis.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\table.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tablet-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tablet.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tablets.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tachometer-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tag.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tags.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tape.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tasks.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\taxi.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\teeth-open.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\teeth.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\temperature-high.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\temperature-low.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tenge.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\terminal.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\text-height.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\text-width.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\th-large.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\th-list.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\th.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\theater-masks.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\thermometer-empty.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\thermometer-full.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\thermometer-half.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\thermometer-quarter.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\thermometer-three-quarters.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\thermometer.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\thumbs-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\thumbs-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\thumbtack.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\ticket-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\times-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\times.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tint-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tint.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tired.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\toggle-off.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\toggle-on.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\toilet-paper-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\toilet-paper.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\toilet.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\toolbox.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tools.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tooth.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\torah.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\torii-gate.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tractor.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\trademark.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\traffic-light.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\trailer.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\train.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tram.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\transgender-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\transgender.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\trash-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\trash-restore-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\trash-restore.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\trash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tree.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\trophy.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\truck-loading.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\truck-monster.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\truck-moving.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\truck-pickup.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\truck.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tshirt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tty.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\tv.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\umbrella-beach.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\umbrella.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\underline.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\undo-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\undo.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\universal-access.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\university.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\unlink.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\unlock-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\unlock.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\upload.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-alt-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-astronaut.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-check.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-circle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-clock.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-cog.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-edit.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-friends.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-graduate.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-injured.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-lock.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-md.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-minus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-ninja.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-nurse.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-plus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-secret.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-shield.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-tag.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-tie.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user-times.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\user.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\users-cog.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\users-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\users.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\utensil-spoon.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\utensils.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\vector-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\venus-double.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\venus-mars.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\venus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\vest-patches.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\vest.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\vial.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\vials.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\video-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\video.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\vihara.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\virus-slash.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\virus.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\viruses.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\voicemail.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\volleyball-ball.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\volume-down.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\volume-mute.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\volume-off.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\volume-up.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\vote-yea.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\vr-cardboard.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\walking.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\wallet.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\warehouse.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\water.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\wave-square.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\weight-hanging.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\weight.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\wheelchair.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\wifi.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\wind.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\window-close.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\window-maximize.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\window-minimize.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\window-restore.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\wine-bottle.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\wine-glass-alt.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\wine-glass.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\won-sign.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\wrench.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\x-ray.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\yen-sign.svg" />
+    <Content Include="Content\fontawesome-5.15.3\svgs\solid\yin-yang.svg" />
+    <Content Include="Content\fontawesome-5.15.3\v4-shims.css" />
+    <Content Include="Content\fontawesome-5.15.3\v4-shims.min.css" />
+    <Content Include="Content\Images\content-loader.gif" />
+    <Content Include="Content\Images\driver-2.ico" />
+    <Content Include="Content\Images\driver.ico" />
+    <Content Include="Content\Images\folder-blue.ico" />
+    <Content Include="Content\Images\loader-circle.gif" />
+    <Content Include="Content\Images\loader-pie.svg" />
+    <Content Include="Content\Images\paperbinder.ico" />
+    <Content Include="Content\Images\road.png" />
+    <Content Include="Content\Images\road2.png" />
+    <Content Include="Content\Images\view-compact.svg" />
+    <Content Include="Content\Images\view-list.svg" />
+    <Content Include="Content\Images\view-roomie.svg" />
+    <Content Include="Content\Report\leman_template.jpg" />
+    <Content Include="Content\Website.css" />
+    <Content Include="Content\Images\folder-management.png" />
+    <Content Include="Global.asax" />
+    <Content Include="Models\InfoManagerDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InfoManagerDb.edmx</DependentUpon>
+      <LastGenOutput>InfoManagerDb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\InfoManagerDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InfoManagerDb.edmx</DependentUpon>
+      <LastGenOutput>InfoManagerDb.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\jquery-load-xml-example\index.html" />
+    <Content Include="Models\jquery-load-xml-example\loading.gif" />
+    <Content Include="Models\jquery-load-xml-example\products.xml" />
+    <Content Include="Content\fontawesome-5.15.3\fa-brands-400.eot" />
+    <Content Include="Content\fontawesome-5.15.3\fa-brands-400.ttf" />
+    <Content Include="Content\fontawesome-5.15.3\fa-brands-400.woff" />
+    <Content Include="Content\fontawesome-5.15.3\fa-brands-400.woff2" />
+    <Content Include="Content\fontawesome-5.15.3\fa-regular-400.eot" />
+    <Content Include="Content\fontawesome-5.15.3\fa-regular-400.ttf" />
+    <Content Include="Content\fontawesome-5.15.3\fa-regular-400.woff" />
+    <Content Include="Content\fontawesome-5.15.3\fa-regular-400.woff2" />
+    <Content Include="Content\fontawesome-5.15.3\fa-solid-900.eot" />
+    <Content Include="Content\fontawesome-5.15.3\fa-solid-900.ttf" />
+    <Content Include="Content\fontawesome-5.15.3\fa-solid-900.woff" />
+    <Content Include="Content\fontawesome-5.15.3\fa-solid-900.woff2" />
+    <EntityDeploy Include="Models\InfoManagerDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>InfoManagerDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\InfoManagerDb.edmx.diagram">
+      <DependentUpon>InfoManagerDb.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\Cursor\busy-pointer.ani" />
+    <Content Include="Content\Cursor\busy.ani" />
+    <Content Include="Content\Cursor\Vs Version 6.0 Cursors.url" />
+    <Content Include="bin\InfoMan.dll.config" />
+    <Content Include="bin\roslyn\csc.exe.config" />
+    <Content Include="bin\roslyn\csc.rsp" />
+    <Content Include="bin\roslyn\csi.exe.config" />
+    <Content Include="bin\roslyn\csi.rsp" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\vbc.exe.config" />
+    <Content Include="bin\roslyn\vbc.rsp" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="Scripts\additional-methods.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.js" />
+    <Content Include="Scripts\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\SkdWebHelper\Skd-Dark.Bootstrap.css" />
+    <Content Include="Scripts\SkdWebHelper\Skd-Dark.css" />
+    <Content Include="Scripts\SkdWebHelper\Skd.css" />
+    <Content Include="Scripts\SkdWebHelper\Skd.Font.css" />
+    <Content Include="Scripts\SkdWebHelper\Skd.Form.css" />
+    <Content Include="Scripts\SkdWebHelper\Skd.Form.js" />
+    <Content Include="Scripts\SkdWebHelper\Skd.JavaScriptExtend.js" />
+    <Content Include="Scripts\SkdWebHelper\Skd.js" />
+    <Content Include="Scripts\SkdWebHelper\Skd.Menu.css" />
+    <Content Include="Scripts\SkdWebHelper\Skd.Menu.js" />
+    <Content Include="Scripts\SkdWebHelper\Skd.Table.css" />
+    <Content Include="Scripts\Website.js" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Info\Index.cshtml" />
+    <Content Include="Views\Info\Category.cshtml" />
+    <Content Include="Views\Info\EntryType.cshtml" />
+    <Content Include="Views\Authentication\Logon.cshtml" />
+    <Content Include="Views\Daily\Index.cshtml" />
+    <Content Include="Views\Economy\Index.cshtml" />
+    <Content Include="Views\Developer\Index.cshtml" />
+    <Content Include="Views\System\DailyType.cshtml" />
+    <Content Include="Views\Daily\Stat.cshtml" />
+    <Content Include="Views\Developer\PoC\Layout\Skd-Card.cshtml" />
+    <Content Include="Views\Developer\PoC\Layout\Skd-Form-Checkbox.cshtml" />
+    <Content Include="Views\Developer\PoC\Layout\Skd-Form.cshtml" />
+    <Content Include="Views\System\Me_Sidebar.cshtml" />
+    <Content Include="Views\Shared\_Layout_SkdSidebar.cshtml" />
+    <Content Include="Views\Task\Task_Sidebar.cshtml" />
+    <Content Include="Views\System\Index.cshtml" />
+    <!-- <Content Include="Views\Daily\Sidebar_Daily.cshtml" /> -->
+    <Content Include="Views\System\DailyTypeExtra.cshtml" />
+    <Content Include="Views\Developer\ToDo\Pages\Boxing.cshtml" />
+    <Content Include="Views\Developer\ToDo\Pages\XmlMenu.cshtml" />
+    <Content Include="Views\Daily\Sidebar_Stat.cshtml" />
+    <Content Include="Views\Daily\_DailyList.cshtml" />
+    <Content Include="Views\System\Sidebar_Device.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\SkdWebHelper\Skd.Font.ttf" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
+    <Content Include="Views\System\InfoCategory.cshtml" />
+    <Content Include="Views\Developer\WiP\Index.cshtml" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Views\Daily\Stat_Dietitian.cshtml" />
+    <Content Include="Views\Daily\Sidebar_DailyAdd.cshtml" />
+    <Content Include="Views\Daily\Stat_OccTherapist.cshtml" />
+    <Content Include="Views\Daily\_DailyInfo_Range.cshtml" />
+    <Content Include="Views\Daily\_DailyInfo_Text.cshtml" />
+    <Content Include="Views\Daily\_DailyInfo_Number.cshtml" />
+    <Content Include="Views\Daily\_DailyInfo_DateTime.cshtml" />
+    <Content Include="Views\Daily\_DailyInfo_List.cshtml" />
+    <Content Include="Views\Work\Index.cshtml" />
+    <Content Include="Views\Work\Hours.cshtml" />
+    <Content Include="Views\Work\Drive.cshtml" />
+    <Content Include="Views\Work\_TaskEdit.cshtml" />
+    <Content Include="Views\Work\Design.cshtml" />
+    <Content Include="Views\Work\ReportWork.cshtml" />
+    <Content Include="Views\Work\Report_LemanGT.cshtml" />
+    <Content Include="Views\Work\Edit.cshtml" />
+    <Content Include="Views\Work\DriveOTF.cshtml" />
+    <Content Include="Views\Work\Drive2.cshtml" />
+    <Content Include="Views\Shared\_Layout_Empty.cshtml" />
+    <Content Include="Views\Work\DriversAid.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>19338</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44362/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

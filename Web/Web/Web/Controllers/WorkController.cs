@@ -1,4 +1,4 @@
-﻿using InfoMan.Models;
+﻿using dk.infomanager.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Skd.Web;
 
-namespace InfoMan
+namespace dk.infomanager
 {
     public static class ExtensionMethods
     {
@@ -29,10 +29,11 @@ namespace InfoMan
     }
 }
 
-namespace InfoMan.Controllers
+namespace dk.infomanager.Controllers
 {
     public class WorkController : CommonController
     {
+        public ActionResult DriversAid() => View();
         public ActionResult Drive2(Guid id)
         {
             using (var db = new Db())

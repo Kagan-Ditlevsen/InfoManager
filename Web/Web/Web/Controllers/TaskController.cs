@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using InfoMan.Models;
+using dk.infomanager.Models;
 
-namespace InfoMan.Controllers
+namespace dk.infomanager.Controllers
 {
     public class TaskController : CommonController
     {

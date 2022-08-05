@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace InfoMan.Models
+namespace dk.infomanager.Models
 {
     [Flags]
     public enum WorkTaskRequiredFieldEnum

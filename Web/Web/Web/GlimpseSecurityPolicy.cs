@@ -4,7 +4,7 @@
 using Glimpse.AspNet.Extensions;
 using Glimpse.Core.Extensibility;
 
-namespace InfoMan
+namespace dk.infomanager
 {
     public class GlimpseSecurityPolicy:IRuntimePolicy
     {

@@ -9,6 +9,7 @@
 
 		<menu title="main">
 				<menuitem type="item" title="Frontpage" url="/" icon="home" sidebar-url="" ajax-url="" loading-message=""></menuitem>
+				<menuitem type="item" title="** Drivers AID **" url="/Work/DriversAid" icon="hands-helping" sidebar-url="" ajax-url="" loading-message=""></menuitem>>
 
 				<menuitem type="areaspacer"></menuitem>
 				<menuitem type="item" title="Daily Dashboard" url="/Daily" icon="pills" sidebar-url="" ajax-url="" loading-message="">

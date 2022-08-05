@@ -2,9 +2,9 @@
 using System.Web;
 using System.Collections.Generic;
 using System.Linq;
-using InfoMan.Models;
+using dk.infomanager.Models;
 
-namespace InfoMan
+namespace dk.infomanager
 {
     public partial class Common
     {

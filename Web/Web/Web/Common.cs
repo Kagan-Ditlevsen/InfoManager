@@ -1,11 +1,11 @@
-﻿using InfoMan.Models;
+﻿using dk.infomanager.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace InfoMan
+namespace dk.infomanager
 {
     public partial class Common
     {

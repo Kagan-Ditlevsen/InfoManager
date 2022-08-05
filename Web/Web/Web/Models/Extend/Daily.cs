@@ -4,7 +4,7 @@ using System.Linq;
 using Skd.Web;
 using System.Web;
 
-namespace InfoMan.Models
+namespace dk.infomanager.Models
 {
     public partial class Daily
     {

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace InfoMan
+namespace dk.infomanager
 {
     public class BundleConfig
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace InfoMan.Controllers
+namespace dk.infomanager.Controllers
 {
     public class SystemController : CommonController
     {

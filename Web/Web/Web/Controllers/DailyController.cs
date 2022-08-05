@@ -1,11 +1,11 @@
-﻿using InfoMan.Models;
+﻿using dk.infomanager.Models;
 using System;
 using System.Web.Mvc;
 using Skd.Web;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace InfoMan.Controllers
+namespace dk.infomanager.Controllers
 {
     public class DailyController : CommonController
     {
@@ -132,7 +132,7 @@ namespace InfoMan.Controllers
     }
 }
 
-namespace InfoMan.ViewModels
+namespace dk.infomanager.ViewModels
 {
     public class Daily_DailyList
     {

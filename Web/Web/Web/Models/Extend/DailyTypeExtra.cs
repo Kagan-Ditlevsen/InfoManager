@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Skd;
 
-namespace InfoMan.Models
+namespace dk.infomanager.Models
 {
     public partial class DailyTypeExtra
     {

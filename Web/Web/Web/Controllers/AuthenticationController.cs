@@ -1,10 +1,10 @@
-﻿using InfoMan.Models;
+﻿using dk.infomanager.Models;
 using System;
 using System.Web;
 using System.Web.Mvc;
 using Skd.Web;
 
-namespace InfoMan.Controllers
+namespace dk.infomanager.Controllers
 {
     public class AuthenticationController : Controller
     {

@@ -10,7 +10,7 @@ using System.Reflection;
 using System.IO;
 using System.Diagnostics;
 
-namespace InfoMan
+namespace dk.infomanager
 {
     public class MvcApplication : System.Web.HttpApplication
     {

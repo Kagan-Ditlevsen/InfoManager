@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace InfoMan.Models
+namespace dk.infomanager.Models
 {
     public partial class WorkTask
     {

@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>IM5 - @ViewBag.Title</title>
+    <title>@ViewBag.Title - Information Manager 2022</title>
     <link rel="icon" type="image/x-icon" href="~/Content/Images/folder-blue.ico" />
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/skd")
@@ -103,7 +103,7 @@
                     <span class="fas fa-smoking"></span><br />@(20 - q) left
                 </div>
                 <div class="top-button col-auto" skd-sidebar-url="/System/Me_Sidebar">
-                    <span class="fas fa-user-cog"></span><br />@InfoMan.Common.User.firstName
+                    <span class="fas fa-user-cog"></span><br />@Common.User.firstName
                 </div>
                 <div id="top_btn_print" class="top-button col-auto">
                     <span class="fas @Icon.Print"></span><br />Print

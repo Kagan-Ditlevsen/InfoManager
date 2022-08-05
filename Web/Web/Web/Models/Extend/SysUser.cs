@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace InfoMan.Models
+namespace dk.infomanager.Models
 {
     public class SysUserStat
     {
@@ -17,6 +17,7 @@ namespace InfoMan.Models
         public int qtyMidnight { get; set; }
         public Nullable<System.DateTime> lastTimeTypeId { get; set; }
         public Nullable<System.DateTime> lastTimeOptionId { get; set; }
+        public Nullable<System.DateTime> lastRegisterDateTime { get; set; }
         public int createUserId { get; set; }
         public HtmlString StatusText()
         {
@@ -77,7 +78,7 @@ namespace InfoMan.Models
         {
             if (HttpContext.Current.Session != null && HttpContext.Current.Session["UserStat"] == null)
             {
-                using (var db = new Db())
+                //using (var db = new Db())
                 {
                     Common.User.Stat.Reload();
                 }

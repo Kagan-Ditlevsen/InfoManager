@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace InfoMan.Controllers
+namespace dk.infomanager.Controllers
 {
     public class HomeController : CommonController
     {

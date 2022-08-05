@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoMan5", "Web\Web\Web\InfoMan5.csproj", "{56C60A1C-36AB-4F44-8932-77A7AD0E0AE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoManager", "Web\Web\Web\InfoManager.csproj", "{56C60A1C-36AB-4F44-8932-77A7AD0E0AE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {44E3FC30-1BCA-487A-A8EB-3F0CB055CC76}
+		SolutionGuid = {7CC0D73A-FA31-4656-B053-E3BC3F8D5CF7}
 	EndGlobalSection
 EndGlobal
