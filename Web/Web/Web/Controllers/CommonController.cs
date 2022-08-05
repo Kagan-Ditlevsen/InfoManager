@@ -17,8 +17,13 @@ namespace dk.infomanager.Controllers
         {
             if (!requestContext.HttpContext.Request.IsSecureConnection)
             {
-                throw new Exception(Request.Url.ToString());
-                //Server.TransferRequest(requestContext.HttpContext.Request.Url.ToString().Replace("http://", "https://"), true);
+                var uriBuilder = new UriBuilder(requestContext.HttpContext.Request.Url)
+                {
+                    Scheme = Uri.UriSchemeHttps,
+                    Port = 443
+                };
+                //throw new Exception(uriBuilder.Uri.ToString());
+                Server.TransferRequest(uriBuilder.Uri.ToString(), true);
 
                 //throw new UnauthorizedAccessException("Secure connection is required. Try " + requestContext.HttpContext.Request.Url.ToString().Replace("http://", "https://") + " instead.");
             }
