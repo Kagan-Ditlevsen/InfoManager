@@ -35,6 +35,12 @@ namespace dk.infomanager.Controllers
 
             Response.Redirect(rUrl);
         }
+        // Added 2022-08-06 to facilitace /Work/DriversAid
+        public string Daily_Driver_Add(int typeId, int? optionId, string remark)
+        {
+            TempData["DriversAidModalInfo"] = null;
+            return "";
+        }
         public void Daily_AddEdit(Guid? dailyId, int typeId, int? optionId, DateTime? registerDateTime, string remark = "", int qty = 1, string extraValues = null, string rUrl = "/Daily")
         {
             DbReturnValue rtn;
@@ -50,17 +56,15 @@ namespace dk.infomanager.Controllers
             if (extraValues != null)
             {
                 string[] tmp = extraValues.Split(',');
-                //throw new Exception(extraValues[0]);
                 string err = "";
                 for (int index = 0; index < tmp.Length - 1; index += 2)
                 {
                     extras.Add(int.Parse(tmp[index]), tmp[index + 1]);
                     err += int.Parse(tmp[index]).ToString() + " = " + tmp[index + 1] + "<br/>";
                 }
-                //throw new Exception(err);
             }
 
-            if (!dailyId.HasValue)
+            if (dailyId.HasValue)
             {
                 string rowIdsAffected = "";
                 for (int i = 1; i <= qty; i++)
@@ -120,7 +124,7 @@ namespace dk.infomanager.Controllers
                     SubTitle = typeTitle
                 };
 
-                TempData["highlightRowIds"] = rtn.RowIdsAffected;
+                TempData["highlightRowIds"] = rtn.RowIdsAffected;;
             }
 
             if (Request.IsAjaxRequest() || rUrl == "void")
