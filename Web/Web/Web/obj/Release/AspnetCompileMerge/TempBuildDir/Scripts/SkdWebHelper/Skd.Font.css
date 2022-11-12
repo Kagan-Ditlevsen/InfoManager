@@ -1,0 +1,37 @@
+﻿@font-face {
+    font-family: 'Skd';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url("Skd.Font.ttf") format("truetype");
+}
+
+.skd-font {
+    font-family: Skd;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+
+.skd-vehicle-semi:before {
+    content: "\e902";
+}
+
+.skd-vehicle-truck:before {
+    content: "\e904";
+}
+
+.skd-vehicle-link:before {
+    content: "\e901";
+}
+
+.skd-vehicle-dolly:before {
+    content: "\e906";
+}
+
+.skd-vehicle-trailer:before {
+    content: "\e905";
+}

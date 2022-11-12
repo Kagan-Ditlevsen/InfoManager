@@ -1,0 +1,290 @@
+﻿@{
+    Menu.Menus = new List<Menu>();
+    var menus = Menu.Init("~/App_Data/Skd.Menu.xml");
+    HttpContext.Current.Application["web.menu"] = menus.First(x => x.Title == "main").Html();
+    var darkmode = Request.Url.LocalPath.StartsWith("/Work/Drive") && Request.Url.LocalPath.Length == 48;
+
+    var scriptCssVersion = ((new DateTime(2021, 10, 16, 14, 36, 0).Ticks) / 100000000).ToString();
+}
+<!DOCTYPE html>
+<html class="h-100">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>@ViewBag.Title - Information Manager 2022</title>
+    <link rel="icon" type="image/x-icon" href="~/Content/Images/folder-blue.ico" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/skd")
+    @Styles.Render("~/Content/website")
+    <link href="~/Scripts/SkdWebHelper/Skd.Font.css" rel="stylesheet" />
+    @RenderSection("styles", required: false)
+
+    @Scripts.Render("~/bundles/modernizr")
+    <script>
+        var isDebug = @Skd.Web.Developer.IsDebug().ToString().ToLower();
+        var highlightRowIds = [];
+        @if(TempData.ContainsKey("highlightRowIds"))
+        {
+            foreach(string id in TempData["highlightRowIds"].ToString().Split(';'))
+            {
+                <text>highlightRowIds.push('@id');</text>
+            }
+        }
+    </script>
+    <style>
+        @@media only screen and (max-width: 768px) {
+            footer {
+                line-height: .8rem;
+            }
+        }
+    </style>
+    @if (darkmode)
+    {
+        <link href="~/Scripts/SkdWebHelper/Skd-Dark.Bootstrap.css" rel="stylesheet" />
+        <link href="~/Scripts/SkdWebHelper/Skd-Dark.css" rel="stylesheet" />
+    }
+</head>
+<body class="@(Skd.Web.Developer.IsDebug() ? "debug" : "") d-flex">
+    <div id="skd_contentloader_template"><img class="skd-content-loader" src="~/Content/Images/loader-circle.gif" /></div>
+    <left class="col-auto bg-dark text-white@(darkmode?" d-none":"")">
+        <div class="d-flex align-items-center" style="border-bottom: 1px dotted var(--skd-menu-text);">
+            <div class="col-auto p-0 ps-1">
+                <img id="brand-icon" src="~/Content/Images/folder-blue.ico" onclick="$('left').toggleClass('float');" />
+            </div>
+            <div id="brand-title" class="d-none col p-0 ps-1 text-center d-sm-inline-block">Information Manager</div>
+        </div>
+        <menu style="background-color: var(--skd-menu-background-end);">
+            @HttpContext.Current.Application["web.menu"]
+        </menu>
+        <div class="d-none d-md-block col px-0 pt-1" style="font-size: .75rem; color: rgb(156, 156, 156); border-top: 1px dotted var(--skd-menu-backgrond-start); line-height: .9rem; ">
+            <div class="d-flex">
+                <div class="col ps-1 pr-0">Version</div>
+                <div class="col-auto ps-1 pe-1">@HttpContext.Current.Application["systemVersion"]</div>
+            </div>
+            <div class="d-flex">
+                <div class="col ps-1 pe-0">Date</div>
+                <div class="col-auto ps-1 pe-1">@HttpContext.Current.Application["systemDateTime"]</div>
+            </div>
+            <div class="d-flex">
+                <div class="col ps-1 pe-0">Device</div>
+                <div class="col-auto ps-1 pe-1" id="skd-device-info">
+                </div>
+            </div>
+        </div>
+    </left>
+    <main class="col">
+        <header class="d-flex align-items-center flex-column flex-md-row@(darkmode?" d-none":"")">
+            <div id="page-title" class="text-center col-md text-md-start pt-md-0">
+                @if (ViewBag.Icon != null)
+                {
+                    <span class="fas fa-@ViewBag.Icon.ToLower().Trim()"></span>
+                }
+                @Html.Raw(ViewBag.Title)
+            </div>
+            <div id="top-botton-row" class="d-flex col w-100 pl-0 pt-md-0 flex-grow-0">
+                <div class="top-button col-auto" skd-sidebar-url="/Task/Task_Sidebar">
+                    <span class="fas fa-tasks"></span><br />ToDo
+                </div>
+                <div class="top-button col-auto" skd-sidebar-url="/Daily/Sidebar_Stat">
+                    <span class="fas fa-charging-station"></span><br />Today
+                </div>
+                <div id="top_btn_debug" class="top-button col-auto@(Skd.Web.Developer.IsDebug() ? " bg-danger text-white" : "" )">
+                    <span class="fas fa-bug@(Skd.Web.Developer.IsDebug() ? " fa-spin" : "")"></span><br />Debug
+                </div>
+                <div id="skd-device-info-top" class="top-button col-auto" skd-sidebar-url="/System/Sidebar_Device"></div>
+                <div class="top-button col-auto" skd-sidebar-url="">
+                    @{
+                        var q = -1;
+                        using (var db = new Db())
+                        {
+                            q = db.Database.SqlQuery<int>("SELECT COUNT(1) FROM Daily WHERE typeId = 9503 AND registerDateTime >= (SELECT MAX(registerDateTime) FROM Daily WHERE typeId = 9503 AND optionId = 25 AND createUserId = {0}) AND createUserId = {1}", Common.User.userId, Common.User.userId).First();
+                        }
+                    }
+                    <span class="fas fa-smoking"></span><br />@(20 - q) left
+                </div>
+                <div class="top-button col-auto" skd-sidebar-url="/System/Me_Sidebar">
+                    <span class="fas fa-user-cog"></span><br />@Common.User.firstName
+                </div>
+                <div id="top_btn_print" class="top-button col-auto">
+                    <span class="fas @Icon.Print"></span><br />Print
+                </div>
+                <div id="top_btn_pdf" class="top-button col-auto">
+                    <span class="fas @Icon.File.PDF"></span><br />PDF
+                </div>
+            </div>
+        </header>
+
+        <section class="d-flex flex-column flex-md-row p-1 p-lg-3">
+            <div class="col-12 p-0">
+                @RenderBody()
+            </div>
+        </section>
+        <style>
+            .top-message {
+                position: relative;
+                padding: .5rem;
+                height: 48px;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                margin-bottom: 0;
+                border-radius: .5rem;
+            }
+
+                .top-message.scroll-fix {
+                    position: fixed;
+                    width: 100%;
+                    border-radius: 0;
+                }
+
+            section .d-flex > :last-child {
+                padding-right: 0;
+                padding-left: 0;
+            }
+
+            section .d-flex > :not(:last-child) {
+                padding-left: 0;
+            }
+
+            #page-title .fas {
+                font-size: 1.5rem;
+                color: var(--bs-dark);
+            }
+
+            @@media only screen and (max-width: 575px) {
+                section > div > .d-flex {
+                    flex-direction: column;
+                }
+
+                    section > div > .d-flex > :first-child {
+                        padding-right: 0;
+                    }
+
+                    section > div > .d-flex > :not(:first-child) {
+                        margin-top: .25rem;
+                    }
+            }
+
+            @@media only screen and (min-width: 992px) { /* LG and above */
+                section > div > .d-flex {
+                    flex-direction: row;
+                }
+            }
+
+            @@media print {
+                left, header, footer, .glimpse, .top-message {
+                    display: none !important;
+                    height: 0 !important;
+                    max-height: 0 !important;
+                    position: absolute;
+                    z-index: -1;
+                    left: 100px;
+                    top: 100px;
+                    width: 0 !important;
+                    max-width: 0 !important;
+                }
+
+                section > .d-flex {
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                }
+            }
+        </style>
+
+        <footer class="d-flex align-items-center justify-content-center flex-column@(darkmode?" d-none":"")">
+            <div class="col-12 ellipsis">
+                &copy;opyright 2021 Stig Kagan-Ditlevsen
+                <skd-display on="sm"><br /></skd-display>
+                <skd-display on="md,lg,xl">&mdash;</skd-display>
+                Taastrup Hovedgade 10a
+                <skd-display on="sm">|</skd-display>
+                <skd-display on="md,lg,xl">&mdash;</skd-display>
+                DK-2630
+                <skd-display on="sm">|</skd-display>
+                <skd-display on="md,lg,xl">&mdash;</skd-display>
+                Denmark
+            </div>
+            <div class="col-12 ellipsis">
+                @{
+                    var a = Common.User.Stat.Retrieve(9503);
+                    var b = Common.User.Stat.Retrieve(1049);
+                    var c = Common.User.Stat.Retrieve(1011);
+                }
+                @if (a != null)
+                {
+                    <text>Cigaret @a.lastTimeTypeId.Value.ToDayHM(false) ago.</text>
+                }
+                @if (b != null)
+                {
+                    <text>Cocktail @b.lastTimeTypeId.Value.ToDayHM(false) ago.</text>
+                }
+                @if (c != null)
+                {
+                    <text>Contalgin @c.lastTimeTypeId.Value.ToDayHM(false) ago.</text>
+                }
+            </div>
+        </footer>
+    </main>
+    <right skd-sidebar loading-message="Loading content..." style="display: none">Loading content...</right>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @Scripts.Render("~/bundles/skd")
+    @Scripts.Render("~/bundles/website")
+    <!-- scripts -->
+    <!-- section: scripts -->
+    @RenderSection("scripts", required: false)
+    <!-- section: scripts END -->
+    <script>
+        /* After user scripts */
+        $(function () {
+            $("#btn_print, #top_btn_print").on("click", function (e) {
+                $(this).blur();
+                $("header, footer, left").addClass("d-none");
+                window.print();
+                $("header, footer, left").removeClass("d-none");
+                return false;
+            });
+            $("#top_btn_pdf").on("click", function (e) {
+                $(this).blur();
+                $("header, footer, left").addClass("d-none");
+                window.print();
+                $("header, footer, left").removeClass("d-none");
+                return false;
+                alert("Direct HTML2PDF not implemented yet");
+            });
+            $("#top_btn_debug").on("click", function () {
+                Skd.PageLoading("Enable/Disable debugging mode", 500);
+                $.post("/Developer/ToggleDebug", function (data) {
+                    $(this).blur();
+                    $("#top_btn_debug").toggleClass("bg-danger text-white");
+                    $("#top_btn_debug span").toggleClass("fa-spin");
+                    skd_debug = $("#top_btn_debug").hasClass("bg-danger");
+                    Skd.PageLoadingHide();
+                });
+            });
+            $("menu [ajax-url='/Developer/RefreshCommonData']").on("click", function () {
+                Skd.PageLoading("Refreshing Database", 500);
+                $.post("/Developer/RefreshCommonData", function (data) {
+                    Skd.Message.Add("Database were freshed", "success", "If needed, please refresh the page yourself!");
+                    Skd.Message.Show();
+                    Skd.PageLoadingHide();
+                });
+            });
+
+            @Message.JavaScriptLines()
+
+            skd_search_updateCount();
+
+            Skd.Form.Init();
+
+            $("form").each(function (e) {
+                skd_form_valid($(this));
+            });
+
+            Skd.SetEvents();
+            Skd.ContentLoadingHide();
+        });
+    </script>
+</body>
+</html>

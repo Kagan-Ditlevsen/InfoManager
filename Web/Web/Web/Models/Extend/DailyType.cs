@@ -29,12 +29,21 @@ namespace dk.infomanager.Models
             }
             return new HtmlString(rtn);
         }
-        public HtmlString Icon()
+        public HtmlString Icon(bool equalSizeIcons = false)
         {
+            if (equalSizeIcons)
+            {
+                iconCss += " fa-fw";
+            }
+            return new HtmlString("<span class=\"" + iconCss + "\" title=\"" + internalTitle + "\"></span>");
+
             // #FIX stacked icons isn't working
             var cssList = iconCss.Split('#');
             if (cssList.Length < 2)
             {
+                if(equalSizeIcons) {
+                    iconCss += " fa-fw";
+                }
                 return new HtmlString("<span class=\"" + iconCss + "\" title=\"" + internalTitle + "\"></span>");
             }
             else

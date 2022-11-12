@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Boxing and CSS 'counter-reset' feature";
+}
+<div class="d-flex">
+    <div class="col-6 order-2">6</div>
+    <div class="col-6 order-1">6</div>
+</div>
+<div class="d-flex">
+    <div class="col-8 order-4">8</div>
+    <div class="col-4 order-3">4</div>
+</div>
+<div class="d-flex">
+    <div class="col-6 order-1">6</div>
+    <div class="col-6 order-2">6</div>
+</div>
+<div class="d-flex">
+    <div class="col-8 order-3">8</div>
+    <div class="col-4 order-4">4</div>
+</div>
+@section scripts {
+    <script>
+        $(function (e) {
+        });
+    </script>
+}
+@section styles {
+    <style>
+        body {
+            counter-reset: section;
+        }
+
+        content .d-flex > [class^="col-"] {
+            background: #0f0;
+        }
+
+            content .d-flex > [class^="col-"]::before {
+                counter-increment: section;
+                content: "Section " counter(section) ": ";
+            }
+    </style>
+}

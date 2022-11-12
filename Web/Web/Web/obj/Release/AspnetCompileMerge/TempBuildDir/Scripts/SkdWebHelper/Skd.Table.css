@@ -1,0 +1,70 @@
+﻿:root {
+    --skd-table-row-color: rgb(0, 0, 0);
+    --skd-table-row-background: rgb(255, 255, 255);
+    --skd-table-row-hover-color: rgb(255, 253, 134);
+}
+
+.skd-table {
+}
+
+    .skd-table .hide, .skd-table-header.hide, .skd-table-row.hide {
+        display: none !important;
+    }
+
+    .skd-table .skd-table-header, .skd-table .skd-table-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: .25rem 0;
+    }
+
+        .skd-table .skd-table-header > div, .skd-table .skd-table-row > div {
+            padding: 0 0 0 .25rem;
+        }
+
+            .skd-table .skd-table-header > div:last-child, .skd-table .skd-table-row > div:last-child {
+                padding-right: .25rem;
+            }
+
+        .skd-table .skd-table-row:hover {
+            background-color: var(--skd-table-row-hover-color);
+        }
+
+        .skd-table .skd-table-row[style*='order: 0'] {
+            border-bottom: 1px dotted rgb(0, 0, 0);
+            order: 0;
+        }
+
+        .skd-table .skd-table-row span.fas {
+            padding: 0;
+        }
+
+    .skd-table .skd-table-header {
+        display: flex;
+        flex-direction: row;
+        background: var(--bs-gray-400) !important;
+        border-bottom: 3px solid var(--bs-warning);
+        padding: 0.25rem 0;
+    }
+
+        .skd-table .skd-table-header:not(:first-child):not(.simple) {
+            border-top: 3px solid var(--bs-warning);
+            margin-top: 1rem;
+        }
+
+    /* Skd-Card */
+    .skd-table .skd-card-header .form-control,
+    .skd-table .skd-card-footer .form-control {
+        height: calc(1.5em + 0.5rem);
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--skd-card-border-radius);
+    }
+
+    .skd-table .skd-card-body {
+        padding: 0;
+    }
+
+        .skd-table .skd-card-body a:hover {
+            text-decoration: none;
+        }
+/* Skd-Card END */

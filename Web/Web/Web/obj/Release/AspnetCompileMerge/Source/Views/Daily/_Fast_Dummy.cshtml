@@ -1,0 +1,180 @@
+﻿@using System.Dynamic;
+@{
+    Layout = "~/Views/Shared/_Layout_Empty.cshtml";
+    ViewBag.Title = "Daily Fast";
+    ViewBag.Icon = "seedling";
+
+    var ots = new List<dynamic>();
+    ots.Add(AddOptionToShow(23, requireExtraInfo: true));
+    ots.Add(AddOptionToShow(25));
+    ots.Add(AddOptionToShow(26));
+    ots.Add(AddOptionToShow(37, "Type what you are eating"));
+    ots.Add(AddOptionToShow(38));
+    ots.Add(AddOptionToShow(59));
+    ots.Add(AddOptionToShow(60));
+
+    List<DailyTypeOption> dto = new List<DailyTypeOption>();
+    foreach (var o in ots.OrderBy(x => x.SortOrder))
+    {
+        dto.Add(Common.DailyTypeOptions.Single(x => x.optionId == o.Id));
+    }
+
+    IEnumerable<Daily> top5daily;
+    using (var conn = new Db())
+    {
+        top5daily = Daily.Overview(Common.User.userId).OrderByDescending(x => x.registerDateTime).Take(5);
+    }
+}
+<input type="hidden" id="typeId" name="typeId" />
+<input type="hidden" id="optionId" name="optionId" />
+<input type="hidden" id="rUrl" name="rUrl" value="/Daily/Fast" />
+<div id="optionButtons" class="d-flex flex-row flex-wrap mt-1">
+    @foreach (var option in dto)
+    {
+        dynamic optionToShow = ots.Single(x => x.Id == option.optionId);
+        <div class="btn-action">
+            <button id="dt_@(option.DailyType.typeId.ToString() + "_" + option.optionId.ToString())"
+                    class="btn btn-success" @(optionToShow.IsRequired ? " required" : "") @(optionToShow.RequireExtraInfo ? " extra-info" : "") @(!string.IsNullOrWhiteSpace(optionToShow.RemarkPlaceholderText) ? " require-remark" : "")>
+                <div class="d-flex flex-column">
+                    <div class="col-12">@option.DailyType.Icon()</div>
+                    <div class="col-12 text-truncate">@option.internalTitle</div>
+                    <div class="col-12 text-end optionExtraIcons"></div>
+                </div>
+            </button>
+        </div>
+    }
+</div>
+
+@Form.Controls.TextBox(new Form.TextBox()
+{
+    Id = "remark",
+    Title = "Optional Remark",
+    Required = true,
+    ControlOnly = true
+})
+<div id="dailyLog" class="mt-1">
+    @foreach (var daily in top5daily)
+    {
+        <div data-id="@daily.dailyId" class="d-flex shade">
+            <div class="col ps-1 pe-0 title">@daily.Title(equalSizeIcons: true)</div>
+            <div class="col-auto px-1 registerDateTime">
+                <span class="fas fa-clock"></span> @daily.registerDateTime.ToString("MM/dd HH:mm")
+            </div>
+        </div>
+    }
+</div>
+@section scripts {
+    <script>
+        $(function () {
+            pageForm.attr("action", "/Daily/Daily_AddEdit");
+            //$("#optionButtons button[extra-info] .optionExtraIcons").append("<span class='fas fa-fw fa-receipt text-warning' title='Additionl information is required' />");
+            $("#optionButtons button[require-remark] .optionExtraIcons").append("<span class='fas fa-fw fa-comment text-danger' title='Remark is required' />");
+            $("#optionButtons button").on("click tap", function (e) {
+                $("#typeId").val($(this).attr("id").split("_")[1]);
+                $("#optionId").val($(this).attr("id").split("_")[2]);
+                $("#remark").attr("required", $(this).hasAttr("require-remark"));
+                if ($(this).hasAttr("require-remark")) {
+                } else {
+                    $("#remark").removeClass("is-invalid");
+                }
+
+                pageForm.validate();
+            });
+            $("header .fas.fa-@ViewBag.Icon").click(function (e) {
+                Skd.PageLoading("Going to Dashboard");
+                location.href = "/";
+            });
+            pageForm.submit(function (e) {
+                if (pageForm.valid()) {
+                    if (skd_debug) {
+                        skd_form_debug(pageForm);
+                    } else {
+                        Skd.PageLoading("Adding Entry...", 0);
+                        return true;
+                    }
+                } else {
+                    $("#typeId, #optionId").val("");
+                }
+
+                return false;
+            });
+            Skd.SetEvents();
+
+            pageResize();
+            window.addEventListener("resize", function (e) {
+                pageResize();
+            }, false);
+        });
+
+        function pageResize() {
+            $("#optionButtons button .optionExtraIcons").each(function (index, elm) {
+                let btn = $(this).closest("button");
+
+                $(this).find(".fas").each(function (index2, elm2) {
+                    $(this)
+                        .css("position", "absolute")
+                        .css("top", "calc(" + btn.position().top + "px + .5rem + " + (index2 * 35) + "px)")
+                        .css("left", "calc(" + btn.position().left + "px +  3px)")
+                        ;
+                });
+            });
+        }
+    </script>
+}
+@section styles {
+    <style>
+        :root {
+            --button-spacing: .25rem;
+        }
+
+        .content #remark {
+            font-size: 2rem;
+        }
+
+        #optionButtons {
+            justify-content: space-between;
+            align-items: stretch;
+            align-content: stretch;
+        }
+
+            #optionButtons .btn-action {
+                flex-grow: 1;
+                margin: 0 .25rem 0 .25rem;
+            }
+
+                #optionButtons .btn-action button {
+                    margin-bottom: .5rem;
+                    width: 100%;
+                    min-width: 100%;
+                }
+
+                    #optionButtons .btn-action button .fas {
+                        font-size: 4rem;
+                    }
+
+                    #optionButtons .btn-action button .optionExtraIcons .fas {
+                        font-size: 2rem;
+                    }
+    </style>
+}
+@functions {
+    static int counter = 0;
+    public static ExpandoObject AddOptionToShow(int id, string reqRemarkPlaceholder = "", bool requireExtraInfo = false)
+    {
+        dynamic rtn;
+        rtn = new ExpandoObject();
+
+        rtn.Id = id;
+        rtn.IsRequired = !string.IsNullOrWhiteSpace(reqRemarkPlaceholder);
+        rtn.RemarkPlaceholderText = "";
+        rtn.RequireExtraInfo = requireExtraInfo;
+        if (rtn.IsRequired)
+        {
+            rtn.RemarkPlaceholderText = reqRemarkPlaceholder;
+            //rtn.RequireExtraInfo = true;
+        }
+        rtn.SortOrder = counter++;
+
+        return rtn;
+    }
+}

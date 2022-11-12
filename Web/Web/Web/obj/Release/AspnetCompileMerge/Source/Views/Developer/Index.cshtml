@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Development Features";
+
+    IQueryable<Daily> med;
+    DateTime last24h = DateTime.Now.AddDays(-1);
+    string med24;
+    using (var db = new Db())
+    {
+        med = db.Daily
+            .Where(x => x.createUserId == Common.User.userId && x.typeId == 1049 && x.optionId == 22);
+        med24 = med.Count(x => x.registerDateTime > last24h).ToString();
+    }
+}
+<div class="d-flex">
+    <div class="col-4 skd-card">
+        <div class="skd-card-header"><span class="fas fa-icons"></span> Font-Awesome Gallery Search (online)</div>
+        <div class="skd-card-body skd-form">
+            <form id="fontawesomeSearch" action="https://fontawesome.com/v5.15/icons" method="get" target="_fontawesome">
+                <input type="hidden" name="m" value="free" />
+                <input type="hidden" name="d" value="gallery" />
+
+                <div class="input-group form-floating">
+                    <input type="search" name="q" class="form-control form-control-sm" placeholder="Search Font-Awesome" />
+                    <button class="btn btn-sm btn-light" type="submit"><span class="fas fa-search"></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-4">
+        @{ string lastDir = ""; }
+        <style>
+            ul {
+                list-style-type: decimal-leading-zero;
+                padding-left: 1.5rem;
+                margin: auto;
+            }
+
+                ul li {
+                    line-height: 1rem;
+                    margin-bottom: .25rem;
+                }
+        </style>
+        <div class="d-flex skd-card">
+            <div class="skd-card-header text-center">Proff of Concept</div>
+            <div class="skd-card-body font-small">
+                <ul>
+                    @foreach (var file in Common.FileItem.Get("~/Views/Developer/PoC/"))
+                    {
+                        if (lastDir != file.Directory)
+                        {
+                            @file.Directory
+                        }
+                        <li><a href="@file.Url.Substring(1)">@file.Title</a></li>
+                        lastDir = file.Directory;
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="d-flex skd-card mt-3">
+            <div class="skd-card-header text-center">Development ToDo/Testing</div>
+            <div class="skd-card-body font-small">
+                <ul>
+                    @foreach (var file in Common.FileItem.Get("~/Views/Developer/ToDo/"))
+                    {
+                        if (lastDir != file.Directory)
+                        {
+                            @file.Directory
+                        }
+                        <li><a href="@file.Url.Substring(1)">@file.Title</a></li>
+                        lastDir = file.Directory;
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">Absolut ingenting</div>
+</div>
+
+<ul>
+    Idéer
+    <li>
+        List som Font-Awesome ikon søgning på <a href="/Developer">developer forsiden</a>, så gøre det samme her. Skriv det der skal oversættes og AJAX henter resultatet
+        <ul>
+            <li><a target="_blank" href="http://translate.google.com/#da/en/justeret">http://translate.google.com/#da/en/justeret</a></li>
+            <li><a target="_blank" href="https://translate.google.com/?sl=da&tl=en&text=justeret&op=translate">https://translate.google.com/?sl=da&tl=en&text=justeret&op=translate</a></li>
+        </ul>
+    </li>
+</ul>
+@section scripts {
+    <script>
+        $(function (e) {
+        });
+    </script>
+}
+@section styles {
+    <style>
+    </style>
+}

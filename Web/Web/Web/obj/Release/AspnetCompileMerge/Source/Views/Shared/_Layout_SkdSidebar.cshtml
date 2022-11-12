@@ -1,0 +1,24 @@
+﻿@RenderSection("styles", required: false)
+<div class="skd-sidebar-title ellipsis align-items-center">
+    @if (!string.IsNullOrEmpty(ViewBag.Icon))
+    {
+        <div class="col-auto ps-0 pe-1"><span class="fas fa-@ViewBag.Icon fa-2x"></span></div>
+    }
+    <div class="col pe-0 ps-0">
+        @ViewBag.Title@(!string.IsNullOrEmpty(ViewBag.SubTitle) ? Html.Raw("<div class='font-small'>" + ViewBag.SubTitle + "</div>") : "")
+    </div>
+</div>
+<div class="tabs"></div>
+<div id="@Request.Url.LocalPath.Replace("/", "_").ToLower()">
+    @RenderBody()
+</div>
+
+<script>
+    $(function (e) {
+        Skd.SetEvents();
+        Skd.Form.Init(true);
+        Skd.Form.DropDown.Init();
+        Skd.Form.ButtonConfirm.Init();
+    });
+</script>
+@RenderSection("scripts", required: false)

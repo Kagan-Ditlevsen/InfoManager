@@ -1,0 +1,170 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Empty.cshtml";
+    ViewBag.Title = "Driving Dashboard";
+
+    int[] dailyTypes = new[] { 9503, 1015, 1013, 1500, 9007 };
+    var actionList = new[]
+    {
+        new { typeId = 9503, optionId = 57, title = "Cigaret", SO = 10},
+        new { typeId = 2000, optionId = 50, title = "Liquid", SO = 20},
+        new { typeId = 9007, optionId = -1, title = "Poo", SO = 30},
+        new { typeId = 1500, optionId = 27, title = "Food", SO = 40},
+        new { typeId = 1015, optionId = 8, title = "Ibomentin", SO = 50},
+        new { typeId = 1013, optionId = 6, title = "Paracetamol", SO = 60}
+    };
+    var listTypes = Common.DailyTypes.Where(x => actionList.Select(y => y.typeId).Contains(x.typeId));
+}
+@TempData["DriversAidModalInfo"]
+<div class="d-flex flex-wrap justify-content-evenly">
+    @foreach (var item in listTypes.OrderBy(x => actionList.Single(y => y.typeId == x.typeId).SO))
+    {
+        string title = item.internalTitle;
+        string lastTime = Common.User.Stat.RetrieveAsOptionGroup(item.typeId).lastTimeTypeId.Value.ToString("MM/dd HH:mm");
+        if (item.defaultOptionId > 0)
+        {
+            title += ", " + item.DailyTypeOption.Single(x => x.optionId == item.defaultOptionId).internalTitle;
+        }
+        <div class="col btn-action btn-group-lg btn-group-vertical p-0 m-1" data-type-id="@item.typeId" data-option-id="@item.defaultOptionId" data-last-register="@Common.User.Stat.RetrieveAsOptionGroup(item.typeId).lastTimeTypeId.Value.ToYMDHM()" data-title="@title">
+
+            <button class="btn btn-success m-0 p-1">
+                @item.Icon()<br />
+                <span class="title">@title</span><br />@lastTime
+            </button>
+        </div>
+    }
+</div>
+@section scripts {
+    <script>
+        var touchTimeout;
+        var touchTimeoutColor;
+        var touchIsLong = false;
+        $(function (e) {
+            $(".btn-action button")
+                .on("click touchend", function (e) {
+                    $(this).removeClass("btn-warning");
+
+                    if (!touchIsLong) {
+                        $(this).blur();
+                        e.preventDefault();
+
+                        let typeId = $(this).closest(".btn-action").attr("data-type-id");
+                        let optionId = $(this).closest(".btn-action").attr("data-option-id");
+                        let title = $(this).closest(".btn-action").attr("data-title");
+
+                        //showInfo("Header", "Adding action... " + title);
+
+                        console.warn("typeId: " + typeId + "\noptionId: " + optionId);
+
+                        Skd.PageLoading("Adding Event...<br /><br />" + title);
+                        location.href = "/Daily/Daily_AddEdit?typeId=" + typeId + "&optionId=" + optionId + "&rUrl=/Work/DriversAid";
+
+                        //$.ajax({
+                        //    type: "POST",
+                        //    url: "/Daily/Daily_AddEdit",
+                        //    data: { typeId: typeId, optionId: optionId, rUrl: "/Work/DriversAid" }
+                        //})
+                        //    .done(function (data) {
+                        //        location.reload(true);
+                        //    })
+                        //    .fail(function (jqXHR, textStatus, errorThrown) {
+                        //        $("body").html(jqXHR.responseText);
+                        //    });
+                    }
+                    console.log(touchIsLong);
+
+                    touchIsLong = false;
+
+                    return false;
+                })
+                .on("touchend mouseup", function (e) {
+                    window.clearTimeout(touchTimeout);
+                    window.clearTimeout(touchTimeoutColor);
+                    return false;
+                })
+                .on("touchstart mousedown", function (e) {
+                    let btn = $(this);
+                    touchIsLong = false;
+
+
+                    touchTimeoutColor = window.setTimeout(function () {
+                        btn.addClass("btn-warning");
+                    }, 100);
+                    touchTimeout = window.setTimeout(function () {
+                        btn.blur();
+                        btn.removeClass("btn-warning");
+                        e.preventDefault();
+
+                        let typeId = btn.closest(".btn-action").attr("data-type-id");
+                        let optionId = btn.closest(".btn-action").attr("data-option-id");
+                        let title = btn.closest(".btn-action").attr("data-title");
+
+                        showInfo("", "Showing optionTypes " + title);
+
+                        console.warn("typeId: " + typeId + "\noptionId: " + optionId);
+
+                        touchIsLong = true;
+                    }, 1000);
+
+                    return false;
+                });
+
+            @*@Message.JavaScriptLines();*@
+        });
+
+        function showInfo(header, content) {
+            var myModal = new bootstrap.Modal(document.getElementById("showInfo_modal"));
+            var elm = $("#showInfo_modal");
+
+            // reset to default
+            $("#showInfo_modal .modal-title, #showInfo_modal .modal-body").html("");
+
+            // setting values
+            if (header == "") {
+                $("#showInfo_modal .modal-header").css("display", "none");
+            } else {
+                $("#showInfo_modal .modal-header").css("display", "flex").html(header);
+            }
+            $("#showInfo_modal .modal-body").html(content);
+            myModal.show();
+        }
+    </script>
+}
+@section styles {
+    <style>
+        .btn-action button.mousedown {
+            background-color: #f00;
+        }
+
+        .btn-action {
+            min-width: 150px;
+        }
+
+            .btn-action > :first-child {
+                min-height: 142px;
+            }
+
+                .btn-action > :first-child span.fas {
+                    font-size: 4rem;
+                }
+
+        #showInfo_modal .modal-header {
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        #showInfo_modal .modal-body {
+            font-size: 2rem;
+        }
+    </style>
+}
+<div class="modal fade" id="showInfo_modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

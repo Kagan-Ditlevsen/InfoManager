@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Load XML Example | YogiHosting Demo</title>
+    <link rel="icon" type="image/png" href="http://www.yogihosting.com/wp-content/themes/yogi-yogihosting/Images/favicon.ico">
+    <meta charset="utf-8" />
+    <style>
+        body {
+            background: #111 no-repeat;
+            background-image: -webkit-gradient(radial, 50% 0, 150, 50% 0, 300, from(#444), to(#111));
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #FFF;
+        }
+
+            h2 a {
+                color: #0184e3;
+                text-decoration: none;
+            }
+
+                h2 a:hover {
+                    text-decoration: underline;
+                }
+
+        .container {
+            width: 960px;
+            margin: auto;
+            color: #FFF;
+            font-size: 25px;
+        }
+
+            .container h3 {
+                font-size: 20px;
+            }
+
+        #content {
+            border: dashed 2px #CCC;
+            padding: 10px;
+            position: relative;
+        }
+
+            #content #loadingImg {
+                display: none;
+                position: absolute;
+                margin: auto;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+
+            #content table {
+                background-color: purple;
+            }
+
+                #content table tr th {
+                    background-color: #CCC;
+                    text-transform: capitalize;
+                }
+
+            #content #resultDiv {
+                overflow: auto;
+            }
+
+        #pagingDiv {
+            padding: 15px 0;
+        }
+
+            #pagingDiv .myDisableClass {
+                background-color: #4CAF50;
+            }
+
+            #pagingDiv .myClass {
+                background-color: #ebbebe;
+            }
+
+            #pagingDiv a, #pagingDiv span {
+                display: inline-block;
+                padding: 0px 9px;
+                margin-right: 4px;
+                border-radius: 3px;
+                border: solid 1px #c0c0c0;
+                background: #e9e9e9;
+                box-shadow: inset 0px 1px 0px rgba(255,255,255, .8), 0px 1px 3px rgba(0,0,0, .1);
+                font-size: .875em;
+                font-weight: bold;
+                text-decoration: none;
+                color: #717171;
+                text-shadow: 0px 1px 0px rgba(255,255,255, 1);
+            }
+
+                #pagingDiv a:hover {
+                    cursor: pointer;
+                    background: #fefefe;
+                    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE), to(#f0f0f0));
+                    background: -moz-linear-gradient(0% 0% 270deg,#FEFEFE, #f0f0f0);
+                }
+
+                #pagingDiv a.active {
+                    border: none;
+                    background: #616161;
+                    box-shadow: inset 0px 0px 8px rgba(0,0,0, .5), 0px 1px 0px rgba(255,255,255, .8);
+                    color: #f0f0f0;
+                    text-shadow: 0px 0px 3px rgba(0,0,0, .5);
+                }
+
+            #pagingDiv span {
+                color: #f0f0f0;
+                background: #616161;
+            }
+
+        #reset {
+            padding: 5px 10px;
+            background: #4CAF50;
+            border: none;
+            color: #FFF;
+            cursor: pointer;
+        }
+
+            #reset:hover {
+                color: #4CAF50;
+                background: #FFF;
+            }
+    </style>
+</head>
+<body>
+    <h1>jQuery Load XML Example</h1>
+    <h2><a href="http://www.yogihosting.com/jquery-load-xml-example/">Read the tutorial on YogiHosting » </a><button id="reset">Reset »</button></h2>
+
+    <div class="container">
+        <div id="content">
+            <h3>Get Content From XML File and show it in HTML Grid Format</h3>
+            <button id="loadButton">Try</button>
+            <div id="tempDiv" style="display:none"></div>
+            <div id="resultDiv"></div>
+            <div id="pagingDiv"></div>
+            <img id="loadingImg" src="loading.gif" />
+        </div>
+    </div>
+    <!--Reference to jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#reset").click(function (e) {
+                location.reload();
+            });
+
+            $("#loadButton").click(function (e) {
+                $("#tempDiv").load("products.xml", function (response, status, xhr) {
+                    if (status != "error") {
+                        /*Hiding the loading image*/
+                        $("#loadingImg").hide();
+                        /*End*/
+                        DisplayXML(1);
+                    }
+                });
+
+                /*Showing the loading image*/
+                $("#loadingImg").show();
+                /*End*/
+
+                //setTimeout(function () {
+
+                //    /*Hiding the loading image*/
+                //    $("#loadingImg").hide();
+                //    /*End*/
+
+                //    DisplayXML(1);
+
+                //}, 2000);
+            });
+
+            function DisplayXML(pageNo) {
+                var xmlDoc = $.parseXML($("#tempDiv").html());
+                var xml = $(xmlDoc);
+                var nodeName = xml.find("*").eq(1)[0].nodeName;
+                var nodes = xml.find(nodeName);
+
+                var pageSize = 5;
+                totalRecords = nodes.length;
+
+                /*Table Header*/
+                var table = $("<table>");
+                var tr = $("<tr>");
+                $.each($(nodes[0]).find("*"), function (index, value) {
+                    var th = $("<th>");
+                    th.append(value.nodeName);
+                    tr.append(th);
+                });
+                table.append(tr);
+                /*End*/
+
+                /*Table Data*/
+                for (i = (pageNo - 1) * pageSize; i < (pageNo * pageSize) ; i++) {
+                    var tr = $("<tr>");
+                    var child = $(nodes[i]).find("*");
+
+                    $.each(child, function (index, value) {
+                        var td = $("<td>");
+                        td.append($(value).text());
+                        tr.append(td);
+                    });
+
+                    table.append(tr);
+                }
+                /*End*/
+
+                $("#resultDiv").html(table);
+
+                /*Paging*/
+                var result = Paging(pageNo, 5, totalRecords, "myClass", "myDisableClass");
+                $("#pagingDiv").html(result)
+                /*Paging*/
+            }
+
+            $("#pagingDiv").on("click", "a", function () {
+                DisplayXML($(this).attr("pn"));
+            });
+
+            function Paging(PageNumber, PageSize, TotalRecords, ClassName, DisableClassName) {
+                var ReturnValue = "";
+
+                var TotalPages = Math.ceil(TotalRecords / PageSize);
+                if (+PageNumber > 1) {
+                    if (+PageNumber == 2)
+                        ReturnValue = ReturnValue + "<a pn='" + (+PageNumber - 1) + "' class='" + ClassName + "'>Previous</a>&nbsp;&nbsp;&nbsp;";
+                    else {
+                        ReturnValue = ReturnValue + "<a pn='";
+                        ReturnValue = ReturnValue + (+PageNumber - 1) + "' class='" + ClassName + "'>Previous</a>&nbsp;&nbsp;&nbsp;";
+                    }
+                }
+                else
+                    ReturnValue = ReturnValue + "<span class='" + DisableClassName + "'>Previous</span>&nbsp;&nbsp;&nbsp;";
+                if ((+PageNumber - 3) > 1)
+                    ReturnValue = ReturnValue + "<a pn='1' class='" + ClassName + "'>1</a>&nbsp;.....&nbsp;|&nbsp;";
+                for (var i = +PageNumber - 3; i <= +PageNumber; i++)
+                    if (i >= 1) {
+                        if (+PageNumber != i) {
+                            ReturnValue = ReturnValue + "<a pn='";
+                            ReturnValue = ReturnValue + i + "' class='" + ClassName + "'>" + i + "</a>&nbsp;|&nbsp;";
+                        }
+                        else {
+                            ReturnValue = ReturnValue + "<span style='font-weight:bold;'>" + i + "</span>&nbsp;|&nbsp;";
+                        }
+                    }
+                for (var i = +PageNumber + 1; i <= +PageNumber + 3; i++)
+                    if (i <= TotalPages) {
+                        if (+PageNumber != i) {
+                            ReturnValue = ReturnValue + "<a pn='";
+                            ReturnValue = ReturnValue + i + "' class='" + ClassName + "'>" + i + "</a>&nbsp;|&nbsp;";
+                        }
+                        else {
+                            ReturnValue = ReturnValue + "<span style='font-weight:bold;'>" + i + "</span>&nbsp;|&nbsp;";
+                        }
+                    }
+                if ((+PageNumber + 3) < TotalPages) {
+                    ReturnValue = ReturnValue + ".....&nbsp;<a pn='";
+                    ReturnValue = ReturnValue + TotalPages + "' class='" + ClassName + "'>" + TotalPages + "</a>";
+                }
+                if (+PageNumber < TotalPages) {
+                    ReturnValue = ReturnValue + "&nbsp;&nbsp;&nbsp;<a pn='";
+                    ReturnValue = ReturnValue + (+PageNumber + 1) + "' class='" + ClassName + "'>Next</a>";
+                }
+                else
+                    ReturnValue = ReturnValue + "&nbsp;&nbsp;&nbsp;<span class='" + DisableClassName + "'>Next</span>";
+
+                return (ReturnValue);
+            }
+
+        });
+    </script>
+</body>
+</html>

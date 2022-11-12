@@ -1,0 +1,314 @@
+﻿
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Daily Fast - Information Manager 2022</title>
+    <link rel="icon" type="image/x-icon" href="Content/Images/driver-2.ico" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/fontawesome-5.15.3/all.min.css" rel="stylesheet" />
+
+    <link href="Scripts/SkdWebHelper/Skd.css" rel="stylesheet" />
+    <link href="Scripts/SkdWebHelper/Skd.Form.css" rel="stylesheet" />
+    <link href="Scripts/SkdWebHelper/Skd.Menu.css" rel="stylesheet" />
+    <link href="Scripts/SkdWebHelper/Skd.Table.css" rel="stylesheet" />
+
+    <link href="Content/Website.css" rel="stylesheet" />
+
+    <link href="Scripts/SkdWebHelper/Skd.Font.css" rel="stylesheet" />
+    <link href="Scripts/SkdWebHelper/Skd-Dark.Bootstrap.css" rel="stylesheet" />
+    <link href="Scripts/SkdWebHelper/Skd-Dark.css" rel="stylesheet" />
+
+    <style>
+    </style>
+    <script src="Scripts/modernizr-2.8.3.js"></script>
+
+    <script>
+        var highlightRowIds = [];
+        highlightRowIds.push('34c484d7-4af7-4b7f-92fe-b29a095f2491');
+    </script>
+    <style>
+        header, footer {
+            text-align: center;
+            min-height: 38px;
+            font-size: 24px;
+        }
+
+            header .fas {
+                position: absolute;
+                left: 0;
+                margin: 4px;
+                font-size: 30px;
+            }
+
+        .content {
+            min-height: calc(100vh - 38px - 38px);
+            max-height: calc(100vh - 38px - 38px);
+            margin: 38px 0;
+            padding: .25rem;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <header class="fixed-top text-bg-warning">
+        <div class="fas fa-seedling"></div>
+        Daily Fast
+    </header>
+
+    <div class="content">
+        <form id="pageForm" method="post" novalidate>
+
+            <style>
+                :root {
+                    --button-spacing: .25rem;
+                }
+
+                .content #remark {
+                    font-size: 2rem;
+                }
+                #optionButtons {
+                    justify-content: space-between;
+                    align-items: stretch;
+                    align-content: stretch;
+                }
+
+                    #optionButtons .btn-action {
+                        flex-grow: 1;
+                        margin: 0 .25rem 0 .25rem;
+                    }
+
+                        #optionButtons .btn-action button {
+                            margin-bottom: .5rem;
+                            width: 100%;
+                            min-width: 100%;
+                        }
+
+                            #optionButtons .btn-action button .fas {
+                                font-size: 5rem;
+                            }
+
+                            #optionButtons .btn-action button .optionExtraIcons .fas {
+                                font-size: 2rem;
+                            }
+            </style>
+            <input type="hidden" id="typeId" name="typeId" />
+            <input type="hidden" id="optionId" name="optionId" />
+            <input type="hidden" id="rUrl" name="rUrl" value="/Daily/Fast" />
+            <div id="optionButtons" class="d-flex flex-row flex-wrap mt-1">
+                <div class="/*col-6*/ btn-action">
+                    <button id="dt_9503_25"
+                            class="btn btn-success" style="order: 1" data-sort-order="1">
+                        <div class="d-flex flex-column">
+                            <div class="col-12"><span class="fas fa-smoking" title="Cigaret"></span></div>
+                            <div class="col-12 text-truncate">New Package</div>
+                            <div class="col-12 text-end optionExtraIcons"></div>
+                        </div>
+                    </button>
+                </div>
+                <div class="/*col-6*/ btn-action">
+                    <button id="dt_9503_23"
+                            class="btn btn-success" extra-info style="order: 0" data-sort-order="0" data-sort-order-is-even>
+                        <div class="d-flex flex-column">
+                            <div class="col-12"><span class="fas fa-smoking" title="Cigaret"></span></div>
+                            <div class="col-12 text-truncate">Normal</div>
+                            <div class="col-12 text-end optionExtraIcons"></div>
+                        </div>
+                    </button>
+                </div>
+                <div class="/*col-6*/ btn-action">
+                    <button id="dt_9503_26"
+                            class="btn btn-success" style="order: 2" data-sort-order="2" data-sort-order-is-even>
+                        <div class="d-flex flex-column">
+                            <div class="col-12"><span class="fas fa-smoking" title="Cigaret"></span></div>
+                            <div class="col-12 text-truncate">Time Unknown</div>
+                            <div class="col-12 text-end optionExtraIcons"></div>
+                        </div>
+                    </button>
+                </div>
+                <div class="/*col-6*/ btn-action">
+                    <button id="dt_1500_37"
+                            class="btn btn-success" required extra-info require-remark style="order: 3" data-sort-order="3">
+                        <div class="d-flex flex-column">
+                            <div class="col-12"><span class="fas fa-utensils" title="Food"></span></div>
+                            <div class="col-12 text-truncate">Mellemm&#229;ltid</div>
+                            <div class="col-12 text-end optionExtraIcons"></div>
+                        </div>
+                    </button>
+                </div>
+                <div class="/*col-6*/ btn-action">
+                    <button id="dt_1500_59"
+                            class="btn btn-success" style="order: 5" data-sort-order="5">
+                        <div class="d-flex flex-column">
+                            <div class="col-12"><span class="fas fa-utensils" title="Food"></span></div>
+                            <div class="col-12 text-truncate">Protein Drink, 250ml.</div>
+                            <div class="col-12 text-end optionExtraIcons"></div>
+                        </div>
+                    </button>
+                </div>
+                <div class="/*col-6*/ btn-action">
+                    <button id="dt_1500_38"
+                            class="btn btn-success" style="order: 4" data-sort-order="4" data-sort-order-is-even>
+                        <div class="d-flex flex-column">
+                            <div class="col-12"><span class="fas fa-utensils" title="Food"></span></div>
+                            <div class="col-12 text-truncate">Snack</div>
+                            <div class="col-12 text-end optionExtraIcons"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <span id="remark_container" class="skd-form-row" data-org-value="" control-type="form-textbox">
+
+
+                <div class="col px-0">
+
+<textarea class="form-control form-control-sm" id="remark" name="remark" placeholder="Optional Remark" autocomplete="off" required></textarea>
+
+                </div>
+            </span>
+            <div id="dailyLog" class="mt-1">
+                <div data-id="34c484d7-4af7-4b7f-92fe-b29a095f2491" class="d-flex shade">
+                    <div class="col ps-1 pe-0 title"><span class="fas fa-utensils fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw" title="Food"></span> Food, Snack</div>
+                    <div class="col-auto px-1 registerDateTime">
+                        <span class="fas fa-clock"></span> 11/12 15:43
+                    </div>
+                </div>
+                <div data-id="80435f0d-544e-4662-a6ea-af2d881a7e09" class="d-flex shade">
+                    <div class="col ps-1 pe-0 title"><span class="fas fa-utensils fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw" title="Food"></span> Food, Snack</div>
+                    <div class="col-auto px-1 registerDateTime">
+                        <span class="fas fa-clock"></span> 11/12 15:35
+                    </div>
+                </div>
+                <div data-id="ed6a4b16-3976-4fd6-948d-40481cc67347" class="d-flex shade">
+                    <div class="col ps-1 pe-0 title"><span class="fas fa-smoking fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw" title="Cigaret"></span> Cigaret, Normal</div>
+                    <div class="col-auto px-1 registerDateTime">
+                        <span class="fas fa-clock"></span> 11/12 15:09
+                    </div>
+                </div>
+                <div data-id="ec86ec3c-3aa4-4178-a72e-6f8df310e7cb" class="d-flex shade">
+                    <div class="col ps-1 pe-0 title"><span class="fas fa-smoking fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw" title="Cigaret"></span> Cigaret, Normal</div>
+                    <div class="col-auto px-1 registerDateTime">
+                        <span class="fas fa-clock"></span> 11/12 14:52
+                    </div>
+                </div>
+                <div data-id="dbaf8361-b244-4ab4-9aa9-d0c4c9723ae1" class="d-flex shade">
+                    <div class="col ps-1 pe-0 title"><span class="fas fa-smoking fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw fa-fw" title="Cigaret"></span> Cigaret, New Package</div>
+                    <div class="col-auto px-1 registerDateTime">
+                        <span class="fas fa-clock"></span> 11/12 14:25
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <footer class="fixed-bottom text-bg-warning">
+        Stig Kagan-Ditlevsen
+    </footer>
+
+    <right skd-sidebar loading-message="Loading content..." style="display: none">Loading content...</right>
+
+    <script src="Scripts/jquery-3.6.1.js"></script>
+    <script src="Scripts/jquery.validate.js"></script>
+    <script src="Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+    <script src="Scripts/SkdWebHelper/Skd.js"></script>
+    <script src="Scripts/SkdWebHelper/Skd.Form.js"></script>
+    <script src="Scripts/SkdWebHelper/Skd.JavaScriptExtend.js"></script>
+    <script src="Scripts/SkdWebHelper/Skd.Menu.js"></script>
+
+    <script src="Scripts/Website.js"></script>
+
+    <script>
+        /* After user scripts */
+        var pageForm;
+
+        $(function () {
+            pageForm = $("#pageForm");
+        });
+    </script>
+    <!-- scripts -->
+    <!-- section: scripts -->
+
+    <script>
+        var buttonWidth = 180;
+        $(function () {
+            pageForm.attr("action", "/Daily/Daily_AddEdit");
+            $("#optionButtons button[extra-info] .optionExtraIcons").append("<span class='fas fa-fw fa-receipt text-warning' title='Additionl information is required' />");
+            $("#optionButtons button[require-remark] .optionExtraIcons").append("<span class='fas fa-fw fa-comment text-danger' title='Remark is required' />");
+            $("#optionButtons button").on("click tap", function (e) {
+                $("#typeId").val($(this).attr("id").split("_")[1]);
+                $("#optionId").val($(this).attr("id").split("_")[2]);
+                $("#remark").attr("required", $(this).hasAttr("require-remark"));
+                if ($(this).hasAttr("require-remark")) {
+                } else {
+                    $("#remark").removeClass("is-invalid");
+                }
+
+                pageForm.validate();
+            });
+            $("header .fas.fa-seedling").click(function (e) {
+                Skd.PageLoading("Going to Dashboard");
+                location.href = "/";
+            });
+            pageForm.submit(function (e) {
+                if (pageForm.valid()) {
+                    if (skd_debug) {
+                        skd_form_debug(pageForm);
+                    } else {
+                        Skd.PageLoading("Adding Entry...", 0);
+                        return true;
+                    }
+                } else {
+                    $("#typeId, #optionId").val("");
+                }
+
+                return false;
+            });
+            Skd.SetEvents();
+
+            pageResize();
+            window.addEventListener("resize", function (e) {
+                pageResize();
+            }, false);
+        });
+
+        function pageResize() {
+            $("#optionButtons button .optionExtraIcons").each(function (index, elm) {
+                let btn = $(this).closest("button");
+
+                $(this).find(".fas").each(function (index2, elm2) {
+                    $(this)
+                        .css("position", "absolute")
+                        .css("top", "calc(" + btn.position().top + "px + .5rem + " + (index2 * 35) + "px)")
+                        .css("left", "calc(" + btn.position().left + "px +  3px)")
+                        ;
+                });
+
+                let deviceW = Skd.DeviceInformation().X;
+                let tmpW = Math.round(deviceW / buttonWidth);
+
+                console.clear();
+                console.log(deviceW);
+                console.log(tmpW);
+                console.log(100 / tmpW);
+
+                $("#optionButtons .btn-action button").css("width", (100 / tmpW) + "%");
+            });
+        }
+    </script>
+
+    <!-- section: scripts END -->
+    <script>
+        /* After user scripts */
+        $(function () {
+            Skd.Message.Show();
+
+            Skd.ContentLoadingHide();
+        });
+    </script>
+</body>
+</html>

@@ -9,6 +9,10 @@ namespace dk.infomanager.Controllers
 {
     public class DailyController : CommonController
     {
+        public ActionResult Fast()
+        {
+            return View("_Fast_Dummy");
+        }
         public ActionResult Index() => View();
         public ActionResult Stat() => View();
         public ActionResult Stat_Dietitian() => View();
@@ -64,7 +68,7 @@ namespace dk.infomanager.Controllers
                 }
             }
 
-            if (dailyId.HasValue)
+            if (!dailyId.HasValue)
             {
                 string rowIdsAffected = "";
                 for (int i = 1; i <= qty; i++)

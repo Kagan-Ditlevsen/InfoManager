@@ -1,0 +1,197 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_SkdSidebar.cshtml";
+    int typeId = int.Parse(Skd.Web.Utils.RequestOrDefaultIfEmpty("typeId", 0));
+    int optionId = int.Parse(Skd.Web.Utils.RequestOrDefaultIfEmpty("optionId", 0));
+    var Model = new Daily() { registerDateTime = DateTime.Now };
+    if (Guid.TryParse(Request["dailyId"], out Guid dailyId))
+    {
+        Model = Daily.Retrieve(dailyId);
+        typeId = Model.typeId;
+        optionId = Model.optionId.HasValue ? Model.optionId.Value : 0;
+    }
+
+    ViewBag.Title = (dailyId != Guid.Empty ? "Update" : "Add new") + " Day Item";
+    ViewBag.Icon = "calendar-day";
+
+    var typeList = Common.DailyTypes
+        .OrderBy(x => x.internalTitle)
+        .Select(x => new DbDropdown(x.typeId, x.internalTitle))
+        .ToList();
+    var optionList = Common.DailyTypeOptions
+        .Where(x => x.typeId == typeId)
+            .OrderBy(x => x.internalTitle)
+
+            .Select(x => new DbDropdown(
+                x.optionId,
+                x.internalTitle,
+                x.typeId.ToString(),
+                x.DailyType.internalTitle
+            )
+        ).ToList();
+    var extraList = Common.DailyTypeExtra
+        .Where(x => x.typeId == typeId && x.isActive)
+        .OrderBy(x => x.sortOrder)
+        .ToList();
+    if (typeId > 0 && optionId == 0)
+    {
+        int? tmpOptionId = null;
+        tmpOptionId = Common.DailyTypes.Single(x => x.typeId == typeId).defaultOptionId;
+        if (tmpOptionId.HasValue)
+        {
+            optionId = tmpOptionId.Value;
+        }
+    }
+}
+@section scripts {
+    <script>
+        function sidebar_deleteEntry() {
+            Skd.PageLoading("Deleting entry...");
+            $("#dailyDelete").submit();
+            return;
+        }
+        var sidebarForm = $("#dailyEntry");
+        function convertDateToUTC(date) {
+            return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+        }
+        $(function (e) {
+            $("[id$='_labels']").parent().removeClass("input-group");
+
+            // date must be lesser than DateTime.Now
+            $("#sidebar_registerDateTime_datetime").on("blur", function (e) {
+                let name = $(this).attr("name");
+                let dateTime = new Date($(this).val()).getTime();
+                let now = new Date().getTime();
+                let isValid = (dateTime <= now);
+                if (!isValid) {
+                    var validator = sidebarForm.validate();
+                    validator.showErrors({
+                        "sidebar_registerDateTime_datetime": "The date and time have to be smaller than now"
+                    });
+                    skd_form_valid_setbuttons(sidebarForm, true);
+                }
+                //else
+                //{
+                //    /* default behaviour from Skd.Form.js */
+                //    /* 'blur' have already run before this, there this dummy code */
+                //    let id = $(this).attr("id").substring(0, $(this).attr("id").lastIndexOf("_"));
+                //    $("#" + id).val($(this).val().replace("T", " "));
+                //}
+            });
+
+            $("#sidebar_typeId").on("change", function (e) {
+                let typeId = $("#sidebar_typeId").val();
+                skd_sidebar_load_content("/Daily/Sidebar_DailyAdd", "typeId=" + typeId + "&optionId=0");
+            })
+            $(".is-invalid").first(function (e) {
+                $(this).focus();
+            });
+            $("#sidebar_registerDateTime_datetime").focus();
+
+            $(sidebarForm).on("submit", function (e) {
+                if (!$(this).valid()) {
+                    return;
+                }
+
+                if (skd_debug) {
+                    return skd_form_debug($(form));
+                } else {
+                    if (!skd_form_valid($(sidebarForm))) {
+                        if (skd_debug) console.log("form not valid");
+                        return false;
+                    }
+                    if (skd_debug) console.log("form submit");
+
+                    Skd.PageLoading("@(Model.dailyId == Guid.Empty ? "Adding" : "Updating") daily entry...");
+                    $(this).off("submit").submit();
+                }
+            });
+
+            skd_form_valid(sidebarForm);
+        });
+    </script>
+}
+<form id="dailyEntry" class="skd-form" action="/Daily/Daily_AddEdit" method="post" novalidate="novalidate">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="dailyId" value="@(Model.dailyId == Guid.Empty ? "" : Model.dailyId.ToString())" />
+    <input type="hidden" id="rUrl" name="rUrl" value="@Request.UrlReferrer.ToString()" />
+    @Form.Controls.DateTime(new Form.DateTime() { Id = "sidebar_registerDateTime", IdName = "registerDateTime", Title = "Register Date/Time", Value = Model.registerDateTime.ToYMDHM(), Required = true })
+    @Form.Controls.Dropdown(new Form.Dropdown() { Id = "sidebar_typeId", IdName = "typeId", Title = "Entry Type", HelpText = "-- Choose Type --", DataList = typeList, Value = typeId.ToString(), Required = true })
+    @if (optionList.Count() > 0)
+    {
+        @Form.Controls.Dropdown(new Form.Dropdown() { Id = "sidebar_optionId", IdName = "optionId", Title = "Entry Option Type", HelpText = "-- Choose Option --", DataList = optionList, Value = optionId.ToString(), UseGrouping = false })
+    }
+    @foreach (var dte in extraList)
+    {
+        DailyInfo di = new DailyInfo() { extraId = dte.extraId };
+        if (dailyId != Guid.Empty)
+        {
+            try
+            {
+                di = Model.DailyInfo.Single(x => x.extraId == dte.extraId);
+            }
+            catch { }
+        }
+        string extraViewName = "_DailyInfo_";
+        switch (dte.inputType)
+        {
+            case "R":
+                extraViewName += "Range";
+                break;
+            case "N":
+                extraViewName += "Number";
+                break;
+            case "D":
+                extraViewName += "DateTime";
+                break;
+            case "L":
+                extraViewName += "List";
+                break;
+            default:
+                extraViewName += "Text";
+                break;
+        }
+        <text>
+            @Html.Partial(extraViewName, di)
+        </text>
+    }
+    @Form.Controls.TextBox(new Form.TextBox() { Id = "sidebar_remark", IdName = "remark", Title = "Remark", Value = Model.remark })
+    @{
+        List<DbDropdown> qtyList = new List<DbDropdown>();
+        for (var i = 1; i < 21; i++)
+        {
+            qtyList.Add(new DbDropdown(i.ToString(), i.ToString()));
+        }
+    }
+    @Form.Controls.Dropdown(new Form.Dropdown { Id = "sidebar_qty", IdName = "qty", Title = "Quantity", DataList = qtyList, Value = "1", Disabled = (dailyId != Guid.Empty) })
+
+    <div id="footer_container" class="d-flex mt-3 mb-3">
+        @if (dailyId != Guid.Empty)
+        {
+            <div class="col-auto ps-0">
+                @Form.Controls.ButtonConfirm(new Form.ButtonConfirm { Title = "Delete", CallbackAfterConfirmation = "sidebar_deleteEntry()" })
+            </div>
+        }
+        <div class="col px-0"></div>
+        <div class="col-auto pe-0">
+            @Form.Controls.ButtonSubmit(new Form.ButtonSubmit { Title = dailyId != Guid.Empty ? "Update" : "Add" })
+        </div>
+    </div>
+    @if (dailyId != Guid.Empty)
+    {
+        <div class="skd-form-row" container-type="!UNKNOWN!">
+            <label class="col-4">Daily Id</label>
+            <div class="input-group" style="padding-left: calc(0.75rem + 1px);">@Model.dailyId</div>
+        </div>
+
+        <div class="skd-form-row mt-0" container-type="!UNKNOWN!">
+            <label class="col-4">Created On</label>
+            <div class="input-group" style="padding-left: calc(0.75rem + 1px);">@Model.createDateTime.ToYMDHM()</div>
+        </div>
+    }
+</form>
+
+<form id="dailyDelete" action="/Daily/Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="rUrl" name="rUrl" value="@Request.UrlReferrer.ToString()" />
+    <input type="hidden" name="dailyId" value="@(dailyId != Guid.Empty ? Model.dailyId.ToString() : "")" />
+</form>

@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Information Dashboard";
+    List<Info> infoes = new List<Info>();
+    using (var db = new Db())
+    {
+        infoes = db.Info.Where(x => x.createUserId == Common.User.userId)
+            .OrderBy(x => x.title)
+            .ToList();
+    }
+}
+<div class="d-flex flex-column flex-md-row">
+    <div class="col-12 col-md-6">
+        <h5>Infoes</h5>
+        @foreach (var info in infoes)
+        {
+            <div class="d-flex">
+                <div class="col-auto">@info.infoId</div>
+                <div class="col">@info.title</div>
+            </div>
+        }
+    </div>
+    <div class="col-12 col-md-6">
+        <h5>Categories</h5>
+        @foreach (var cat in Common.InfoCategories)
+        {
+            <div class="d-flex">
+                <div class="col-auto">@cat.categoryId</div>
+                <div class="col-auto">@cat.parentCategoryId</div>
+                <div class="col">@cat.internalTitle</div>
+            </div>
+        }
+    </div>
+</div>
+@section scripts {
+    <script>
+        $(function (e) {
+        });
+    </script>
+}
+@section styles {
+    <style>
+    </style>
+}

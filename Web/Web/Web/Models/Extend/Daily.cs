@@ -13,12 +13,12 @@ namespace dk.infomanager.Models
             string rtn = string.Join(", ", DailyInfo.Where(x => !string.IsNullOrEmpty(x.entry)).Select(x => x.DailyTypeExtra.internalTitle + ": " + x.entry).ToArray());
             return new HtmlString(rtn);
         }
-        public HtmlString Title(bool includeIcon = true)
+        public HtmlString Title(bool includeIcon = true, bool equalSizeIcons = false)
         {
             string rtn = "";
             if (includeIcon)
             {
-                rtn += Common.DailyTypes.Single(x => x.typeId == typeId).Icon() + " ";
+                rtn += Common.DailyTypes.Single(x => x.typeId == typeId).Icon(equalSizeIcons) + " ";
             }
             rtn += Common.DailyTypes.Single(x => x.typeId == typeId).internalTitle;
             if (optionId.HasValue)

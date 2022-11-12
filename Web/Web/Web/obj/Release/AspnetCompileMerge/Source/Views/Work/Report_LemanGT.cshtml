@@ -1,0 +1,131 @@
+﻿@model Work
+@{
+    DateTime listDT = DateTime.Now;
+    listDT = listDT.AddDays(listDT.DayOfWeek(DayOfWeek.Monday) * -1);
+    DateTime selDT = DateTime.Parse(Skd.Web.Utils.RequestOrDefault("dateTime", listDT));
+
+    ViewBag.Title = "Leman week Report";
+}
+<div class="top-message alert alert-warning">
+    <div class="d-flex align-items-center flex-column flex-md-row">
+        <div class="col-auto">
+            @Form.Controls.Button(new Form.Button() { Id = "btn_print", Background = Skd.Web.Enumeration.BootstrapStyle.Dark, Icon = Icon.Print })
+        </div>
+        <div class="col-auto">
+            <select id="dateTime" name="dateTime" class="form-select form-select-sm" onchange="location.href = '?dateTime=' + this.value;">
+                @for (var i = 0; i <= (5 * 7); i += 7)
+                {
+                    <option value="@listDT.AddDays(i*-1).ToYMD()" @(selDT.ToYMD() == listDT.AddDays(i * -1).ToYMD() ? " selected" : "")>@listDT.AddDays(i * -1).ToYMD()</option>
+                }
+            </select>
+        </div>
+        <div class="col">@listDT.DayOfWeek(DayOfWeek.Monday)</div>
+        <div class="col">@listDT.ToYMD()</div>
+    </div>
+</div>
+@if (Model == null)
+{
+    DateTime weekStart = selDT;
+    DateTime weekEnd = weekStart.AddDays(7);
+    List<WorkTask> weekly;
+    using (var db = new Db())
+    {
+        weekly = db.WorkTask
+            .Include("Work")
+            .Include("WorkTaskType")
+            .Where(x =>
+                x.Work.startDateTime > weekStart
+                && x.Work.endDateTime < weekEnd
+                && x.Work.remark.Contains("Leman GT")
+            )
+            .ToList();
+    }
+    List<string> remarks = new List<string>();
+    var workIds = weekly.OrderBy(x => x.startDateTime).Select(x => new { x.Work.workId, x.Work.startDateTime }).Distinct();
+    var rowPos = new[] { 8.3, 10.7, 13.1, 15.4, 17.7 };
+    bool showRemarkA = false;
+    bool showRemarkB = false;
+
+    <img id="background-image" src="~/Content/Report/leman_template.jpg" style="width: 29.7cm; position: absolute; top: -1cm; left: 4.5cm; display:none" />
+    foreach (var work in workIds.OrderBy(x => x.startDateTime))
+    {
+        double posTop = 3.2 + (weekly.First(x => x.workId == work.workId).Work.startDateTime.Value.DayOfWeek(DayOfWeek.Monday) * 0.85);
+        <div class="d-flex flex-row" style="position: absolute; top: @(posTop.ToString() + "cm"); left: 5.5cm;">
+            <div class="col-auto" style="position: absolute; left: 5.3cm">@weekly.First(x => x.workId == work.workId).Work.startDateTime.Value.ToString("dd")</div>
+            <div class="col-auto" style="position: absolute; left: 6.8cm">@weekly.First(x => x.workId == work.workId).Work.startDateTime.Value.ToString("MM")</div>
+
+            @foreach (var task in weekly.Where(x => x.workId == work.workId && x.reportColumnNumber > 0))
+            {
+                if (task.startDateTime.HasValue || task.endDateTime.HasValue)
+                {
+                    double posLeft = (((task.reportColumnNumber - 1) * 2.15) + 8.9);
+                    DateTime dateTime = task.startDateTime.HasValue ? task.startDateTime.Value : task.endDateTime.Value;
+                    <div class="col-auto" style="position: absolute; left: @(rowPos[task.reportColumnNumber - 1].ToString() + "cm")">@Html.Raw(dateTime.ToString("HH") + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + dateTime.ToString("mm"))</div>
+                    <div class="col-auto" style="position: absolute; left: 20.3cm">
+                        @{
+                            string linkText = weekly.Count(x => x.workId == work.workId && x.typeId == (int)WorkTaskTypeEnum.PickupLink) > 0 ? "YES" : "NO";
+                            if (task.Work.remark.Contains("TJW P"))
+                            {
+                                linkText += "<sup>b)</sup>";
+                                showRemarkB = true;
+                            }
+                            else if (task.Work.remark.Contains("TJW S"))
+                            {
+                                linkText += "<sup>a)</sup>";
+                                showRemarkA = true;
+                            }
+                        }@Html.Raw(linkText)
+                    </div>
+                }
+                else
+                {
+                    <div class="col-auto" style="width: 100px; position: absolute; left: @(rowPos[task.reportColumnNumber - 1].ToString() + "cm")">--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--</div>
+                }
+            }
+        </div>
+    }
+    <div class="col-auto" style="position: absolute; top: 13cm; left: 6cm;">
+        @{
+            var remarkList = weekly.Where(x => new[] { (int)WorkTaskTypeEnum.Waiting, (int)WorkTaskTypeEnum.Note, (int)WorkTaskTypeEnum.Accident }.Contains(x.typeId)).OrderBy(x => x.Work.startDateTime).ThenBy(y => y.startDateTime);
+            if (remarkList.Count() > 0)
+            {
+                <div><u>REMARKS</u> (Message to Office/Carrier):</div>
+                foreach (var task in remarkList)
+                {
+                    <div style="line-height:1.5rem">@task.startDateTime.Value.ToString("d/M HH:mm")@(task.endDateTime.HasValue ? " - " + task.endDateTime.Value.ToString("HH:mm") : "")&nbsp;&nbsp;&nbsp;&nbsp;<span class="fas @task.WorkTaskType.icon"></span>&nbsp;@task.WorkTaskType.internalTitle: @task.remark</div>
+                }
+            }
+
+            if (showRemarkA || showRemarkB)
+            {
+                if (remarkList.Count() > 0)
+                {
+                    <hr />
+                }
+                if (showRemarkA)
+                {
+                    <div>a) Link setdown @@ TJW, Silovej 20, DK-2690 Karlslunde</div>
+                }
+                if (showRemarkB)
+                {
+                    <div>b) Link picked up @@ TJW, Silovej 20, DK-2690 Karlslunde</div>
+                }
+            }
+        }
+    </div>
+}
+@section scripts {
+    <script>
+        $(function (e) {
+        });
+    </script>
+}
+@section styles {
+    <style>
+        @@media print {
+            #background-image {
+                display: block !important;
+            }
+        }
+    </style>
+}

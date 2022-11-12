@@ -1,0 +1,46 @@
+﻿@{
+    DateTime d = DateTime.Parse(Skd.Web.Utils.RequestOrDefault("start", DateTime.Now.AddDays(-7).ToYMD()));
+    DateTime de = d.AddDays(8);
+    ViewBag.Title = "Occupational therapist Statistics from " + d.ToYMD() + " and 7 days ahead";
+
+    //List<vw_Daily_Days> dayList = new List<vw_Daily_Days>();
+    //List<Daily> dayListItems = new List<Daily>();
+    //int[] typesToInclude = { 1801, 9007, 1500, 9009, 9011, 9505, 9501, 1111 };
+    //int[] typesToStats = { 9503, 9007, 1500, 1801 };
+    //using (var db = new Db())
+    //{
+    //    dayList = db.vw_Daily_Days.Where(x => x.startDateTime >= d && x.endDateTime <= de).ToList();
+    //    dayListItems = db.Daily.Include("DailyType").Where(x => x.registerDateTime >= d && x.registerDateTime <= de && (typesToInclude.Contains(x.typeId) || typesToStats.Contains(x.typeId))).ToList();
+    //}
+}
+<div class="top-message alert alert-warning">
+    <div class="d-flex flex-row align-items-center">
+        <div class="col ps-2">Contact information: <span class="fas fa-user-nurse"></span> Marie/Sus <span class="fas fa-phone-alt"></span> 4335 2484 / 2044 9871</div>
+        <div class="col-auto pe-1">
+            @Form.Controls.DateTime(new Form.DateTime() { Id = "start", Value = d.ToYMD(), ControlOnly = true, DateTimeType = Form.DateTimeType.Date })
+        </div>
+        <div class="col-auto">
+            @Form.Controls.Button(new Form.Button() { Id = "btn_print", Background = Skd.Web.Enumeration.BootstrapStyle.Dark, Icon = Icon.Print })
+        </div>
+    </div>
+</div>
+<div class="p-0">
+</div>
+@section scripts {
+    <script>
+        $(function () {
+            $("#start_date").on("change", function (e) {
+                Skd.PageLoading("Getting new data...");
+                location.search = QueryString("start", $("#start_date").val());
+            });
+            $("[skd-cmd=datetime_clear]").on("click", function (e) {
+                Skd.PageLoading("Getting new data...");
+                location.search = QueryString("start", "");
+            });
+        });
+    </script>
+}
+@section styles {
+    <style>
+    </style>
+}

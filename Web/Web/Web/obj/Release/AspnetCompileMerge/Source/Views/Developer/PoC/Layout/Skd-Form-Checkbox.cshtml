@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title += "Skd-Form-Checkbox";
+    ViewBag.SubTitle = "<code>Under development</code>";
+}
+<div class="d-flex">
+    <div class="col-6">
+        <button class="btn btn-sm" skd-toggle><span class="fas fa-toggle-on"></span> Checkbox</button>
+    </div>
+    <div class="col-6">
+        <span class="badge badge-success fas fa-circle"> Accepterer du betingelserne?</span>
+    </div>
+</div>
+@section scripts {
+    <script>
+        $(function () {
+            $("[skd-toggle]").on("click", function (e) {
+                $(this).toggleClass("toggled");
+            });
+        });
+    </script>
+}
+@section styles {
+    <style>
+        [skd-toggle] .fa-toggle-on {
+            transform: rotate(180deg);
+            color: #aa0000;
+            cursor: pointer;
+        }
+
+        [skd-toggle]:not(.toggled) .fa-toggle-on {
+            transform: rotate(0);
+            color: #00aa00;
+        }
+    </style>
+}

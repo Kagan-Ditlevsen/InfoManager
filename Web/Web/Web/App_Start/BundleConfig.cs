@@ -10,7 +10,7 @@ namespace dk.infomanager
         {
             /* JavaScript */
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-3.6.0.js",
+                "~/Scripts/jquery-{version}.js",
                 "~/Scripts/jquery.validate*",
                 "~/Scripts/additional-methods.min.js" // jQuery Validation
             ));
@@ -20,7 +20,7 @@ namespace dk.infomanager
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                "~/Scripts/modernizr-*"
+                "~/Scripts/modernizr-{version}.js"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/skd").Include(
