@@ -1,0 +1,7 @@
+*.cache
+*.sou
+bin
+obj
+_publish
+packages
+*.apk
