@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,6 +13,15 @@ namespace InfoAndroidApp.Models
 {
     internal class Db : IDisposable
     {
+        [Obsolete("Not implemented yet")]
+        public List<SysUser> SysUser { get; set; }
+        [Obsolete("Not implemented yet")]
+        public List<Daily> Daily { get; set; }
+        [Obsolete("Not implemented yet")]
+        public List<DailyInfo> DailyInfo { get; set; }
+        public List<DailyType> DailyType { get; set; }
+        public List<DailyTypeExtra> DailyTypeExtra { get; set; }
+        public List<DailyTypeOption> DailyTypeOption { get; set; }
         /*
          * 
          * <add name="ConnectionStringName"
@@ -20,7 +30,20 @@ namespace InfoAndroidApp.Models
 
         public static string SqlConnectionString = "data source=mssql.haulmanager.nu;initial catalog=haulmanager_nu_db_im;persist security info=True;user id=haulmanager_nu;password=als76Asl;MultipleActiveResultSets=False;Encrypt=False;Trusted_Connection=True;TrustServerCertificate=True;Connection Timeout=30;application name=infomanager.dk";
 
-        public Db() { }
+        public Db()
+        {
+            string setup = Common.ApiCall("setup").Result;
+            Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(setup);
+
+            SysUser = new List<SysUser>();
+            Daily = new List<Daily>();
+            DailyInfo = new List<DailyInfo>();
+
+            DailyType = myDeserializedClass.DailyType;
+            DailyTypeExtra = myDeserializedClass.DailyTypeExtra;
+            DailyTypeOption = myDeserializedClass.DailyTypeOption;
+
+        }
         //public static DataSet DataSetFromReader(IDataReader reader)
         //{
         //    DataSet ds = new DataSet();
@@ -45,7 +68,7 @@ namespace InfoAndroidApp.Models
             rtn.MultipleActiveResultSets = true;
 
             rtn.TrustServerCertificate = true;
-            
+
             return new SqlConnection(rtn.ConnectionString);
         }
         public static async Task<DataSet> DataSetFromReaderAsync(string[] tableNames)
@@ -58,7 +81,7 @@ namespace InfoAndroidApp.Models
             {
                 foreach (string table in tableNames)
                 {
-                    command.CommandText += ";SELECT * FROM " + table;
+                    command.CommandText += ";SELECT * FROM " + table;// + " FOR JSON PATH";
                 }
                 await conn.OpenAsync();
 
@@ -84,7 +107,7 @@ namespace InfoAndroidApp.Models
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

@@ -1300,6 +1300,14 @@ app_system_properties:
 .L.env.buf.315:
 	.zero	70
 	.size	.L.env.buf.315, 70
+	.type	.L.env.buf.316, @object
+.L.env.buf.316:
+	.zero	70
+	.size	.L.env.buf.316, 70
+	.type	.L.env.buf.317, @object
+.L.env.buf.317:
+	.zero	70
+	.size	.L.env.buf.317, 70
 	# Bundled assemblies data
 
 	.type	bundled_assemblies, @object
@@ -3520,7 +3528,21 @@ bundled_assemblies:
 	.long	0x0	# name_length
 	.long	.L.env.buf.315	# name
 
-	.size	bundled_assemblies, 7584
+	.long	0xffffffff	# apk_fd
+	.long	0x0	# data_offset
+	.long	0x0	# data_size
+	.long	0x0	# data
+	.long	0x0	# name_length
+	.long	.L.env.buf.316	# name
+
+	.long	0xffffffff	# apk_fd
+	.long	0x0	# data_offset
+	.long	0x0	# data_size
+	.long	0x0	# data
+	.long	0x0	# name_length
+	.long	.L.env.buf.317	# name
+
+	.size	bundled_assemblies, 7632
 	# Assembly store individual assembly data
 	.type	assembly_store_bundled_assemblies, @object
 	.global	assembly_store_bundled_assemblies
@@ -3756,7 +3778,7 @@ application_config:
 	.long	0x3	# package_naming_policy
 	.long	0xc	# environment_variable_count
 	.long	0x0	# system_property_count
-	.long	0x13c	# number_of_assemblies_in_apk
+	.long	0x13e	# number_of_assemblies_in_apk
 	.long	0x46	# bundled_assembly_name_width
 	.long	0x2	# number_of_assembly_store_files
 	.long	0x20	# number_of_dso_cache_entries
@@ -3808,7 +3830,7 @@ application_config:
 
 	.type	.L.autostr.8, @object
 .L.autostr.8:
-	.asciz	"87457984-b6d2-4dfc-a103-ddebcf1d49d6"
+	.asciz	"1f0d40ab-49dc-44f3-afda-200a4a1a1f98"
 	.size	.L.autostr.8, 37
 
 	.type	.L.autostr.9, @object
@@ -3993,8 +4015,8 @@ application_config:
 
 	.type	.L.autostr.45, @object
 .L.autostr.45:
-	.asciz	"com.companyname.InfoAndroidApp"
-	.size	.L.autostr.45, 31
+	.asciz	"dk.infomanager.app"
+	.size	.L.autostr.45, 19
 
 
 	.ident	"Xamarin.Android remotes/origin/release/6.0.4xx @ af4a25d50f5a602c77d05c2ec8c8644c00cffbbd"

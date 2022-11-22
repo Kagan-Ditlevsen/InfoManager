@@ -6,9 +6,24 @@
     xmlns:local="clr-namespace:InfoAndroidApp"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Information Manager"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    <TabBar>
+        <Tab Title="Home"
+             Icon="{FontImage FontFamily=FA6, Glyph=&#xe1b0;}">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
+        </Tab>
+        <Tab Title="Daily Log"
+             Icon="{FontImage FontFamily=FA6, Glyph=&#xf00b;}">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:LogPage}"
+                Route="LogPage" />
+        </Tab>
+        <Tab Title="Setup"
+             Icon="{FontImage FontFamily=FA6, Glyph=&#xf4fe;}">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:SetupPage}"
+                Route="SetupPage" />
+        </Tab>
+    </TabBar>
 </Shell>

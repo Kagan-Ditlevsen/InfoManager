@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="thisPage"
+             x:Class="InfoAndroidApp.LogPage"
+             Title="Daily Log">
+    <Grid Margin="0"
+          RowDefinitions="Auto,*,Auto">
+        <Label
+            Grid.Row="0"
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <ScrollView x:Name="scrollView"
+                    Grid.Row="1"
+                    VerticalOptions="FillAndExpand">
+            <StackLayout>
+                <Label x:Name="label" Text="" />
+                <!-- More Label objects go here -->
+            </StackLayout>
+        </ScrollView>
+        <FlexLayout Grid.Row="2" x:Name="ActionButtonList" HeightRequest="200"
+                    Direction="Row"
+                    AlignContent="Stretch"
+                    AlignItems="Stretch">
+            <Button Text="Left icon" ContentLayout="Left,5" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b0;}" HorizontalOptions="FillAndExpand" WidthRequest="150"
+                x:Name="ActionButton_1" Clicked="ActionButton_Clicked" ClassId="1"/>
+            <Button Text="Left icon #2" ContentLayout="Left,5" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b1;}" HorizontalOptions="FillAndExpand" WidthRequest="150"
+                x:Name="ActionButton_21" Clicked="ActionButton_Clicked" ClassId="2"/>
+        </FlexLayout>
+    </Grid>
+</ContentPage>

@@ -9,7 +9,9 @@
 
 		<menu title="main">
 				<menuitem type="item" title="Frontpage" url="/" icon="home" sidebar-url="" ajax-url="" loading-message=""></menuitem>
-				<menuitem type="item" title="Speed Daily" url="/Daily/Fast" icon="seedling" sidebar-url="" ajax-url="" loading-message=""></menuitem>
+				<menuitem type="item" title="Speed Daily" url="/Daily/Fast" icon="seedling" sidebar-url="" ajax-url="" loading-message="">
+						<menuitem type="item" title="Android App" url="https://otg.haulmanager.nu/Download/dk.infomanager.app.apk" icon="android" sidebar-url="" ajax-url="" loading-message=""></menuitem>
+				</menuitem>
 				<menuitem type="item" title="** Drivers AID **" url="/Work/DriversAid" icon="hands-helping" sidebar-url="" ajax-url="" loading-message=""></menuitem>
 
 				<menuitem type="areaspacer"></menuitem>

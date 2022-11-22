@@ -44,7 +44,6 @@
         </div>
     }
 </div>
-
 @Form.Controls.TextBox(new Form.TextBox()
 {
     Id = "remark",
@@ -79,10 +78,6 @@
                 }
 
                 pageForm.validate();
-            });
-            $("header .fas.fa-@ViewBag.Icon").click(function (e) {
-                Skd.PageLoading("Going to Dashboard");
-                location.href = "/";
             });
             pageForm.submit(function (e) {
                 if (pageForm.valid()) {

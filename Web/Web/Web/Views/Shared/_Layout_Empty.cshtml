@@ -24,12 +24,12 @@
             font-size: 24px;
         }
 
-            header .fas {
+            /*header .fas {
                 position: absolute;
                 left: 0;
                 margin: 4px;
                 font-size: 30px;
-            }
+            }*/
 
         .content {
             min-height: calc(100vh - var(--header-height) - var(--footer-height));
@@ -60,9 +60,13 @@
     </script>
 </head>
 <body>
-    <header class="fixed-top text-bg-warning">
-        <div class="fas fa-@ViewBag.Icon"></div>
-        @ViewBag.Title
+    <header class="d-flex fixed-top text-bg-warning">
+        <div class="col-auto ps-1 pe-0"><span id="top_btn_home" class="fas fa-@ViewBag.Icon"></span></div>
+        <div class="col px-1">@ViewBag.Title</div>
+        <div class="col-auto ps-0 pe-1">
+            @*<span class="badge text-bg-secondary" style="padding: .35rem;"><span class="fas fa-refresh"></span> Refresh</span>*@
+            <span id="top_btn_sync" class="fas fa-sync"></span>
+        </div>
     </header>
 
     <div class="content">
@@ -94,14 +98,23 @@
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     @Scripts.Render("~/bundles/skd")
     @Scripts.Render("~/bundles/website")
-    <script>
+<script>
         /* After user scripts */
         var pageForm;
 
         $(function () {
             pageForm = $("#pageForm");
+
+            $("header #top_btn_home").click(function (e) {
+                Skd.PageLoading("Going to Dashboard");
+                location.href = "/";
+            });
+            $("header #top_btn_sync").click(function (e) {
+                Skd.PageLoading("Refreshing page...");
+                location.reload();
+            });
         });
-    </script>
+</script>
     <!-- scripts -->
     <!-- section: scripts -->
     @RenderSection("scripts", required: false)

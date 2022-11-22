@@ -14,19 +14,20 @@ namespace dk.infomanager.Models
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+
     public partial class Db : DbContext
     {
         public Db()
             : base("name=Db")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Daily> Daily { get; set; }
         public virtual DbSet<DailyInfo> DailyInfo { get; set; }
         public virtual DbSet<DailyType> DailyType { get; set; }
@@ -54,34 +55,34 @@ namespace dk.infomanager.Models
         public virtual DbSet<vw_Daily_Overview> vw_Daily_Overview { get; set; }
         public virtual DbSet<vw_Daily_Statistics> vw_Daily_Statistics { get; set; }
         public virtual DbSet<vw_DailyType_Tree> vw_DailyType_Tree { get; set; }
-    
+
         [DbFunction("Db", "fnc_Work_Salary")]
         public virtual IQueryable<fnc_Work_Salary_Result> fnc_Work_Salary(string workId, Nullable<System.DateTime> sd, Nullable<System.DateTime> ed, Nullable<decimal> rate0618, Nullable<decimal> rate1823, Nullable<decimal> rate2306)
         {
             var workIdParameter = workId != null ?
                 new ObjectParameter("workId", workId) :
                 new ObjectParameter("workId", typeof(string));
-    
+
             var sdParameter = sd.HasValue ?
                 new ObjectParameter("sd", sd) :
                 new ObjectParameter("sd", typeof(System.DateTime));
-    
+
             var edParameter = ed.HasValue ?
                 new ObjectParameter("ed", ed) :
                 new ObjectParameter("ed", typeof(System.DateTime));
-    
+
             var rate0618Parameter = rate0618.HasValue ?
                 new ObjectParameter("rate0618", rate0618) :
                 new ObjectParameter("rate0618", typeof(decimal));
-    
+
             var rate1823Parameter = rate1823.HasValue ?
                 new ObjectParameter("rate1823", rate1823) :
                 new ObjectParameter("rate1823", typeof(decimal));
-    
+
             var rate2306Parameter = rate2306.HasValue ?
                 new ObjectParameter("rate2306", rate2306) :
                 new ObjectParameter("rate2306", typeof(decimal));
-    
+
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fnc_Work_Salary_Result>("[Db].[fnc_Work_Salary](@workId, @sd, @ed, @rate0618, @rate1823, @rate2306)", workIdParameter, sdParameter, edParameter, rate0618Parameter, rate1823Parameter, rate2306Parameter);
         }
     }

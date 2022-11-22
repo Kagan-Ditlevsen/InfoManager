@@ -13,6 +13,11 @@ namespace Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+                name: "API",
+                url: "API/{authId}/{action}",
+                defaults: new { controller = "API", action = "Index" }
+            );
             // using multi function area defined id's
             routes.MapRoute(
                 name: "Economy",

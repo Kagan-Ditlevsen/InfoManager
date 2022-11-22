@@ -15,18 +15,18 @@ namespace dk.infomanager.Controllers
     {
         protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
         {
-            if (!requestContext.HttpContext.Request.IsSecureConnection)
-            {
-                var uriBuilder = new UriBuilder(requestContext.HttpContext.Request.Url)
-                {
-                    Scheme = Uri.UriSchemeHttps,
-                    Port = 443
-                };
-                //throw new Exception(uriBuilder.Uri.ToString());
-                Server.TransferRequest(uriBuilder.Uri.ToString(), true);
+            //if (!requestContext.HttpContext.Request.IsSecureConnection)
+            //{
+            //    var uriBuilder = new UriBuilder(requestContext.HttpContext.Request.Url)
+            //    {
+            //        Scheme = Uri.UriSchemeHttps,
+            //        Port = 443
+            //    };
+            //    //throw new Exception(uriBuilder.Uri.ToString());
+            //    Server.TransferRequest(uriBuilder.Uri.ToString(), true);
 
-                //throw new UnauthorizedAccessException("Secure connection is required. Try " + requestContext.HttpContext.Request.Url.ToString().Replace("http://", "https://") + " instead.");
-            }
+            //    //throw new UnauthorizedAccessException("Secure connection is required. Try " + requestContext.HttpContext.Request.Url.ToString().Replace("http://", "https://") + " instead.");
+            //}
 
 
             CultureInfo ci = new CultureInfo("en-US");

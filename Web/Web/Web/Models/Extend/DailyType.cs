@@ -8,6 +8,16 @@ namespace dk.infomanager.Models
 {
     public partial class DailyType
     {
+        #region crudO
+        public static List<DailyType> Overview()
+        {
+            using (var db = new Db())
+            {
+                //db.Configuration.LazyLoadingEnabled = false;
+                return db.DailyType.ToList();
+            }
+        }
+        #endregion
         public DailyType Parent() => Common.DailyTypes.FirstOrDefault(x => x.typeId == parentTypeId);
         public DailyType Next() => Common.DailyTypes.SingleOrDefault(x => x.typeId == nextTypeId);
         public DailyType Previous() => Common.DailyTypes.SingleOrDefault(x => x.nextTypeId == typeId);

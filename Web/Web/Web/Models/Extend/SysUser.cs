@@ -1,8 +1,13 @@
 using Skd;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
+using dk.infomanager.Controllers;
 
 namespace dk.infomanager.Models
 {
@@ -104,6 +109,70 @@ namespace dk.infomanager.Models
     }
     public partial class SysUser
     {
+        internal string ApiAuthenticateKey()
+        {
+            string key="";
+            try
+            {   
+                using (DESCryptoServiceProvider dESCryptoServiceProvider = new DESCryptoServiceProvider())
+                {
+                    // First pass
+                    byte[] bytesToEncrypt = Encoding.UTF8.GetBytes(userId.ToString());
+                    MemoryStream memoryStream = new MemoryStream();
+                    CryptoStream cryptoStream = new CryptoStream(memoryStream, dESCryptoServiceProvider.CreateEncryptor(ApiController._keyOne, ApiController._keyTwo), CryptoStreamMode.Write);
+
+                    cryptoStream.Write(bytesToEncrypt, 0, bytesToEncrypt.Length);
+                    cryptoStream.FlushFinalBlock();
+
+                    byte[] bytesToEncryptSecond = memoryStream.ToArray();
+
+                    // Second pass
+                    memoryStream = new MemoryStream();
+                    cryptoStream = new CryptoStream(memoryStream, dESCryptoServiceProvider.CreateEncryptor(ApiController._keyTwo, ApiController._keyThree), CryptoStreamMode.Write);
+
+                    cryptoStream.Write(bytesToEncryptSecond, 0, bytesToEncryptSecond.Length);
+                    cryptoStream.FlushFinalBlock();
+
+                    key = Convert.ToBase64String(memoryStream.ToArray());
+                }
+
+                return key;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        internal static SysUser RetrieveByApiKey(string key)
+        {
+            try
+            {
+                using (DESCryptoServiceProvider dESCryptoServiceProvider = new DESCryptoServiceProvider())
+                {
+                    // First pass
+                    MemoryStream memoryStream = new MemoryStream();
+                    CryptoStream cryptoStream = new CryptoStream(memoryStream, dESCryptoServiceProvider.CreateDecryptor(ApiController._keyTwo, ApiController._keyThree), CryptoStreamMode.Write);
+                    cryptoStream.Write(Convert.FromBase64String(key), 0, Convert.FromBase64String(key).Length);
+                    cryptoStream.FlushFinalBlock();
+
+                    byte[] encryptedString2 = memoryStream.ToArray();
+
+                    // Second pass
+                    memoryStream = new MemoryStream();
+                    cryptoStream = new CryptoStream(memoryStream, dESCryptoServiceProvider.CreateDecryptor(ApiController._keyOne, ApiController._keyTwo), CryptoStreamMode.Write);
+                    cryptoStream.Write(encryptedString2, 0, encryptedString2.Length);
+                    cryptoStream.FlushFinalBlock();
+
+                    int userId = int.Parse(Encoding.UTF8.GetString(memoryStream.ToArray()));
+
+                    return Retrieve(userId);
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         public virtual Stat Stat { get; set; }
 
         public SysUser() { Stat = new Stat(); }
