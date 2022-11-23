@@ -14,13 +14,13 @@ namespace api.infomanager.dk.Controllers
         [HttpGet("{id}", Name = "DailyRetrieve")]
         public object Retrieve(int id)
         {
-            SqlConnection conn = new SqlConnection();
-            conn.Open();
-            string query = "SELECT * FROM DailyType WHERE typeId = " + id.ToString();
-            SqlCommand cmd = new SqlCommand(query, conn);
-            DataTable dt = new DataTable();
-            dt.Load(cmd.ExecuteReader());
-            conn.Close();
+            //SqlConnection conn = new SqlConnection();
+            //conn.Open();
+            //string query = "SELECT * FROM DailyType WHERE typeId = " + id.ToString();
+            //SqlCommand cmd = new SqlCommand(query, conn);
+            //DataTable dt = new DataTable();
+            //dt.Load(cmd.ExecuteReader());
+            //conn.Close();
 
             using(var context = new InfoManager.DAL.infomanager_dk_db_mainEntities())
             {
