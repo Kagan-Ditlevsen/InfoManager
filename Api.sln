@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api.infomanager.dk", "Api\Api\api.infomanager.dk.csproj", "{4825F816-FE8C-430C-8A10-78101479C47A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4825F816-FE8C-430C-8A10-78101479C47A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4825F816-FE8C-430C-8A10-78101479C47A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4825F816-FE8C-430C-8A10-78101479C47A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4825F816-FE8C-430C-8A10-78101479C47A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B838A326-3389-47BB-9905-E6A1344EEDF5}
+	EndGlobalSection
+EndGlobal
