@@ -12,19 +12,18 @@ namespace InfoManager.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class FinanceAccount
+    public partial class InfoTag
     {
-        public int accountId { get; set; }
-        public Nullable<int> parentAccountId { get; set; }
-        public string typeId { get; set; }
-        public string title { get; set; }
-        public decimal sumInitial { get; set; }
-        public Nullable<decimal> sumCurrent { get; set; }
-        public string C_sortOrder { get; set; }
-        public Nullable<byte> C_lvl { get; set; }
-        public string C_lvlTitle { get; set; }
-        public string C_breadcrum { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public InfoTag()
+        {
+            this.Info = new HashSet<Info>();
+        }
     
-        public virtual FinanceAccountType FinanceAccountType { get; set; }
+        public int tagId { get; set; }
+        public string title { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Info> Info { get; set; }
     }
 }

@@ -10,3 +10,10 @@ D:\Github\InfoManager\DAL\DAL\obj\Release\_DAL.csproj.CoreCompileInputs.cache
 D:\Github\InfoManager\DAL\DAL\obj\Release\_DAL.csproj.CopyComplete
 D:\Github\InfoManager\DAL\DAL\obj\Release\InfoManager.DAL.dll
 D:\Github\InfoManager\DAL\DAL\obj\Release\InfoManager.DAL.pdb
+D:\GitHub\InfoManager\DAL\DAL\bin\Release\Skd.Web.dll
+D:\GitHub\InfoManager\DAL\DAL\bin\Release\Skd.Common.dll
+D:\GitHub\InfoManager\DAL\DAL\bin\Release\Newtonsoft.Json.dll
+D:\GitHub\InfoManager\DAL\DAL\bin\Release\Skd.Web.pdb
+D:\GitHub\InfoManager\DAL\DAL\bin\Release\Skd.Web.dll.config
+D:\GitHub\InfoManager\DAL\DAL\bin\Release\Skd.Common.pdb
+D:\GitHub\InfoManager\DAL\DAL\bin\Release\Skd.Common.xml

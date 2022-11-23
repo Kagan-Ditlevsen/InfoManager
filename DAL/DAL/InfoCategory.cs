@@ -25,9 +25,10 @@ namespace InfoManager.DAL
         public string internalTitle { get; set; }
         public int sortOrder { get; set; }
         public System.DateTime createDateTime { get; set; }
-        public Nullable<int> createUserId { get; set; }
+        public int createUserId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Info> Info { get; set; }
+        public virtual SysUser SysUser { get; set; }
     }
 }

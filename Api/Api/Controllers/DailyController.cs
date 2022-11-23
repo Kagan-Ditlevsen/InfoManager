@@ -22,7 +22,11 @@ namespace api.infomanager.dk.Controllers
             dt.Load(cmd.ExecuteReader());
             conn.Close();
 
-            return JsonConvert.SerializeObject(dt.DataTableToList<DailyType>());
+            using(var context = new InfoManager.DAL.infomanager_dk_db_mainEntities())
+            {
+                var rtn = context.Daily.OrderByDescending(x => x.registerDateTime).Take(1);
+                return JsonConvert.SerializeObject(rtn);
+            }
         }
 
         [HttpGet("Overview", Name = "DailyOverview")]

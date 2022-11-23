@@ -12,18 +12,13 @@ namespace InfoManager.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class FinanceLine
+    public partial class vw_Daily_Days
     {
-        public int lineId { get; set; }
-        public int financeId { get; set; }
-        public Nullable<int> accountId { get; set; }
-        public decimal amount { get; set; }
-        public string title { get; set; }
-        public string remark { get; set; }
-        public System.DateTime createDateTime { get; set; }
+        public int typeId { get; set; }
+        public string internalTitle { get; set; }
+        public System.DateTime startDateTime { get; set; }
+        public Nullable<System.DateTime> endDateTime { get; set; }
+        public Nullable<System.DateTime> elapsedTime { get; set; }
         public int createUserId { get; set; }
-        public Nullable<System.DateTime> validateDateTime { get; set; }
-    
-        public virtual Finance Finance { get; set; }
     }
 }

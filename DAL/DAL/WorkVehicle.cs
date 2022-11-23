@@ -23,6 +23,7 @@ namespace InfoManager.DAL
         public string remark { get; set; }
         public System.DateTime createDateTime { get; set; }
         public int createUserId { get; set; }
+        public string internalId { get; set; }
     
         public virtual WorkVehicleType WorkVehicleType { get; set; }
     }

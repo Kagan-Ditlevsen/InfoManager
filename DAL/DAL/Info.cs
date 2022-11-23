@@ -18,6 +18,7 @@ namespace InfoManager.DAL
         public Info()
         {
             this.InfoEntry = new HashSet<InfoEntry>();
+            this.InfoTag = new HashSet<InfoTag>();
         }
     
         public int infoId { get; set; }
@@ -30,5 +31,7 @@ namespace InfoManager.DAL
         public virtual InfoCategory InfoCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InfoEntry> InfoEntry { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InfoTag> InfoTag { get; set; }
     }
 }

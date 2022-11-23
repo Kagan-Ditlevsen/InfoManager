@@ -12,19 +12,18 @@ namespace InfoManager.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class InfoEntry
+    public partial class vw_Daily_Statistics
     {
-        public int entryId { get; set; }
-        public int infoId { get; set; }
         public int typeId { get; set; }
-        public string title { get; set; }
-        public string entry { get; set; }
-        public int sortOrder { get; set; }
-        public string remark { get; set; }
-        public System.DateTime createDateTime { get; set; }
+        public string typeTitle { get; set; }
+        public Nullable<int> optionId { get; set; }
+        public string optionTitle { get; set; }
+        public Nullable<int> qtyMorning { get; set; }
+        public Nullable<int> qty24h { get; set; }
+        public Nullable<int> qtyMidnight { get; set; }
+        public Nullable<System.DateTime> lastTimeTypeId { get; set; }
+        public Nullable<System.DateTime> lastTimeOptionId { get; set; }
         public int createUserId { get; set; }
-    
-        public virtual Info Info { get; set; }
-        public virtual InfoEntryType InfoEntryType { get; set; }
+        public Nullable<System.DateTime> lastRegisterDateTime { get; set; }
     }
 }

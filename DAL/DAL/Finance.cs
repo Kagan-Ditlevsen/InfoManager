@@ -24,8 +24,6 @@ namespace InfoManager.DAL
         public System.DateTime receiptDateTime { get; set; }
         public string title { get; set; }
         public string shopId { get; set; }
-        public Nullable<int> accountId { get; set; }
-        public decimal receiptSum { get; set; }
         public string receiptId { get; set; }
         public string remark { get; set; }
         public System.DateTime createDateTime { get; set; }

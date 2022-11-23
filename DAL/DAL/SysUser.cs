@@ -17,6 +17,7 @@ namespace InfoManager.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SysUser()
         {
+            this.InfoCategory = new HashSet<InfoCategory>();
             this.SysUserTimesheet = new HashSet<SysUserTimesheet>();
         }
     
@@ -35,6 +36,8 @@ namespace InfoManager.DAL
         public Nullable<System.DateTime> modifyDateTime { get; set; }
         public System.DateTime createDateTime { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InfoCategory> InfoCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SysUserTimesheet> SysUserTimesheet { get; set; }
     }

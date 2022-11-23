@@ -34,11 +34,11 @@ namespace InfoManager.DAL
         public virtual DbSet<FinanceAccount> FinanceAccount { get; set; }
         public virtual DbSet<FinanceAccountType> FinanceAccountType { get; set; }
         public virtual DbSet<FinanceLine> FinanceLine { get; set; }
-        public virtual DbSet<FinDummy> FinDummy { get; set; }
         public virtual DbSet<Info> Info { get; set; }
         public virtual DbSet<InfoCategory> InfoCategory { get; set; }
         public virtual DbSet<InfoEntry> InfoEntry { get; set; }
         public virtual DbSet<InfoEntryType> InfoEntryType { get; set; }
+        public virtual DbSet<InfoTag> InfoTag { get; set; }
         public virtual DbSet<SysUser> SysUser { get; set; }
         public virtual DbSet<SysUserTimesheet> SysUserTimesheet { get; set; }
         public virtual DbSet<Work> Work { get; set; }
@@ -50,5 +50,9 @@ namespace InfoManager.DAL
         public virtual DbSet<WorkTaskType> WorkTaskType { get; set; }
         public virtual DbSet<WorkVehicle> WorkVehicle { get; set; }
         public virtual DbSet<WorkVehicleType> WorkVehicleType { get; set; }
+        public virtual DbSet<vw_Daily_Days> vw_Daily_Days { get; set; }
+        public virtual DbSet<vw_Daily_Overview> vw_Daily_Overview { get; set; }
+        public virtual DbSet<vw_Daily_Statistics> vw_Daily_Statistics { get; set; }
+        public virtual DbSet<vw_DailyType_Tree> vw_DailyType_Tree { get; set; }
     }
 }
