@@ -779,8 +779,6 @@ C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\libxamarin-dotnet-debug.dylib
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\libxamarin-dotnet.a
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\libxamarin-dotnet.dylib
-C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\haulmanager.DAL.dll
-C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\haulmanager.DAL.pdb
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\mauiimage.inputs
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\mauifont.inputs
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-maccatalyst\maccatalyst-x64\mauisplash.inputs

@@ -1720,9 +1720,6 @@
     <AppxPackagedFile Include="C:\Users\kagan\.nuget\packages\runtime.win-x64.runtime.native.system.data.sqlclient.sni\4.4.0\runtimes\win-x64\native\sni.dll">
       <PackagePath>sni.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Github\HaulManagerOTG\haulmanager.DAL\haulmanager.DAL\bin\Debug\net6.0\haulmanager.DAL.dll">
-      <PackagePath>haulmanager.DAL.dll</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\InfoAndroidApp.deps.json">
       <PackagePath>InfoAndroidApp.deps.json</PackagePath>
     </AppxPackagedFile>

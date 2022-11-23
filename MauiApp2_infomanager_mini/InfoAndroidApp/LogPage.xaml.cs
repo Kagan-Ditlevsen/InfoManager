@@ -42,7 +42,7 @@ public partial class LogPage : ContentPage
     }
     protected override void OnAppearing()
     {
-        string setup = Common.ApiCall("setup").Result;
+        string setup = Api.ApiCall("setup").Result;
         Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(setup);
         var x = myDeserializedClass.DailyType.Single(x => x.typeId == 1053);
         label.Text = $"{x.internalTitle} [{x.iconCss}]";

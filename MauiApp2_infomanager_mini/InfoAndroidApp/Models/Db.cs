@@ -32,7 +32,7 @@ namespace InfoAndroidApp.Models
 
         public Db()
         {
-            string setup = Common.ApiCall("setup").Result;
+            string setup = Api.ApiCall("setup").Result;
             Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(setup);
 
             SysUser = new List<SysUser>();

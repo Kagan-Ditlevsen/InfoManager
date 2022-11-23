@@ -3,9 +3,9 @@
   <PropertyGroup>
     <IsFirstTimeProjectOpen>False</IsFirstTimeProjectOpen>
     <ActiveDebugFramework>net6.0-android33.0</ActiveDebugFramework>
-    <ActiveDebugProfile>Stig Unfold (Android 13.0 - API 33)</ActiveDebugProfile>
+    <ActiveDebugProfile>JTM Tablet (Android 13.0 - API 33)</ActiveDebugProfile>
     <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
-    <DefaultDevice>stig_unfold</DefaultDevice>
+    <DefaultDevice>jtm_tablet</DefaultDevice>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetPlatformIdentifier)'=='iOS'">
     <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>

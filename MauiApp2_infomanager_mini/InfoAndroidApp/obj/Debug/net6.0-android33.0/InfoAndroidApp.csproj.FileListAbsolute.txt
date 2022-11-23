@@ -1086,8 +1086,6 @@ C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-android33.0\dk.infomanager.app-Signed.aab
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-android33.0\dk.infomanager.app-Signed.apk
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-android33.0\dk.infomanager.app-Signed.apk.idsig
-C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-android33.0\haulmanager.DAL.dll
-C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-android33.0\haulmanager.DAL.pdb
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-android33.0\resizetizer\r\drawable-hdpi\logo.png
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-android33.0\resizetizer\r\drawable-mdpi\logo.png
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-android33.0\resizetizer\r\drawable-xhdpi\logo.png
@@ -1117,7 +1115,6 @@ C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-android33.0\InfoAndroidApp.AssemblyInfo.cs
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-android33.0\InfoAndroidApp.csproj.CoreCompileInputs.cache
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-android33.0\XamlC.stamp
-C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-android33.0\InfoAndroidApp.csproj.CopyComplete
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-android33.0\InfoAndroidApp.dll
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-android33.0\InfoAndroidApp.pdb
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-android33.0\InfoAndroidApp.genruntimeconfig.cache

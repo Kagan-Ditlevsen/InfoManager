@@ -1593,8 +1593,6 @@ C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\zh-Hant\WindowsFormsIntegration.resources.dll
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\Microsoft.Windows.SDK.NET.dll
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\WinRT.Runtime.dll
-C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\haulmanager.DAL.dll
-C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\bin\Debug\net6.0-windows10.0.19041.0\win10-x64\haulmanager.DAL.pdb
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\InfoAndroidApp.csproj.AssemblyReference.cache
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\mauiimage.inputs
 C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\obj\Debug\net6.0-windows10.0.19041.0\win10-x64\mauifont.inputs
