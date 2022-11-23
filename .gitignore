@@ -1,5 +1,6 @@
 *.cache
 *.sou
+.vs
 bin
 obj
 _publish

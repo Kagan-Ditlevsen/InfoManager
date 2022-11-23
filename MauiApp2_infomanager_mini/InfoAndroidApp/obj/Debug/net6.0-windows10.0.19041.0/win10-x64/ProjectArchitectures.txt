@@ -1,1 +1,0 @@
-C:\Github\InfoManager\MauiApp2_infomanager_mini\InfoAndroidApp\InfoAndroidApp.csproj;x64

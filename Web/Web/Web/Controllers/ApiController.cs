@@ -46,6 +46,7 @@ namespace dk.infomanager.Controllers
             return JsonConvert.SerializeObject(obj, Formatting.None, serializerSettings);
         }
 
+        #region Daily cRudO
         public string Daily_Retrieve(string authId, Guid id)
         {
             Auth(authId);
@@ -55,14 +56,15 @@ namespace dk.infomanager.Controllers
             return JsonConvert.SerializeObject(obj);
         }
 
-        public string Daily_List(string authId, int userId)
+        public string Daily_Overview(string authId, int count = 500)
         {
             Auth(authId);
 
-            var obj = DailyType.Overview();
+            var obj = Daily.Overview(user.userId);
 
             return JsonConvert.SerializeObject(obj.Take(3), Formatting.None, serializerSettings);
         }
+        #endregion
 
         string AuthenticateGet()
         {
