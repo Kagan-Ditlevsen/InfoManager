@@ -12,6 +12,7 @@ namespace InfoManager.DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using Newtonsoft.Json;
     
     public partial class infomanager_dk_db_mainEntities : DbContext
     {
@@ -24,35 +25,63 @@ namespace InfoManager.DAL
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+        [JsonIgnore]
         public virtual DbSet<Daily> Daily { get; set; }
+        [JsonIgnore]
         public virtual DbSet<DailyInfo> DailyInfo { get; set; }
+        [JsonIgnore]
         public virtual DbSet<DailyType> DailyType { get; set; }
+        [JsonIgnore]
         public virtual DbSet<DailyTypeExtra> DailyTypeExtra { get; set; }
+        [JsonIgnore]
         public virtual DbSet<DailyTypeOption> DailyTypeOption { get; set; }
+        [JsonIgnore]
         public virtual DbSet<Finance> Finance { get; set; }
+        [JsonIgnore]
         public virtual DbSet<FinanceAccount> FinanceAccount { get; set; }
+        [JsonIgnore]
         public virtual DbSet<FinanceAccountType> FinanceAccountType { get; set; }
+        [JsonIgnore]
         public virtual DbSet<FinanceLine> FinanceLine { get; set; }
+        [JsonIgnore]
         public virtual DbSet<Info> Info { get; set; }
+        [JsonIgnore]
         public virtual DbSet<InfoCategory> InfoCategory { get; set; }
+        [JsonIgnore]
         public virtual DbSet<InfoEntry> InfoEntry { get; set; }
+        [JsonIgnore]
         public virtual DbSet<InfoEntryType> InfoEntryType { get; set; }
+        [JsonIgnore]
         public virtual DbSet<InfoTag> InfoTag { get; set; }
+        [JsonIgnore]
         public virtual DbSet<SysUser> SysUser { get; set; }
+        [JsonIgnore]
         public virtual DbSet<SysUserTimesheet> SysUserTimesheet { get; set; }
+        [JsonIgnore]
         public virtual DbSet<Work> Work { get; set; }
+        [JsonIgnore]
         public virtual DbSet<WorkAddress> WorkAddress { get; set; }
+        [JsonIgnore]
         public virtual DbSet<WorkStatusEnum> WorkStatusEnum { get; set; }
+        [JsonIgnore]
         public virtual DbSet<WorkTask> WorkTask { get; set; }
+        [JsonIgnore]
         public virtual DbSet<WorkTaskDocumentation> WorkTaskDocumentation { get; set; }
+        [JsonIgnore]
         public virtual DbSet<WorkTaskTemplate> WorkTaskTemplate { get; set; }
+        [JsonIgnore]
         public virtual DbSet<WorkTaskType> WorkTaskType { get; set; }
+        [JsonIgnore]
         public virtual DbSet<WorkVehicle> WorkVehicle { get; set; }
+        [JsonIgnore]
         public virtual DbSet<WorkVehicleType> WorkVehicleType { get; set; }
+        [JsonIgnore]
         public virtual DbSet<vw_Daily_Days> vw_Daily_Days { get; set; }
+        [JsonIgnore]
         public virtual DbSet<vw_Daily_Overview> vw_Daily_Overview { get; set; }
+        [JsonIgnore]
         public virtual DbSet<vw_Daily_Statistics> vw_Daily_Statistics { get; set; }
+        [JsonIgnore]
         public virtual DbSet<vw_DailyType_Tree> vw_DailyType_Tree { get; set; }
     }
 }

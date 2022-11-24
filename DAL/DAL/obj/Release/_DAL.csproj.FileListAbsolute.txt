@@ -17,3 +17,17 @@ D:\GitHub\InfoManager\DAL\DAL\bin\Release\Skd.Web.pdb
 D:\GitHub\InfoManager\DAL\DAL\bin\Release\Skd.Web.dll.config
 D:\GitHub\InfoManager\DAL\DAL\bin\Release\Skd.Common.pdb
 D:\GitHub\InfoManager\DAL\DAL\bin\Release\Skd.Common.xml
+C:\Github\InfoManager\DAL\DAL\bin\Release\InfoManager.DAL.dll.config
+C:\Github\InfoManager\DAL\DAL\bin\Release\InfoManager.DAL.dll
+C:\Github\InfoManager\DAL\DAL\bin\Release\InfoManager.DAL.pdb
+C:\Github\InfoManager\DAL\DAL\bin\Release\EntityFramework.dll
+C:\Github\InfoManager\DAL\DAL\bin\Release\EntityFramework.SqlServer.dll
+C:\Github\InfoManager\DAL\DAL\bin\Release\EntityFramework.xml
+C:\Github\InfoManager\DAL\DAL\bin\Release\EntityFramework.SqlServer.xml
+C:\Github\InfoManager\DAL\DAL\obj\Release\_DAL.csproj.AssemblyReference.cache
+C:\Github\InfoManager\DAL\DAL\obj\Release\_DAL.csproj.CoreCompileInputs.cache
+C:\Github\InfoManager\DAL\DAL\obj\Release\_DAL.csproj.CopyComplete
+C:\Github\InfoManager\DAL\DAL\obj\Release\InfoManager.DAL.dll
+C:\Github\InfoManager\DAL\DAL\obj\Release\InfoManager.DAL.pdb
+C:\Github\InfoManager\DAL\DAL\bin\Release\Newtonsoft.Json.dll
+C:\Github\InfoManager\DAL\DAL\bin\Release\Newtonsoft.Json.xml
