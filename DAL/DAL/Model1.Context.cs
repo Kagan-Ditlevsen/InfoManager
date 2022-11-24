@@ -13,14 +13,15 @@ namespace InfoManager.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using Newtonsoft.Json;
-    
+
     public partial class infomanager_dk_db_mainEntities : DbContext
     {
         public infomanager_dk_db_mainEntities()
             : base("name=infomanager_dk_db_mainEntities")
         {
+            //this.Configuration.LazyLoadingEnabled = false;
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

@@ -3,7 +3,7 @@
     "webapi1": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "Daily/Overview",
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

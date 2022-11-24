@@ -6,6 +6,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Xml.Serialization;
 using System.IO;
+using System.Dynamic;
+using InfoManager.DAL;
 
 namespace api.infomanager.dk.Controllers
 {
@@ -14,15 +16,16 @@ namespace api.infomanager.dk.Controllers
     public class DailyController : ControllerBase
     {
         [HttpGet("{id}", Name = "DailyRetrieve")]
-        public object Retrieve(int id)
+        public object Retrieve(Guid id)
         {
-            using (var context = new InfoManager.DAL.infomanager_dk_db_mainEntities())
+            using (var context = new infomanager_dk_db_mainEntities())
             {
-                var rtn = context.SysUser.SingleOrDefault(x => x.userId == id);
+                context.Configuration.LazyLoadingEnabled = false;
+                var rtn = context.Daily.Find(id);
                 return JsonConvert.SerializeObject(rtn, Formatting.None, new JsonSerializerSettings()
                 {
-                    MaxDepth = 1,
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    MaxDepth = 1
                 });
             }
         }
@@ -30,12 +33,33 @@ namespace api.infomanager.dk.Controllers
         [HttpGet("Overview", Name = "DailyOverview")]
         public object Overview()
         {
-            using (var context = new InfoManager.DAL.infomanager_dk_db_mainEntities())
+            using (var context = new infomanager_dk_db_mainEntities())
             {
-                var rtn = context.Daily;
-                var q = from daily in context.Daily select new { id = daily.dailyId };
-                return JsonConvert.SerializeObject(q);
+                context.Configuration.LazyLoadingEnabled = false;
+                var rtn = context.Daily.Take(5).ToList();
+                return JsonConvert.SerializeObject(rtn, Formatting.None, new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    MaxDepth = 1
+                });
             }
         }
+        /*
+         Foo foo = new Foo {A = 1, B = "abc"};
+        foreach(var prop in foo.GetType().GetProperties()) {
+            Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(foo, null));
+        }
+         * */
+        /*
+        dynamic expando = new ExpandoObject();
+        var p = expando as IDictionary<String, object>;
+
+        p["A"] = "New val 1";
+        p["B"] = "New val 2";
+
+        Console.WriteLine(expando.A);
+        Console.WriteLine(expando.B);
+         * 
+         * */
     }
 }
