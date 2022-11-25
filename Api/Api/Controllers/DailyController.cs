@@ -18,6 +18,7 @@ namespace api.infomanager.dk.Controllers
         [HttpGet("{id}", Name = "DailyRetrieve")]
         public object Retrieve(Guid id)
         {
+            //return DbHelper.Retrieve(id);
             using (var context = new infomanager_dk_db_mainEntities())
             {
                 context.Configuration.LazyLoadingEnabled = false;
