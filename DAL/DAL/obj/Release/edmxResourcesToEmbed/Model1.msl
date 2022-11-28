@@ -85,10 +85,10 @@
     <EntitySetMapping Name="FinanceAccount">
       <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.FinanceAccount">
         <MappingFragment StoreEntitySet="FinanceAccount">
-          <ScalarProperty Name="C_breadcrum" ColumnName="_breadcrum" />
-          <ScalarProperty Name="C_lvlTitle" ColumnName="_lvlTitle" />
-          <ScalarProperty Name="C_lvl" ColumnName="_lvl" />
-          <ScalarProperty Name="C_sortOrder" ColumnName="_sortOrder" />
+          <ScalarProperty Name="breadcrum" ColumnName="breadcrum" />
+          <ScalarProperty Name="lvlTitle" ColumnName="lvlTitle" />
+          <ScalarProperty Name="lvl" ColumnName="lvl" />
+          <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
           <ScalarProperty Name="sumCurrent" ColumnName="sumCurrent" />
           <ScalarProperty Name="sumInitial" ColumnName="sumInitial" />
           <ScalarProperty Name="title" ColumnName="title" />

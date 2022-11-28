@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api.infomanager.dk", "Api\Api\api.infomanager.dk.csproj", "{4825F816-FE8C-430C-8A10-78101479C47A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9F9F0FB9-EE05-4144-AF7F-65DCDB444AD2} = {9F9F0FB9-EE05-4144-AF7F-65DCDB444AD2}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "infomanager.DAL", "DAL\DAL\infomanager.DAL.csproj", "{9F9F0FB9-EE05-4144-AF7F-65DCDB444AD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{4825F816-FE8C-430C-8A10-78101479C47A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4825F816-FE8C-430C-8A10-78101479C47A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4825F816-FE8C-430C-8A10-78101479C47A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F9F0FB9-EE05-4144-AF7F-65DCDB444AD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F9F0FB9-EE05-4144-AF7F-65DCDB444AD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F9F0FB9-EE05-4144-AF7F-65DCDB444AD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F9F0FB9-EE05-4144-AF7F-65DCDB444AD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

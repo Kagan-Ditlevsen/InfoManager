@@ -4,36 +4,36 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="abf5aa36795c41a6bd581526a5c8490a" Name="Diagram1" ZoomLevel="99">
+      <Diagram DiagramId="abf5aa36795c41a6bd581526a5c8490a" Name="Diagram1" ZoomLevel="92">
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.Daily" Width="1.5" PointX="19.25" PointY="4.25" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.DailyInfo" Width="1.5" PointX="21.5" PointY="7.625" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.DailyType" Width="1.5" PointX="14.75" PointY="4.625" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.DailyTypeExtra" Width="1.5" PointX="17" PointY="10.375" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.DailyTypeOption" Width="1.5" PointX="17" PointY="3.125" />
-        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.Finance" Width="1.5" PointX="7.75" PointY="1.125" />
+        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.Finance" Width="1.5" PointX="0.75" PointY="15.125" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.FinanceAccount" Width="1.5" PointX="17" PointY="15" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.FinanceAccountType" Width="1.5" PointX="14.75" PointY="15.75" />
-        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.FinanceLine" Width="1.5" PointX="10" PointY="1" />
-        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.Info" Width="1.5" PointX="10.25" PointY="8.625" />
-        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.InfoCategory" Width="1.5" PointX="8" PointY="8.75" />
-        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.InfoEntry" Width="1.5" PointX="12.5" PointY="8.375" />
-        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.InfoEntryType" Width="1.5" PointX="10.25" PointY="5" />
-        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.InfoTag" Width="1.5" PointX="12.5" PointY="13.125" />
+        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.FinanceLine" Width="1.5" PointX="3" PointY="15" />
+        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.Info" Width="1.5" PointX="10.25" PointY="11.875" />
+        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.InfoCategory" Width="1.5" PointX="8" PointY="12" />
+        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.InfoEntry" Width="1.5" PointX="12.5" PointY="11.75" />
+        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.InfoEntryType" Width="1.5" PointX="10.25" PointY="8.375" />
+        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.InfoTag" Width="1.5" PointX="12.5" PointY="16.375" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.SysUser" Width="1.5" PointX="5.75" PointY="9.625" />
-        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.SysUserTimesheet" Width="1.5" PointX="8" PointY="12.125" />
+        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.SysUserTimesheet" Width="1.5" PointX="8" PointY="8.625" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.Work" Width="1.5" PointX="0.75" PointY="2.125" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.WorkAddress" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.WorkStatusEnum" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.WorkStatusEnum" Width="1.5" PointX="7.75" PointY="5.75" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.WorkTask" Width="1.5" PointX="3" PointY="1.125" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.WorkTaskDocumentation" Width="1.5" PointX="5.25" PointY="2.75" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.WorkTaskTemplate" Width="1.5" PointX="3" PointY="8.125" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.WorkTaskType" Width="1.5" PointX="0.75" PointY="8.75" />
-        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.WorkVehicle" Width="1.5" PointX="3" PointY="15" />
-        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.WorkVehicleType" Width="1.5" PointX="0.75" PointY="15.625" />
+        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.WorkVehicle" Width="1.5" PointX="10" PointY="1" />
+        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.WorkVehicleType" Width="1.5" PointX="7.75" PointY="1.625" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.vw_Daily_Days" Width="1.5" PointX="5.75" PointY="15.75" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.vw_Daily_Overview" Width="1.5" PointX="7.75" PointY="15.75" />
         <EntityTypeShape EntityType="infomanager_dk_db_mainModel.vw_Daily_Statistics" Width="1.5" PointX="9.75" PointY="15.75" />
-        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.vw_DailyType_Tree" Width="1.5" PointX="11.75" PointY="15.75" />
+        <EntityTypeShape EntityType="infomanager_dk_db_mainModel.vw_DailyType_Tree" Width="1.5" PointX="0.75" PointY="18.75" />
         <AssociationConnector Association="infomanager_dk_db_mainModel.FK_Daily_DailyType" />
         <AssociationConnector Association="infomanager_dk_db_mainModel.FK_Daily_DailyTypeOption" />
         <AssociationConnector Association="infomanager_dk_db_mainModel.FK_DailyInfo_Daily" />

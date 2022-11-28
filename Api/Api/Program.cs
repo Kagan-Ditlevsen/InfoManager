@@ -22,7 +22,7 @@ builder.Services.AddSwaggerGenNewtonsoftSupport();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 //if(1==1)
 {
     app.UseSwagger();
@@ -43,6 +43,11 @@ app.UseRequestLocalization();
 //app.UseAuthorization();
 
 //app.MapControllers();
+
+
+
+// https://localhost:7156/Authenticate/uUvBjGik00jcs$EjBBI7MSiufThzBrR7WpXd2vCu67$hBK5TyCQDgjBgmw¤¤qeiA
+// https://localhost:7156/Authenticate/xnQu7ZZ6qZMumfa3ou2JMw==
 
 app.Run();
 

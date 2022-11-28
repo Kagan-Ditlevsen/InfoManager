@@ -17,3 +17,17 @@ D:\Github\InfoManager\DAL\DAL\obj\Debug\_DAL.csproj.CoreCompileInputs.cache
 D:\Github\InfoManager\DAL\DAL\obj\Debug\_DAL.csproj.CopyComplete
 D:\Github\InfoManager\DAL\DAL\obj\Debug\InfoManager.DAL.dll
 D:\Github\InfoManager\DAL\DAL\obj\Debug\InfoManager.DAL.pdb
+C:\Github\InfoManager\DAL\DAL\bin\Debug\infomanager.DAL.dll.config
+C:\Github\InfoManager\DAL\DAL\bin\Debug\infomanager.DAL.dll
+C:\Github\InfoManager\DAL\DAL\bin\Debug\infomanager.DAL.pdb
+C:\Github\InfoManager\DAL\DAL\bin\Debug\EntityFramework.dll
+C:\Github\InfoManager\DAL\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Github\InfoManager\DAL\DAL\bin\Debug\Newtonsoft.Json.dll
+C:\Github\InfoManager\DAL\DAL\bin\Debug\EntityFramework.xml
+C:\Github\InfoManager\DAL\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Github\InfoManager\DAL\DAL\bin\Debug\Newtonsoft.Json.xml
+C:\Github\InfoManager\DAL\DAL\obj\Debug\_DAL.csproj.AssemblyReference.cache
+C:\Github\InfoManager\DAL\DAL\obj\Debug\_DAL.csproj.CoreCompileInputs.cache
+C:\Github\InfoManager\DAL\DAL\obj\Debug\_DAL.csproj.CopyComplete
+C:\Github\InfoManager\DAL\DAL\obj\Debug\infomanager.DAL.dll
+C:\Github\InfoManager\DAL\DAL\obj\Debug\infomanager.DAL.pdb

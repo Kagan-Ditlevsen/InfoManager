@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Class.cs" />
+    <Compile Remove="Controllers\_DailyController.cs" />
     <Compile Remove="Db.cs" />
   </ItemGroup>
 
@@ -20,9 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="InfoManager.DAL">
-      <HintPath>..\..\DAL\DAL\bin\Release\InfoManager.DAL.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\DAL\DAL\infomanager.DAL.csproj" />
   </ItemGroup>
 
 </Project>

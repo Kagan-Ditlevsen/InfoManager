@@ -86,10 +86,10 @@
     <Property Name="title" Type="nvarchar" MaxLength="100" />
     <Property Name="sumInitial" Type="money" Nullable="false" />
     <Property Name="sumCurrent" Type="money" StoreGeneratedPattern="Computed" />
-    <Property Name="_sortOrder" Type="varchar(max)" />
-    <Property Name="_lvl" Type="tinyint" />
-    <Property Name="_lvlTitle" Type="nvarchar" MaxLength="4000" StoreGeneratedPattern="Computed" />
-    <Property Name="_breadcrum" Type="nvarchar" MaxLength="100" StoreGeneratedPattern="Computed" />
+    <Property Name="sortOrder" Type="varchar(max)" />
+    <Property Name="lvl" Type="tinyint" />
+    <Property Name="lvlTitle" Type="nvarchar" MaxLength="4000" StoreGeneratedPattern="Computed" />
+    <Property Name="breadcrum" Type="nvarchar" MaxLength="100" StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="FinanceAccountType">
     <Key>

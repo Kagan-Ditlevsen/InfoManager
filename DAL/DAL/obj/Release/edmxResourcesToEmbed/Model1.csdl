@@ -210,11 +210,11 @@
     <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="sumInitial" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
     <Property Name="sumCurrent" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
-    <Property Name="C_sortOrder" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="C_lvl" Type="Byte" />
-    <Property Name="C_lvlTitle" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
-    <Property Name="C_breadcrum" Type="String" MaxLength="100" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
     <NavigationProperty Name="FinanceAccountType" Relationship="infomanager_dk_db_mainModel.FK_FinanceAccount_FinanceAccountType" FromRole="FinanceAccount" ToRole="FinanceAccountType" />
+    <Property Name="sortOrder" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="lvl" Type="Byte" />
+    <Property Name="lvlTitle" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="breadcrum" Type="String" MaxLength="100" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="FinanceAccountType">
     <Key>

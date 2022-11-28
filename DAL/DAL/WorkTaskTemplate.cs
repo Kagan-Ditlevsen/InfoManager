@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InfoManager.DAL
+namespace infomanager.DAL
 {
     using System;
     using System.Collections.Generic;

@@ -91,10 +91,10 @@
           <Property Name="title" Type="nvarchar" MaxLength="100" />
           <Property Name="sumInitial" Type="money" Nullable="false" />
           <Property Name="sumCurrent" Type="money" StoreGeneratedPattern="Computed" />
-          <Property Name="_sortOrder" Type="varchar(max)" />
-          <Property Name="_lvl" Type="tinyint" />
-          <Property Name="_lvlTitle" Type="nvarchar" MaxLength="4000" StoreGeneratedPattern="Computed" />
-          <Property Name="_breadcrum" Type="nvarchar" MaxLength="100" StoreGeneratedPattern="Computed" />
+          <Property Name="sortOrder" Type="varchar(max)" />
+          <Property Name="lvl" Type="tinyint" />
+          <Property Name="lvlTitle" Type="nvarchar" MaxLength="4000" StoreGeneratedPattern="Computed" />
+          <Property Name="breadcrum" Type="nvarchar" MaxLength="100" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="FinanceAccountType">
           <Key>
@@ -1081,11 +1081,11 @@ warning 6002: The table/view 'haulmanager_nu_db_im.dbo.vw_DailyType_Tree' does n
           <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="sumInitial" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="sumCurrent" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="C_sortOrder" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="C_lvl" Type="Byte" />
-          <Property Name="C_lvlTitle" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="C_breadcrum" Type="String" MaxLength="100" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="FinanceAccountType" Relationship="infomanager_dk_db_mainModel.FK_FinanceAccount_FinanceAccountType" FromRole="FinanceAccount" ToRole="FinanceAccountType" />
+          <Property Name="sortOrder" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="lvl" Type="Byte" />
+          <Property Name="lvlTitle" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="breadcrum" Type="String" MaxLength="100" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="FinanceAccountType">
           <Key>
@@ -1670,7 +1670,7 @@ warning 6002: The table/view 'haulmanager_nu_db_im.dbo.vw_DailyType_Tree' does n
           <End Type="infomanager_dk_db_mainModel.Info" Role="Info" Multiplicity="*" />
           <End Type="infomanager_dk_db_mainModel.InfoTag" Role="InfoTag" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1760,10 +1760,10 @@ warning 6002: The table/view 'haulmanager_nu_db_im.dbo.vw_DailyType_Tree' does n
           <EntitySetMapping Name="FinanceAccount">
             <EntityTypeMapping TypeName="infomanager_dk_db_mainModel.FinanceAccount">
               <MappingFragment StoreEntitySet="FinanceAccount">
-                <ScalarProperty Name="C_breadcrum" ColumnName="_breadcrum" />
-                <ScalarProperty Name="C_lvlTitle" ColumnName="_lvlTitle" />
-                <ScalarProperty Name="C_lvl" ColumnName="_lvl" />
-                <ScalarProperty Name="C_sortOrder" ColumnName="_sortOrder" />
+                <ScalarProperty Name="breadcrum" ColumnName="breadcrum" />
+                <ScalarProperty Name="lvlTitle" ColumnName="lvlTitle" />
+                <ScalarProperty Name="lvl" ColumnName="lvl" />
+                <ScalarProperty Name="sortOrder" ColumnName="sortOrder" />
                 <ScalarProperty Name="sumCurrent" ColumnName="sumCurrent" />
                 <ScalarProperty Name="sumInitial" ColumnName="sumInitial" />
                 <ScalarProperty Name="title" ColumnName="title" />

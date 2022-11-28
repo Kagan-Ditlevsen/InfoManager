@@ -1,66 +1,83 @@
-using api.infomanager.dk.DAL;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+﻿using System.Diagnostics;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Xml.Serialization;
-using System.IO;
-using System.Dynamic;
-using InfoManager.DAL;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using infomanager.DAL;
 
-namespace api.infomanager.dk.Controllers
+namespace infomanager.Api
 {
     [ApiController]
     [Route("[controller]")]
-    public class DailyController : ControllerBase
-    {
-        [HttpGet("{id}", Name = "DailyRetrieve")]
-        public object Retrieve(Guid id)
-        {
-            //return DbHelper.Retrieve(id);
-            using (var context = new infomanager_dk_db_mainEntities())
+	public partial class DailyController : CommonController
+	{
+		#region Done
+		[HttpGet("Create", Name = "DailyCreate")]
+		public string Create(DateTime registerDateTime, int typeId, int? optionId, string remark, DateTime createDateTime, int createUserId)
+		{
+                     
+            Guid dailyId = Guid.NewGuid();
+            using (var context = ApiHelper.Db())
             {
-                context.Configuration.LazyLoadingEnabled = false;
-                var rtn = context.Daily.Find(id);
-                return JsonConvert.SerializeObject(rtn, Formatting.None, new JsonSerializerSettings()
+                Daily obj = new Daily()
                 {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                    MaxDepth = 1
-                });
-            }
-        }
+                    dailyId = dailyId,
+registerDateTime = registerDateTime,
+typeId = typeId,
+optionId = optionId,
+remark = remark,
+createDateTime = createDateTime,
+createUserId = createUserId
+                };
+                context.Entry(obj).State = System.Data.Entity.EntityState.Added;
 
-        [HttpGet("Overview", Name = "DailyOverview")]
-        public object Overview()
-        {
-            using (var context = new infomanager_dk_db_mainEntities())
+                int qtyChanges = context.SaveChanges();
+
+				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+            }
+		}
+
+		[HttpGet("Retrieve", Name = "DailyRetrieve")]
+		public string Retrieve(Guid dailyId)
+		{
+			using (var context = ApiHelper.Db())
             {
-                context.Configuration.LazyLoadingEnabled = false;
-                var rtn = context.Daily.Take(5).ToList();
-                return JsonConvert.SerializeObject(rtn, Formatting.None, new JsonSerializerSettings()
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                    MaxDepth = 1
-                });
+                Daily obj = context.Daily.Find(dailyId);
+
+				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
             }
-        }
-        /*
-         Foo foo = new Foo {A = 1, B = "abc"};
-        foreach(var prop in foo.GetType().GetProperties()) {
-            Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(foo, null));
-        }
-         * */
-        /*
-        dynamic expando = new ExpandoObject();
-        var p = expando as IDictionary<String, object>;
+		}
 
-        p["A"] = "New val 1";
-        p["B"] = "New val 2";
+		[HttpGet("Update", Name = "DailyUpdate")]
+		public string Update()
+		{
+return "";
+		}
 
-        Console.WriteLine(expando.A);
-        Console.WriteLine(expando.B);
-         * 
-         * */
-    }
+		[HttpGet("Delete", Name = "DailyDelete")]
+		public string Delete(Guid dailyId)
+		{
+			using (var context = ApiHelper.Db())
+            {
+                Daily obj = context.Daily.Find(dailyId);
+				context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+
+                int qtyChanges = context.SaveChanges();
+
+				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+            }
+		}
+
+		[HttpGet("Overview", Name = "DailyOverview")]
+		public string Overview(int qtyToReturn = 10)
+		{
+			using (var context = ApiHelper.Db())
+            {
+				var obj = context.Daily.Take(qtyToReturn).ToList();
+
+				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+            }
+		}
+		#endregion
+	}
 }

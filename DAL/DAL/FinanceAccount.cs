@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InfoManager.DAL
+namespace infomanager.DAL
 {
     using System;
     using System.Collections.Generic;
@@ -20,10 +20,10 @@ namespace InfoManager.DAL
         public string title { get; set; }
         public decimal sumInitial { get; set; }
         public Nullable<decimal> sumCurrent { get; set; }
-        public string C_sortOrder { get; set; }
-        public Nullable<byte> C_lvl { get; set; }
-        public string C_lvlTitle { get; set; }
-        public string C_breadcrum { get; set; }
+        public string sortOrder { get; set; }
+        public Nullable<byte> lvl { get; set; }
+        public string lvlTitle { get; set; }
+        public string breadcrum { get; set; }
     
         public virtual FinanceAccountType FinanceAccountType { get; set; }
     }
