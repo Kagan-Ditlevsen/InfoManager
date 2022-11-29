@@ -13,38 +13,54 @@ namespace infomanager.Api
 	{
 		#region Done
 		[HttpGet("Create", Name = "SysUserTimesheetCreate")]
-		public string Create(int userId, DateTime? startDateTime, DateTime? endDateTime, string remark, DateTime createDateTime, int createUserId)
+		public string Create(string auth, int userId, DateTime? startDateTime, DateTime? endDateTime, string remark, DateTime createDateTime, int createUserId)
 		{
-                     
-            Guid timesheetId = Guid.NewGuid();
-            using (var context = ApiHelper.Db())
+            try
             {
-                SysUserTimesheet obj = new SysUserTimesheet()
+                AuthenticatedUser.Validate(auth);
+			    Guid timesheetId = Guid.NewGuid();
+                using (var context = ApiHelper.Db())
                 {
-                    timesheetId = timesheetId,
+                    SysUserTimesheet obj = new SysUserTimesheet()
+                    {
+                        timesheetId = timesheetId,
 userId = userId,
 startDateTime = startDateTime,
 endDateTime = endDateTime,
 remark = remark,
 createDateTime = createDateTime,
 createUserId = createUserId
-                };
-                context.Entry(obj).State = System.Data.Entity.EntityState.Added;
+                    };
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Added;
 
-                int qtyChanges = context.SaveChanges();
+                    int qtyChanges = context.SaveChanges();
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Retrieve", Name = "SysUserTimesheetRetrieve")]
-		public string Retrieve(Guid timesheetId)
+		public string Retrieve(string auth, Guid timesheetId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                SysUserTimesheet obj = context.SysUserTimesheet.Find(timesheetId);
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+                    SysUserTimesheet obj = context.SysUserTimesheet.Find(timesheetId);
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
@@ -55,27 +71,45 @@ return "";
 		}
 
 		[HttpGet("Delete", Name = "SysUserTimesheetDelete")]
-		public string Delete(Guid timesheetId)
+		public string Delete(string auth, Guid timesheetId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                SysUserTimesheet obj = context.SysUserTimesheet.Find(timesheetId);
-				context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+                AuthenticatedUser.Validate(auth);
 
-                int qtyChanges = context.SaveChanges();
+			    using (var context = ApiHelper.Db())
+                {
+                    SysUserTimesheet obj = context.SysUserTimesheet.Find(timesheetId);
+				    context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Overview", Name = "SysUserTimesheetOverview")]
-		public string Overview(int qtyToReturn = 10)
+		public string Overview(string auth, int qtyToReturn = 10)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-				var obj = context.SysUserTimesheet.Take(qtyToReturn).ToList();
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+				    var obj = context.SysUserTimesheet.Take(qtyToReturn).ToList();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 		#endregion

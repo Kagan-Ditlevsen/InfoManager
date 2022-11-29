@@ -9,75 +9,109 @@ namespace infomanager.Api
 {
     [ApiController]
     [Route("[controller]")]
-	public partial class DailyController : CommonController
-	{
-		#region Done
-		[HttpGet("Create", Name = "DailyCreate")]
-		public string Create(DateTime registerDateTime, int typeId, int? optionId, string remark, DateTime createDateTime, int createUserId)
-		{
-                     
-            Guid dailyId = Guid.NewGuid();
-            using (var context = ApiHelper.Db())
+    public partial class DailyController : CommonController
+    {
+        #region Done
+        [HttpGet("Create", Name = "DailyCreate")]
+        public string Create(string auth, DateTime registerDateTime, int typeId, int? optionId, string remark, DateTime createDateTime, int createUserId)
+        {
+            try
             {
-                Daily obj = new Daily()
+                AuthenticatedUser.Validate(auth);
+                Guid dailyId = Guid.NewGuid();
+                using (var context = ApiHelper.Db())
                 {
-                    dailyId = dailyId,
-registerDateTime = registerDateTime,
-typeId = typeId,
-optionId = optionId,
-remark = remark,
-createDateTime = createDateTime,
-createUserId = createUserId
-                };
-                context.Entry(obj).State = System.Data.Entity.EntityState.Added;
+                    Daily obj = new Daily()
+                    {
+                        dailyId = dailyId,
+                        registerDateTime = registerDateTime,
+                        typeId = typeId,
+                        optionId = optionId,
+                        remark = remark,
+                        createDateTime = createDateTime,
+                        createUserId = createUserId
+                    };
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Added;
 
-                int qtyChanges = context.SaveChanges();
+                    int qtyChanges = context.SaveChanges();
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
             }
-		}
-
-		[HttpGet("Retrieve", Name = "DailyRetrieve")]
-		public string Retrieve(Guid dailyId)
-		{
-			using (var context = ApiHelper.Db())
+            catch (Exception ex)
             {
-                Daily obj = context.Daily.Find(dailyId);
-
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
-		}
+        }
 
-		[HttpGet("Update", Name = "DailyUpdate")]
-		public string Update()
-		{
-return "";
-		}
-
-		[HttpGet("Delete", Name = "DailyDelete")]
-		public string Delete(Guid dailyId)
-		{
-			using (var context = ApiHelper.Db())
+        [HttpGet("Retrieve", Name = "DailyRetrieve")]
+        public string Retrieve(string auth, Guid dailyId)
+        {
+            try
             {
-                Daily obj = context.Daily.Find(dailyId);
-				context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+                AuthenticatedUser.Validate(auth);
 
-                int qtyChanges = context.SaveChanges();
+                using (var context = ApiHelper.Db())
+                {
+                    Daily obj = context.Daily.Find(dailyId);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
             }
-		}
-
-		[HttpGet("Overview", Name = "DailyOverview")]
-		public string Overview(int qtyToReturn = 10)
-		{
-			using (var context = ApiHelper.Db())
+            catch (Exception ex)
             {
-				var obj = context.Daily.Take(qtyToReturn).ToList();
-
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
-		}
-		#endregion
-	}
+        }
+
+        [HttpGet("Update", Name = "DailyUpdate")]
+        public string Update()
+        {
+            return "";
+        }
+
+        [HttpGet("Delete", Name = "DailyDelete")]
+        public string Delete(string auth, Guid dailyId)
+        {
+            try
+            {
+                AuthenticatedUser.Validate(auth);
+
+                using (var context = ApiHelper.Db())
+                {
+                    Daily obj = context.Daily.Find(dailyId);
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+
+                    int qtyChanges = context.SaveChanges();
+
+                    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
+            }
+        }
+
+        [HttpGet("Overview", Name = "DailyOverview")]
+        public string Overview(string auth, int qtyToReturn = 10)
+        {
+            try
+            {
+                AuthenticatedUser.Validate(auth);
+
+                using (var context = ApiHelper.Db())
+                {
+                    var obj = context.Daily.Take(qtyToReturn).ToList();
+
+                    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
+            }
+        }
+        #endregion
+    }
 }

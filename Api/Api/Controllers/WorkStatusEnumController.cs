@@ -13,33 +13,49 @@ namespace infomanager.Api
 	{
 		#region Done
 		[HttpGet("Create", Name = "WorkStatusEnumCreate")]
-		public string Create(int statusId, string internalTitle)
+		public string Create(string auth, int statusId, string internalTitle)
 		{
-                     
-            
-            using (var context = ApiHelper.Db())
+            try
             {
-                WorkStatusEnum obj = new WorkStatusEnum()
+                AuthenticatedUser.Validate(auth);
+			    
+                using (var context = ApiHelper.Db())
                 {
-                    statusId = statusId,
+                    WorkStatusEnum obj = new WorkStatusEnum()
+                    {
+                        statusId = statusId,
 internalTitle = internalTitle
-                };
-                context.Entry(obj).State = System.Data.Entity.EntityState.Added;
+                    };
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Added;
 
-                int qtyChanges = context.SaveChanges();
+                    int qtyChanges = context.SaveChanges();
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Retrieve", Name = "WorkStatusEnumRetrieve")]
-		public string Retrieve(int statusId)
+		public string Retrieve(string auth, int statusId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                WorkStatusEnum obj = context.WorkStatusEnum.Find(statusId);
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+                    WorkStatusEnum obj = context.WorkStatusEnum.Find(statusId);
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
@@ -50,27 +66,45 @@ return "";
 		}
 
 		[HttpGet("Delete", Name = "WorkStatusEnumDelete")]
-		public string Delete(int statusId)
+		public string Delete(string auth, int statusId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                WorkStatusEnum obj = context.WorkStatusEnum.Find(statusId);
-				context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+                AuthenticatedUser.Validate(auth);
 
-                int qtyChanges = context.SaveChanges();
+			    using (var context = ApiHelper.Db())
+                {
+                    WorkStatusEnum obj = context.WorkStatusEnum.Find(statusId);
+				    context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Overview", Name = "WorkStatusEnumOverview")]
-		public string Overview(int qtyToReturn = 10)
+		public string Overview(string auth, int qtyToReturn = 10)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-				var obj = context.WorkStatusEnum.Take(qtyToReturn).ToList();
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+				    var obj = context.WorkStatusEnum.Take(qtyToReturn).ToList();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 		#endregion

@@ -13,33 +13,49 @@ namespace infomanager.Api
 	{
 		#region Done
 		[HttpGet("Create", Name = "InfoTagCreate")]
-		public string Create(int tagId, string title)
+		public string Create(string auth, int tagId, string title)
 		{
-                     
-            
-            using (var context = ApiHelper.Db())
+            try
             {
-                InfoTag obj = new InfoTag()
+                AuthenticatedUser.Validate(auth);
+			    
+                using (var context = ApiHelper.Db())
                 {
-                    tagId = tagId,
+                    InfoTag obj = new InfoTag()
+                    {
+                        tagId = tagId,
 title = title
-                };
-                context.Entry(obj).State = System.Data.Entity.EntityState.Added;
+                    };
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Added;
 
-                int qtyChanges = context.SaveChanges();
+                    int qtyChanges = context.SaveChanges();
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Retrieve", Name = "InfoTagRetrieve")]
-		public string Retrieve(int tagId)
+		public string Retrieve(string auth, int tagId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                InfoTag obj = context.InfoTag.Find(tagId);
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+                    InfoTag obj = context.InfoTag.Find(tagId);
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
@@ -50,27 +66,45 @@ return "";
 		}
 
 		[HttpGet("Delete", Name = "InfoTagDelete")]
-		public string Delete(int tagId)
+		public string Delete(string auth, int tagId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                InfoTag obj = context.InfoTag.Find(tagId);
-				context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+                AuthenticatedUser.Validate(auth);
 
-                int qtyChanges = context.SaveChanges();
+			    using (var context = ApiHelper.Db())
+                {
+                    InfoTag obj = context.InfoTag.Find(tagId);
+				    context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Overview", Name = "InfoTagOverview")]
-		public string Overview(int qtyToReturn = 10)
+		public string Overview(string auth, int qtyToReturn = 10)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-				var obj = context.InfoTag.Take(qtyToReturn).ToList();
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+				    var obj = context.InfoTag.Take(qtyToReturn).ToList();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 		#endregion

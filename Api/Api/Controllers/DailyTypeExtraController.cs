@@ -13,15 +13,17 @@ namespace infomanager.Api
 	{
 		#region Done
 		[HttpGet("Create", Name = "DailyTypeExtraCreate")]
-		public string Create(int extraId, int typeId, string internalTitle, int sortOrder, bool isActive, bool isRequired, string inputType, string inputData)
+		public string Create(string auth, int extraId, int typeId, string internalTitle, int sortOrder, bool isActive, bool isRequired, string inputType, string inputData)
 		{
-                     
-            
-            using (var context = ApiHelper.Db())
+            try
             {
-                DailyTypeExtra obj = new DailyTypeExtra()
+                AuthenticatedUser.Validate(auth);
+			    
+                using (var context = ApiHelper.Db())
                 {
-                    extraId = extraId,
+                    DailyTypeExtra obj = new DailyTypeExtra()
+                    {
+                        extraId = extraId,
 typeId = typeId,
 internalTitle = internalTitle,
 sortOrder = sortOrder,
@@ -29,23 +31,37 @@ isActive = isActive,
 isRequired = isRequired,
 inputType = inputType,
 inputData = inputData
-                };
-                context.Entry(obj).State = System.Data.Entity.EntityState.Added;
+                    };
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Added;
 
-                int qtyChanges = context.SaveChanges();
+                    int qtyChanges = context.SaveChanges();
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Retrieve", Name = "DailyTypeExtraRetrieve")]
-		public string Retrieve(int extraId)
+		public string Retrieve(string auth, int extraId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                DailyTypeExtra obj = context.DailyTypeExtra.Find(extraId);
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+                    DailyTypeExtra obj = context.DailyTypeExtra.Find(extraId);
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
@@ -56,27 +72,45 @@ return "";
 		}
 
 		[HttpGet("Delete", Name = "DailyTypeExtraDelete")]
-		public string Delete(int extraId)
+		public string Delete(string auth, int extraId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                DailyTypeExtra obj = context.DailyTypeExtra.Find(extraId);
-				context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+                AuthenticatedUser.Validate(auth);
 
-                int qtyChanges = context.SaveChanges();
+			    using (var context = ApiHelper.Db())
+                {
+                    DailyTypeExtra obj = context.DailyTypeExtra.Find(extraId);
+				    context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Overview", Name = "DailyTypeExtraOverview")]
-		public string Overview(int qtyToReturn = 10)
+		public string Overview(string auth, int qtyToReturn = 10)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-				var obj = context.DailyTypeExtra.Take(qtyToReturn).ToList();
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+				    var obj = context.DailyTypeExtra.Take(qtyToReturn).ToList();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 		#endregion

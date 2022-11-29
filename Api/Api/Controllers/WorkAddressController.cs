@@ -13,38 +13,54 @@ namespace infomanager.Api
 	{
 		#region Done
 		[HttpGet("Create", Name = "WorkAddressCreate")]
-		public string Create(int addressId, string title, string gpsAddress, string gpsPlusCode, string systemRemark, string locationCode, bool isArchived)
+		public string Create(string auth, int addressId, string title, string gpsAddress, string gpsPlusCode, string systemRemark, string locationCode, bool isArchived)
 		{
-                     
-            
-            using (var context = ApiHelper.Db())
+            try
             {
-                WorkAddress obj = new WorkAddress()
+                AuthenticatedUser.Validate(auth);
+			    
+                using (var context = ApiHelper.Db())
                 {
-                    addressId = addressId,
+                    WorkAddress obj = new WorkAddress()
+                    {
+                        addressId = addressId,
 title = title,
 gpsAddress = gpsAddress,
 gpsPlusCode = gpsPlusCode,
 systemRemark = systemRemark,
 locationCode = locationCode,
 isArchived = isArchived
-                };
-                context.Entry(obj).State = System.Data.Entity.EntityState.Added;
+                    };
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Added;
 
-                int qtyChanges = context.SaveChanges();
+                    int qtyChanges = context.SaveChanges();
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Retrieve", Name = "WorkAddressRetrieve")]
-		public string Retrieve(int addressId)
+		public string Retrieve(string auth, int addressId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                WorkAddress obj = context.WorkAddress.Find(addressId);
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+                    WorkAddress obj = context.WorkAddress.Find(addressId);
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
@@ -55,27 +71,45 @@ return "";
 		}
 
 		[HttpGet("Delete", Name = "WorkAddressDelete")]
-		public string Delete(int addressId)
+		public string Delete(string auth, int addressId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                WorkAddress obj = context.WorkAddress.Find(addressId);
-				context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+                AuthenticatedUser.Validate(auth);
 
-                int qtyChanges = context.SaveChanges();
+			    using (var context = ApiHelper.Db())
+                {
+                    WorkAddress obj = context.WorkAddress.Find(addressId);
+				    context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Overview", Name = "WorkAddressOverview")]
-		public string Overview(int qtyToReturn = 10)
+		public string Overview(string auth, int qtyToReturn = 10)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-				var obj = context.WorkAddress.Take(qtyToReturn).ToList();
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+				    var obj = context.WorkAddress.Take(qtyToReturn).ToList();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 		#endregion

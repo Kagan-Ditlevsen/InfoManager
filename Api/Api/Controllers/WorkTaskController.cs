@@ -13,15 +13,17 @@ namespace infomanager.Api
 	{
 		#region Done
 		[HttpGet("Create", Name = "WorkTaskCreate")]
-		public string Create(Guid workId, int typeId, int sortOrder, DateTime? startDateTime, DateTime? endDateTime, string addressText, string vehicleText, string vehicleNumberplate, string linkNumberplate, string dollyNumberplate, string trailerNumberplate, string remark, string systemRemark, DateTime createDateTime, int createUserId, DateTime? deleteDateTime, int? deleteUserId, bool? isFinished, byte reportColumnNumber, string transportId, string freighterSetup, string addressSetup)
+		public string Create(string auth, Guid workId, int typeId, int sortOrder, DateTime? startDateTime, DateTime? endDateTime, string addressText, string vehicleText, string vehicleNumberplate, string linkNumberplate, string dollyNumberplate, string trailerNumberplate, string remark, string systemRemark, DateTime createDateTime, int createUserId, DateTime? deleteDateTime, int? deleteUserId, bool? isFinished, byte reportColumnNumber, string transportId, string freighterSetup, string addressSetup)
 		{
-                     
-            Guid taskId = Guid.NewGuid();
-            using (var context = ApiHelper.Db())
+            try
             {
-                WorkTask obj = new WorkTask()
+                AuthenticatedUser.Validate(auth);
+			    Guid taskId = Guid.NewGuid();
+                using (var context = ApiHelper.Db())
                 {
-                    taskId = taskId,
+                    WorkTask obj = new WorkTask()
+                    {
+                        taskId = taskId,
 workId = workId,
 typeId = typeId,
 sortOrder = sortOrder,
@@ -44,23 +46,37 @@ reportColumnNumber = reportColumnNumber,
 transportId = transportId,
 freighterSetup = freighterSetup,
 addressSetup = addressSetup
-                };
-                context.Entry(obj).State = System.Data.Entity.EntityState.Added;
+                    };
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Added;
 
-                int qtyChanges = context.SaveChanges();
+                    int qtyChanges = context.SaveChanges();
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Retrieve", Name = "WorkTaskRetrieve")]
-		public string Retrieve(Guid taskId)
+		public string Retrieve(string auth, Guid taskId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                WorkTask obj = context.WorkTask.Find(taskId);
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+                    WorkTask obj = context.WorkTask.Find(taskId);
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
@@ -71,27 +87,45 @@ return "";
 		}
 
 		[HttpGet("Delete", Name = "WorkTaskDelete")]
-		public string Delete(Guid taskId)
+		public string Delete(string auth, Guid taskId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                WorkTask obj = context.WorkTask.Find(taskId);
-				context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+                AuthenticatedUser.Validate(auth);
 
-                int qtyChanges = context.SaveChanges();
+			    using (var context = ApiHelper.Db())
+                {
+                    WorkTask obj = context.WorkTask.Find(taskId);
+				    context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Overview", Name = "WorkTaskOverview")]
-		public string Overview(int qtyToReturn = 10)
+		public string Overview(string auth, int qtyToReturn = 10)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-				var obj = context.WorkTask.Take(qtyToReturn).ToList();
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+				    var obj = context.WorkTask.Take(qtyToReturn).ToList();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 		#endregion

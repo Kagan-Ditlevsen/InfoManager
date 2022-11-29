@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.Data.Entity.Infrastructure.Design;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks.Dataflow;
 // https://social.technet.microsoft.com/wiki/contents/articles/53073.asp-net-core-rest-api-documentation-using-swagger-c.aspx

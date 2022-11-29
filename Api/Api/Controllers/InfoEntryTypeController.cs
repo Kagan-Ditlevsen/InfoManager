@@ -13,35 +13,51 @@ namespace infomanager.Api
 	{
 		#region Done
 		[HttpGet("Create", Name = "InfoEntryTypeCreate")]
-		public string Create(int typeId, string internalTitle, DateTime createDateTime, int? createUserId)
+		public string Create(string auth, int typeId, string internalTitle, DateTime createDateTime, int? createUserId)
 		{
-                     
-            
-            using (var context = ApiHelper.Db())
+            try
             {
-                InfoEntryType obj = new InfoEntryType()
+                AuthenticatedUser.Validate(auth);
+			    
+                using (var context = ApiHelper.Db())
                 {
-                    typeId = typeId,
+                    InfoEntryType obj = new InfoEntryType()
+                    {
+                        typeId = typeId,
 internalTitle = internalTitle,
 createDateTime = createDateTime,
 createUserId = createUserId
-                };
-                context.Entry(obj).State = System.Data.Entity.EntityState.Added;
+                    };
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Added;
 
-                int qtyChanges = context.SaveChanges();
+                    int qtyChanges = context.SaveChanges();
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Retrieve", Name = "InfoEntryTypeRetrieve")]
-		public string Retrieve(int typeId)
+		public string Retrieve(string auth, int typeId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                InfoEntryType obj = context.InfoEntryType.Find(typeId);
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+                    InfoEntryType obj = context.InfoEntryType.Find(typeId);
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
@@ -52,27 +68,45 @@ return "";
 		}
 
 		[HttpGet("Delete", Name = "InfoEntryTypeDelete")]
-		public string Delete(int typeId)
+		public string Delete(string auth, int typeId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                InfoEntryType obj = context.InfoEntryType.Find(typeId);
-				context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+                AuthenticatedUser.Validate(auth);
 
-                int qtyChanges = context.SaveChanges();
+			    using (var context = ApiHelper.Db())
+                {
+                    InfoEntryType obj = context.InfoEntryType.Find(typeId);
+				    context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Overview", Name = "InfoEntryTypeOverview")]
-		public string Overview(int qtyToReturn = 10)
+		public string Overview(string auth, int qtyToReturn = 10)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-				var obj = context.InfoEntryType.Take(qtyToReturn).ToList();
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+				    var obj = context.InfoEntryType.Take(qtyToReturn).ToList();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 		#endregion

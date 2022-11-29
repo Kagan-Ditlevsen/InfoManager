@@ -13,15 +13,17 @@ namespace infomanager.Api
 	{
 		#region Done
 		[HttpGet("Create", Name = "WorkTaskTemplateCreate")]
-		public string Create(string templateId, int sortOrder, int typeId, DateTime? startDateTime, DateTime? endDateTime, string addressText, string vehicleNumberplate, string linkNumberplate, string dollyNumberplate, string trailerNumberplate, string remark, string systemRemark, byte? reportColumnNumber, DateTime createDateTime, int createUserId)
+		public string Create(string auth, string templateId, int sortOrder, int typeId, DateTime? startDateTime, DateTime? endDateTime, string addressText, string vehicleNumberplate, string linkNumberplate, string dollyNumberplate, string trailerNumberplate, string remark, string systemRemark, byte? reportColumnNumber, DateTime createDateTime, int createUserId)
 		{
-                     
-            
-            using (var context = ApiHelper.Db())
+            try
             {
-                WorkTaskTemplate obj = new WorkTaskTemplate()
+                AuthenticatedUser.Validate(auth);
+			    
+                using (var context = ApiHelper.Db())
                 {
-                    templateId = templateId,
+                    WorkTaskTemplate obj = new WorkTaskTemplate()
+                    {
+                        templateId = templateId,
 sortOrder = sortOrder,
 typeId = typeId,
 startDateTime = startDateTime,
@@ -36,23 +38,37 @@ systemRemark = systemRemark,
 reportColumnNumber = reportColumnNumber,
 createDateTime = createDateTime,
 createUserId = createUserId
-                };
-                context.Entry(obj).State = System.Data.Entity.EntityState.Added;
+                    };
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Added;
 
-                int qtyChanges = context.SaveChanges();
+                    int qtyChanges = context.SaveChanges();
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Retrieve", Name = "WorkTaskTemplateRetrieve")]
-		public string Retrieve(string templateId, int sortOrder)
+		public string Retrieve(string auth, string templateId, int sortOrder)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                WorkTaskTemplate obj = context.WorkTaskTemplate.Find(templateId, sortOrder);
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+                    WorkTaskTemplate obj = context.WorkTaskTemplate.Find(templateId, sortOrder);
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
@@ -63,27 +79,45 @@ return "";
 		}
 
 		[HttpGet("Delete", Name = "WorkTaskTemplateDelete")]
-		public string Delete(string templateId, int sortOrder)
+		public string Delete(string auth, string templateId, int sortOrder)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                WorkTaskTemplate obj = context.WorkTaskTemplate.Find(templateId, sortOrder);
-				context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+                AuthenticatedUser.Validate(auth);
 
-                int qtyChanges = context.SaveChanges();
+			    using (var context = ApiHelper.Db())
+                {
+                    WorkTaskTemplate obj = context.WorkTaskTemplate.Find(templateId, sortOrder);
+				    context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Overview", Name = "WorkTaskTemplateOverview")]
-		public string Overview(int qtyToReturn = 10)
+		public string Overview(string auth, int qtyToReturn = 10)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-				var obj = context.WorkTaskTemplate.Take(qtyToReturn).ToList();
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+				    var obj = context.WorkTaskTemplate.Take(qtyToReturn).ToList();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 		#endregion

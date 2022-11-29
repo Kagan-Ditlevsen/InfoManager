@@ -12,7 +12,12 @@ namespace infomanager.Api
 {
     [ApiController]
     [Route("[controller]")]
-    public partial class CommonController : ControllerBase
+    public partial class CommonController : Controller
     {
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            //throw new Exception("place security here: infomanager.Api.CommonController");
+            base.OnActionExecuting(context);
+        }
     }
 }

@@ -13,15 +13,17 @@ namespace infomanager.Api
 	{
 		#region Done
 		[HttpGet("Create", Name = "WorkVehicleCreate")]
-		public string Create(int vehicleId, string numberplate, int typeId, bool isArchived, bool isTemporary, string lastLocation, string remark, DateTime createDateTime, int createUserId, string internalId)
+		public string Create(string auth, int vehicleId, string numberplate, int typeId, bool isArchived, bool isTemporary, string lastLocation, string remark, DateTime createDateTime, int createUserId, string internalId)
 		{
-                     
-            
-            using (var context = ApiHelper.Db())
+            try
             {
-                WorkVehicle obj = new WorkVehicle()
+                AuthenticatedUser.Validate(auth);
+			    
+                using (var context = ApiHelper.Db())
                 {
-                    vehicleId = vehicleId,
+                    WorkVehicle obj = new WorkVehicle()
+                    {
+                        vehicleId = vehicleId,
 numberplate = numberplate,
 typeId = typeId,
 isArchived = isArchived,
@@ -31,23 +33,37 @@ remark = remark,
 createDateTime = createDateTime,
 createUserId = createUserId,
 internalId = internalId
-                };
-                context.Entry(obj).State = System.Data.Entity.EntityState.Added;
+                    };
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Added;
 
-                int qtyChanges = context.SaveChanges();
+                    int qtyChanges = context.SaveChanges();
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Retrieve", Name = "WorkVehicleRetrieve")]
-		public string Retrieve(int vehicleId)
+		public string Retrieve(string auth, int vehicleId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                WorkVehicle obj = context.WorkVehicle.Find(vehicleId);
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+                    WorkVehicle obj = context.WorkVehicle.Find(vehicleId);
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
@@ -58,27 +74,45 @@ return "";
 		}
 
 		[HttpGet("Delete", Name = "WorkVehicleDelete")]
-		public string Delete(int vehicleId)
+		public string Delete(string auth, int vehicleId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                WorkVehicle obj = context.WorkVehicle.Find(vehicleId);
-				context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+                AuthenticatedUser.Validate(auth);
 
-                int qtyChanges = context.SaveChanges();
+			    using (var context = ApiHelper.Db())
+                {
+                    WorkVehicle obj = context.WorkVehicle.Find(vehicleId);
+				    context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Overview", Name = "WorkVehicleOverview")]
-		public string Overview(int qtyToReturn = 10)
+		public string Overview(string auth, int qtyToReturn = 10)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-				var obj = context.WorkVehicle.Take(qtyToReturn).ToList();
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+				    var obj = context.WorkVehicle.Take(qtyToReturn).ToList();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 		#endregion

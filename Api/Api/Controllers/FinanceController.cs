@@ -13,15 +13,17 @@ namespace infomanager.Api
 	{
 		#region Done
 		[HttpGet("Create", Name = "FinanceCreate")]
-		public string Create(int financeId, DateTime receiptDateTime, string title, string shopId, string receiptId, string remark, DateTime createDateTime, int createUserId)
+		public string Create(string auth, int financeId, DateTime receiptDateTime, string title, string shopId, string receiptId, string remark, DateTime createDateTime, int createUserId)
 		{
-                     
-            
-            using (var context = ApiHelper.Db())
+            try
             {
-                Finance obj = new Finance()
+                AuthenticatedUser.Validate(auth);
+			    
+                using (var context = ApiHelper.Db())
                 {
-                    financeId = financeId,
+                    Finance obj = new Finance()
+                    {
+                        financeId = financeId,
 receiptDateTime = receiptDateTime,
 title = title,
 shopId = shopId,
@@ -29,23 +31,37 @@ receiptId = receiptId,
 remark = remark,
 createDateTime = createDateTime,
 createUserId = createUserId
-                };
-                context.Entry(obj).State = System.Data.Entity.EntityState.Added;
+                    };
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Added;
 
-                int qtyChanges = context.SaveChanges();
+                    int qtyChanges = context.SaveChanges();
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Retrieve", Name = "FinanceRetrieve")]
-		public string Retrieve(int financeId)
+		public string Retrieve(string auth, int financeId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                Finance obj = context.Finance.Find(financeId);
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+                    Finance obj = context.Finance.Find(financeId);
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
@@ -56,27 +72,45 @@ return "";
 		}
 
 		[HttpGet("Delete", Name = "FinanceDelete")]
-		public string Delete(int financeId)
+		public string Delete(string auth, int financeId)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-                Finance obj = context.Finance.Find(financeId);
-				context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
+                AuthenticatedUser.Validate(auth);
 
-                int qtyChanges = context.SaveChanges();
+			    using (var context = ApiHelper.Db())
+                {
+                    Finance obj = context.Finance.Find(financeId);
+				    context.Entry(obj).State = System.Data.Entity.EntityState.Deleted;
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 
 		[HttpGet("Overview", Name = "FinanceOverview")]
-		public string Overview(int qtyToReturn = 10)
+		public string Overview(string auth, int qtyToReturn = 10)
 		{
-			using (var context = ApiHelper.Db())
+            try
             {
-				var obj = context.Finance.Take(qtyToReturn).ToList();
+                AuthenticatedUser.Validate(auth);
 
-				return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+			    using (var context = ApiHelper.Db())
+                {
+				    var obj = context.Finance.Take(qtyToReturn).ToList();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
             }
 		}
 		#endregion
