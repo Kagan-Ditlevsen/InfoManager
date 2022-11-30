@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.IO;
-using System.Security.Authentication;
-using System.Text;
+﻿using System.Security.Authentication;
 
 namespace infomanager.Api
 {
@@ -9,7 +6,6 @@ namespace infomanager.Api
     {
         // This should be altered to reflect the real user
         public string Id { get; set; }
-        public DateTime CreateDateTime { get; set; }
 
         //public static string Retrieve(string id)
         //{
@@ -21,15 +17,7 @@ namespace infomanager.Api
 
         public static bool Validate(string auth)
         {
-            dynamic decryptedString = ApiHelper.DecryptString(auth);
-
-            AuthenticatedUser au = new AuthenticatedUser()
-            {
-                Id = decryptedString.id,
-                CreateDateTime = decryptedString.CreateDateTime,
-            };
-
-            //throw new AuthenticationException("Authentication key is wrong or out of date");
+            throw new AuthenticationException("Authentication key is wrong or out of date");
             return true;
         }
     }
