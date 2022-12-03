@@ -67,9 +67,36 @@ createUserId = createUserId
 		}
 
 		[HttpGet("Update", Name = "InfoEntryUpdate")]
-		public string Update()
+		public string Update(string auth, int entryId, int? infoId, int? typeId, string? title, string? entry, int? sortOrder, string? remark, DateTime? createDateTime, int? createUserId)
 		{
-return "";
+            try
+            {
+                AuthenticatedUser.Validate(auth);
+
+                using (var context = ApiHelper.Db())
+                {
+                    var obj = context.InfoEntry.Single(x => entryId == entryId);
+                    obj.entryId = entryId == null ? (int)entryId : obj.entryId; // isKey: True, isIdentity: True, isComputed: False;
+obj.infoId = infoId.HasValue ? (int)infoId : obj.infoId; // isKey: False, isIdentity: False, isComputed: False;
+obj.typeId = typeId.HasValue ? (int)typeId : obj.typeId; // isKey: False, isIdentity: False, isComputed: False;
+obj.title = title.Length > 0 ? title : obj.title; // isKey: False, isIdentity: False, isComputed: False;
+obj.entry = entry.Length > 0 ? entry : obj.entry; // isKey: False, isIdentity: False, isComputed: False;
+obj.sortOrder = sortOrder.HasValue ? (int)sortOrder : obj.sortOrder; // isKey: False, isIdentity: False, isComputed: False;
+obj.remark = remark.Length > 0 ? remark : obj.remark; // isKey: False, isIdentity: False, isComputed: False;
+obj.createDateTime = createDateTime.HasValue ? (DateTime)createDateTime : obj.createDateTime; // isKey: False, isIdentity: False, isComputed: False;
+obj.createUserId = createUserId.HasValue ? (int)createUserId : obj.createUserId; // isKey: False, isIdentity: False, isComputed: False
+
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
+            }
 		}
 
 		[HttpGet("Delete", Name = "InfoEntryDelete")]

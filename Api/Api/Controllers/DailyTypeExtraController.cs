@@ -66,9 +66,35 @@ inputData = inputData
 		}
 
 		[HttpGet("Update", Name = "DailyTypeExtraUpdate")]
-		public string Update()
+		public string Update(string auth, int extraId, int? typeId, string? internalTitle, int? sortOrder, bool? isActive, bool? isRequired, string? inputType, string? inputData)
 		{
-return "";
+            try
+            {
+                AuthenticatedUser.Validate(auth);
+
+                using (var context = ApiHelper.Db())
+                {
+                    var obj = context.DailyTypeExtra.Single(x => extraId == extraId);
+                    obj.extraId = extraId == null ? (int)extraId : obj.extraId; // isKey: True, isIdentity: True, isComputed: False;
+obj.typeId = typeId.HasValue ? (int)typeId : obj.typeId; // isKey: False, isIdentity: False, isComputed: False;
+obj.internalTitle = internalTitle.Length > 0 ? internalTitle : obj.internalTitle; // isKey: False, isIdentity: False, isComputed: False;
+obj.sortOrder = sortOrder.HasValue ? (int)sortOrder : obj.sortOrder; // isKey: False, isIdentity: False, isComputed: False;
+obj.isActive = isActive.HasValue ? (bool)isActive : obj.isActive; // isKey: False, isIdentity: False, isComputed: False;
+obj.isRequired = isRequired.HasValue ? (bool)isRequired : obj.isRequired; // isKey: False, isIdentity: False, isComputed: False;
+obj.inputType = inputType.Length > 0 ? inputType : obj.inputType; // isKey: False, isIdentity: False, isComputed: False;
+obj.inputData = inputData.Length > 0 ? inputData : obj.inputData; // isKey: False, isIdentity: False, isComputed: False
+
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
+            }
 		}
 
 		[HttpGet("Delete", Name = "DailyTypeExtraDelete")]

@@ -65,9 +65,34 @@ requiredFields = requiredFields
 		}
 
 		[HttpGet("Update", Name = "WorkTaskTypeUpdate")]
-		public string Update()
+		public string Update(string auth, int typeId, string? actionType, string? internalTitle, string? btnStartText, string? btnEndText, string? icon, int? requiredFields)
 		{
-return "";
+            try
+            {
+                AuthenticatedUser.Validate(auth);
+
+                using (var context = ApiHelper.Db())
+                {
+                    var obj = context.WorkTaskType.Single(x => typeId == typeId);
+                    obj.typeId = typeId == null ? (int)typeId : obj.typeId; // isKey: True, isIdentity: False, isComputed: False;
+obj.actionType = actionType.Length > 0 ? actionType : obj.actionType; // isKey: False, isIdentity: False, isComputed: False;
+obj.internalTitle = internalTitle.Length > 0 ? internalTitle : obj.internalTitle; // isKey: False, isIdentity: False, isComputed: False;
+obj.btnStartText = btnStartText.Length > 0 ? btnStartText : obj.btnStartText; // isKey: False, isIdentity: False, isComputed: False;
+obj.btnEndText = btnEndText.Length > 0 ? btnEndText : obj.btnEndText; // isKey: False, isIdentity: False, isComputed: False;
+obj.icon = icon.Length > 0 ? icon : obj.icon; // isKey: False, isIdentity: False, isComputed: False;
+obj.requiredFields = requiredFields.HasValue ? (int)requiredFields : obj.requiredFields; // isKey: False, isIdentity: False, isComputed: False
+
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
+            }
 		}
 
 		[HttpGet("Delete", Name = "WorkTaskTypeDelete")]

@@ -60,9 +60,29 @@ title = title
 		}
 
 		[HttpGet("Update", Name = "InfoTagUpdate")]
-		public string Update()
+		public string Update(string auth, int tagId, string? title)
 		{
-return "";
+            try
+            {
+                AuthenticatedUser.Validate(auth);
+
+                using (var context = ApiHelper.Db())
+                {
+                    var obj = context.InfoTag.Single(x => tagId == tagId);
+                    obj.tagId = tagId == null ? (int)tagId : obj.tagId; // isKey: True, isIdentity: False, isComputed: False;
+obj.title = title.Length > 0 ? title : obj.title; // isKey: False, isIdentity: False, isComputed: False
+
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
+            }
 		}
 
 		[HttpGet("Delete", Name = "InfoTagDelete")]

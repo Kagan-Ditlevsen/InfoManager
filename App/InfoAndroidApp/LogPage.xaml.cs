@@ -35,7 +35,7 @@ public partial class LogPage : ContentPage
             };
             btn.Clicked += ActionButton_Clicked;
 
-            zzz.Children.Add(btn);
+            //zzz.Children.Add(btn);
         }
     }
 

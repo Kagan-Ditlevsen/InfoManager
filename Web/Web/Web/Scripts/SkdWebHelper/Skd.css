@@ -481,6 +481,7 @@ skd-display {
 /* Skd.Message() */
 #skd-message-container {
     z-index: 1000000;
+    bottom: 3rem;
 }
 
     #skd-message-container .skd-message .toast-body:empty {

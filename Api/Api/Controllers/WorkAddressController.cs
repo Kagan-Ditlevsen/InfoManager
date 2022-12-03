@@ -65,9 +65,34 @@ isArchived = isArchived
 		}
 
 		[HttpGet("Update", Name = "WorkAddressUpdate")]
-		public string Update()
+		public string Update(string auth, int addressId, string? title, string? gpsAddress, string? gpsPlusCode, string? systemRemark, string? locationCode, bool? isArchived)
 		{
-return "";
+            try
+            {
+                AuthenticatedUser.Validate(auth);
+
+                using (var context = ApiHelper.Db())
+                {
+                    var obj = context.WorkAddress.Single(x => addressId == addressId);
+                    obj.addressId = addressId == null ? (int)addressId : obj.addressId; // isKey: True, isIdentity: True, isComputed: False;
+obj.title = title.Length > 0 ? title : obj.title; // isKey: False, isIdentity: False, isComputed: False;
+obj.gpsAddress = gpsAddress.Length > 0 ? gpsAddress : obj.gpsAddress; // isKey: False, isIdentity: False, isComputed: False;
+obj.gpsPlusCode = gpsPlusCode.Length > 0 ? gpsPlusCode : obj.gpsPlusCode; // isKey: False, isIdentity: False, isComputed: False;
+obj.systemRemark = systemRemark.Length > 0 ? systemRemark : obj.systemRemark; // isKey: False, isIdentity: False, isComputed: False;
+obj.locationCode = locationCode.Length > 0 ? locationCode : obj.locationCode; // isKey: False, isIdentity: False, isComputed: False;
+obj.isArchived = isArchived.HasValue ? (bool)isArchived : obj.isArchived; // isKey: False, isIdentity: False, isComputed: False
+
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
+            }
 		}
 
 		[HttpGet("Delete", Name = "WorkAddressDelete")]

@@ -17,7 +17,7 @@ namespace infomanager.Api
 
         public static bool Validate(string auth)
         {
-            throw new AuthenticationException("Authentication key is wrong or out of date");
+            //throw new AuthenticationException("Authentication key is wrong or out of date");
             return true;
         }
     }

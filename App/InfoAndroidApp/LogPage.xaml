@@ -4,27 +4,89 @@
              x:Name="thisPage"
              x:Class="InfoAndroidApp.LogPage"
              Title="Daily Log">
-    <Grid Margin="0"
-          RowDefinitions="Auto,*,Auto">
-        <Label
-            Grid.Row="0"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <ScrollView x:Name="scrollView"
-                    Grid.Row="1"
-                    VerticalOptions="FillAndExpand">
-            <StackLayout x:Name="zzz">
-            </StackLayout>
+    <Grid>
+        <ScrollView>
+            <FlexLayout x:Name="flexLayout"
+                        Wrap="Wrap"
+                        JustifyContent="Start" AlignContent="Start">
+                <HorizontalStackLayout BackgroundColor="Grey"
+                    HeightRequest="50" FlexLayout.Grow="1" FlexLayout.Basis="150" Margin="6,3" >
+                    <Label Text="X" WidthRequest="25" BackgroundColor="Red"></Label>
+                    <Label Text="Pickup" WidthRequest="125" BackgroundColor="Green"></Label>
+                </HorizontalStackLayout>
+                <Button Text="Button 1 flowing overline" ContentLayout="Left, 10" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b0;}" x:Name="ActionButton_1" Clicked="ActionButton_Clicked" ClassId="1"
+                        HeightRequest="50" FlexLayout.Grow="1" FlexLayout.Basis="150" Margin="6,3" />
+                <Button Text="Button 1" ContentLayout="Left, 10" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b0;}" x:Name="ActionButton_2" Clicked="ActionButton_Clicked" ClassId="1"
+                        HeightRequest="50" FlexLayout.Grow="1" FlexLayout.Basis="150" Margin="6,3" />
+                <Button Text="Button 1" ContentLayout="Left, 10" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b1;}" x:Name="ActionButton_3" Clicked="ActionButton_Clicked" ClassId="1"
+                        HeightRequest="50" FlexLayout.Grow="1" FlexLayout.Basis="150" Margin="6,3" />
+                <Button Text="Button 1" ContentLayout="Left, 10" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b2;}" x:Name="ActionButton_4" Clicked="ActionButton_Clicked" ClassId="1"
+                        HeightRequest="50" FlexLayout.Grow="1" FlexLayout.Basis="150" Margin="6,3" />
+                <Button Text="Button 1" ContentLayout="Left, 10" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b3;}" x:Name="ActionButton_5" Clicked="ActionButton_Clicked" ClassId="1"
+                        HeightRequest="50" FlexLayout.Grow="1" FlexLayout.Basis="150" Margin="6,3" />
+                <Button Text="Button 1" ContentLayout="Left, 10" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b4;}" x:Name="ActionButton_6" Clicked="ActionButton_Clicked" ClassId="1"
+                        HeightRequest="50" FlexLayout.Grow="1" FlexLayout.Basis="150" Margin="6,3" />
+                <Button Text="Button 1" ContentLayout="Left, 10" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b5;}" x:Name="ActionButton_7" Clicked="ActionButton_Clicked" ClassId="1"
+                        HeightRequest="50" FlexLayout.Grow="1" FlexLayout.Basis="150" Margin="6,3" />
+            </FlexLayout>
         </ScrollView>
-        <FlexLayout Grid.Row="2" x:Name="ActionButtonList" HeightRequest="200"
-                    Direction="Row"
-                    AlignContent="Stretch"
-                    AlignItems="Stretch">
-            <!--<Button Text="Left icon" ContentLayout="Left,5" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b0;}" HorizontalOptions="FillAndExpand" WidthRequest="150"
-                x:Name="ActionButton_1" Clicked="ActionButton_Clicked" ClassId="1"/>
-            <Button Text="Left icon #2" ContentLayout="Left,5" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b1;}" HorizontalOptions="FillAndExpand" WidthRequest="150"
-                x:Name="ActionButton_21" Clicked="ActionButton_Clicked" ClassId="2"/>-->
-        </FlexLayout>
     </Grid>
+    <!-- HorizontalOptions="Fill" VerticalOptions="Fill" -->
+    <!--<StackLayout Orientation="Vertical">
+        <Button Text="Button 1" ContentLayout="Left, 10" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b0;}" WidthRequest="150"
+                x:Name="ActionButton_1" Clicked="ActionButton_Clicked" ClassId="1"/>
+        <Button Text="Button 2" ContentLayout="Left, 10" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b1;}" WidthRequest="150"
+                x:Name="ActionButton_2" Clicked="ActionButton_Clicked" ClassId="2"/>
+        <Button Text="Button 3" ContentLayout="Left, 10" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b0;}" WidthRequest="150"
+                x:Name="ActionButton_3" Clicked="ActionButton_Clicked" ClassId="3"/>
+        <Button Text="Button 4 med tekst som fylder fuck meget" ContentLayout="Left, 10" ImageSource="{FontImage FontFamily=FA6, Glyph=&#xe1b1;}" FlexLayout.Basis="50" WidthRequest="150"
+                x:Name="ActionButton_4" Clicked="ActionButton_Clicked" ClassId="4"/>
+    </StackLayout>-->
+    <!--
+    <ScrollView
+        x:Name="scrollView"
+        IsVisible="true">
+        <FlexLayout Direction="Column"
+                AlignItems="Center"
+                JustifyContent="SpaceEvenly">
+            <Label Text="FlexLayout in Action"
+               FontSize="20" />
+            <Image Source="dotnet_bot_branded.png"
+               HeightRequest="300" />
+            <Button Text="Do-Nothing Button" />
+            <Label Text="Another Label" />
+        </FlexLayout>
+    </ScrollView>
+    -->
+
+    <!--<Label Text="CONTENT"
+                   FontSize="18"
+                   BackgroundColor="Gray" HeightRequest="50"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                   FlexLayout.Grow="1" FlexLayout.Basis="150" />
+    <Label Text="CONTENT"
+                   FontSize="18"
+                   BackgroundColor="Red" HeightRequest="50"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                   FlexLayout.Grow="1" FlexLayout.Basis="150" />
+    <Label Text="CONTENT"
+                   FontSize="18"
+                   BackgroundColor="Green" HeightRequest="50"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                   FlexLayout.Grow="1" FlexLayout.Basis="150" />
+    <Label Text="CONTENT"
+                   FontSize="18"
+                   BackgroundColor="Gray" HeightRequest="50"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                   FlexLayout.Grow="1" FlexLayout.Basis="150" />
+    <Label Text="CONTENT"
+                   FontSize="18"
+                   BackgroundColor="Red" HeightRequest="50"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                   FlexLayout.Grow="1" FlexLayout.Basis="150" />
+    <Label Text="CONTENT"
+                   FontSize="18"
+                   BackgroundColor="Green" HeightRequest="50"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                   FlexLayout.Grow="1" FlexLayout.Basis="150" />-->
 </ContentPage>

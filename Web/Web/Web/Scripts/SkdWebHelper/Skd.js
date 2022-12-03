@@ -213,9 +213,10 @@ Skd.PageLoadingHide = function () {
 /* Message */
 Skd.Message = new SkdModule("Skd.Message", null, null, new Date(2021, 06, 01));
 
-var _skd_message_container = "<div id=\"skd-message-container\" class=\"toast-container position-fixed bottom-0 end-0 p-3\"></div>";
+var _skd_message_container = "<div id=\"skd-message-container\" class=\"toast-container position-fixed end-0 p-3\"></div>";
 var _skd_message_template = "<div data-bs-delay='*msg-delay*' id=\"skd-message-*id*\" class=\"skd-message toast\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\"><div class=\"toast-header *type*\"><span class=\"fas fa-*icon*\"></span><strong class=\"ms-2 me-auto\">*text*</strong><small class=\"text-nowarp\">*createDT*</small><button type=\"button\" class=\"btn-close ms-1\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button></div><div class=\"toast-body\">*subtext*</div></div>";
 var _skd_message_delay = 5000;
+//_skd_message_delay = 50000000;
 var _skd_message_deleteOnDelay = true;
 Skd.Message.Show = function () {
     $("#skd-message-container .toast").each(function (e) {

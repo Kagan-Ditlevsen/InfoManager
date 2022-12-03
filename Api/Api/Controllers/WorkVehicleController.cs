@@ -68,9 +68,37 @@ internalId = internalId
 		}
 
 		[HttpGet("Update", Name = "WorkVehicleUpdate")]
-		public string Update()
+		public string Update(string auth, int vehicleId, string? numberplate, int? typeId, bool? isArchived, bool? isTemporary, string? lastLocation, string? remark, DateTime? createDateTime, int? createUserId, string? internalId)
 		{
-return "";
+            try
+            {
+                AuthenticatedUser.Validate(auth);
+
+                using (var context = ApiHelper.Db())
+                {
+                    var obj = context.WorkVehicle.Single(x => vehicleId == vehicleId);
+                    obj.vehicleId = vehicleId == null ? (int)vehicleId : obj.vehicleId; // isKey: True, isIdentity: True, isComputed: False;
+obj.numberplate = numberplate.Length > 0 ? numberplate : obj.numberplate; // isKey: False, isIdentity: False, isComputed: False;
+obj.typeId = typeId.HasValue ? (int)typeId : obj.typeId; // isKey: False, isIdentity: False, isComputed: False;
+obj.isArchived = isArchived.HasValue ? (bool)isArchived : obj.isArchived; // isKey: False, isIdentity: False, isComputed: False;
+obj.isTemporary = isTemporary.HasValue ? (bool)isTemporary : obj.isTemporary; // isKey: False, isIdentity: False, isComputed: False;
+obj.lastLocation = lastLocation.Length > 0 ? lastLocation : obj.lastLocation; // isKey: False, isIdentity: False, isComputed: False;
+obj.remark = remark.Length > 0 ? remark : obj.remark; // isKey: False, isIdentity: False, isComputed: False;
+obj.createDateTime = createDateTime.HasValue ? (DateTime)createDateTime : obj.createDateTime; // isKey: False, isIdentity: False, isComputed: False;
+obj.createUserId = createUserId.HasValue ? (int)createUserId : obj.createUserId; // isKey: False, isIdentity: False, isComputed: False;
+obj.internalId = internalId.Length > 0 ? internalId : obj.internalId; // isKey: False, isIdentity: False, isComputed: False
+
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
+            }
 		}
 
 		[HttpGet("Delete", Name = "WorkVehicleDelete")]

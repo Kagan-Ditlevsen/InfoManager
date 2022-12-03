@@ -63,9 +63,32 @@ createUserId = createUserId
 		}
 
 		[HttpGet("Update", Name = "DailyInfoUpdate")]
-		public string Update()
+		public string Update(string auth, Guid dailyId, int extraId, string? entry, DateTime? createDateTime, int? createUserId)
 		{
-return "";
+            try
+            {
+                AuthenticatedUser.Validate(auth);
+
+                using (var context = ApiHelper.Db())
+                {
+                    var obj = context.DailyInfo.Single(x => dailyId == dailyId && extraId == extraId);
+                    obj.dailyId = dailyId == null ? (Guid)dailyId : obj.dailyId; // isKey: True, isIdentity: False, isComputed: False;
+obj.extraId = extraId == null ? (int)extraId : obj.extraId; // isKey: True, isIdentity: False, isComputed: False;
+obj.entry = entry.Length > 0 ? entry : obj.entry; // isKey: False, isIdentity: False, isComputed: False;
+obj.createDateTime = createDateTime.HasValue ? (DateTime)createDateTime : obj.createDateTime; // isKey: False, isIdentity: False, isComputed: False;
+obj.createUserId = createUserId.HasValue ? (int)createUserId : obj.createUserId; // isKey: False, isIdentity: False, isComputed: False
+
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
+            }
 		}
 
 		[HttpGet("Delete", Name = "DailyInfoDelete")]

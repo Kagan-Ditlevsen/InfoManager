@@ -60,9 +60,29 @@ internalTitle = internalTitle
 		}
 
 		[HttpGet("Update", Name = "FinanceAccountTypeUpdate")]
-		public string Update()
+		public string Update(string auth, string typeId, string? internalTitle)
 		{
-return "";
+            try
+            {
+                AuthenticatedUser.Validate(auth);
+
+                using (var context = ApiHelper.Db())
+                {
+                    var obj = context.FinanceAccountType.Single(x => typeId == typeId);
+                    obj.typeId = typeId.Length > 0 ? typeId : obj.typeId; // isKey: True, isIdentity: False, isComputed: False;
+obj.internalTitle = internalTitle.Length > 0 ? internalTitle : obj.internalTitle; // isKey: False, isIdentity: False, isComputed: False
+
+                    context.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+
+                    int qtyChanges = context.SaveChanges();
+
+				    return JsonConvert.SerializeObject(obj, Formatting.None, ApiHelper.serializerSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return ApiHelper.ApiException(ex.ToString(), ex.Message);
+            }
 		}
 
 		[HttpGet("Delete", Name = "FinanceAccountTypeDelete")]
