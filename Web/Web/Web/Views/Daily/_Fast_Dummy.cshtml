@@ -19,10 +19,19 @@
         dto.Add(Common.DailyTypeOptions.Single(x => x.optionId == o.Id));
     }
 
-    IEnumerable<Daily> top5daily;
-    using (var conn = new Db())
+    List<Daily> top5daily = new List<Daily>();
+    using (var ctx = new Db())
     {
-        top5daily = Daily.Overview(Common.User.userId).OrderByDescending(x => x.registerDateTime).Take(5);
+        top5daily = ctx.Daily
+            .Include("DailyType")
+            .Include("DailyType.DailyTypeOption")
+            .Include("DailyInfo")
+            .Include("DailyType.DailyTypeExtra")
+            .Where(x => x.createUserId == Common.User.userId)
+            .OrderByDescending(x => x.registerDateTime)
+            .Take(10)
+            .ToList();
+        // top5daily = Daily.Overview(Common.User.userId).OrderByDescending(x => x.registerDateTime).Take(5);
     }
 }
 <input type="hidden" id="typeId" name="typeId" />
