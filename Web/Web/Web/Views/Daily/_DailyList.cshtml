@@ -14,10 +14,10 @@
     {
         dailyList = db.vw_Daily_Overview
             //.Where(x => x.createUserId == Common.User.userId && x.registerDateTime > new DateTime(2021, 1, 1) && x.typeId == 9013)
-            .Where(x => x.createUserId == Common.User.userId)
+            .Where(x => x.createUserId == Common.User.userId && x.createDateTime > new DateTime(2022,12,14))
             .OrderByDescending(x => x.registerDateTime)
             .ThenByDescending(x => x.createDateTime)
-            .Take(int.Parse(Session["dailyList_qty"].ToString()))
+            //.Take(int.Parse(Session["dailyList_qty"].ToString()))
             .ToList();
         Guid[] dailyIds = dailyList.Select(y => y.dailyId).ToArray();
         extrasList = db.Daily.Include("DailyInfo").Include("DailyInfo.DailyTypeExtra").Where(x => dailyIds.Contains(x.dailyId)).ToList();

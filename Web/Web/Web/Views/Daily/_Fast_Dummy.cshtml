@@ -5,18 +5,22 @@
     ViewBag.Icon = "seedling";
 
     var ots = new List<dynamic>();
-    ots.Add(AddOptionToShow(23, requireExtraInfo: true));
-    ots.Add(AddOptionToShow(25));
-    ots.Add(AddOptionToShow(26));
-    ots.Add(AddOptionToShow(37, "Type what you are eating"));
-    ots.Add(AddOptionToShow(38));
-    ots.Add(AddOptionToShow(59));
-    ots.Add(AddOptionToShow(60));
+    ots.Add(AddOptionToShow(typeId: 9503, optionId: 23, icon: "fas fa-smoking", requireExtraInfo: true));
+    ots.Add(AddOptionToShow(typeId: 9503, optionId: 25, icon: "fas fa-smoking;fas fa-box text-warning"));
+    ots.Add(AddOptionToShow(typeId: 9503, optionId: 26, icon: "fas fa-smoking;fas fa-clock text-danger"));
+    ots.Add(AddOptionToShow(typeId: 1500, optionId: 37, icon: "fas fa-utensils", reqRemarkPlaceholder: "What you are eating?"));
+    ots.Add(AddOptionToShow(typeId: 1500, optionId: 38, icon: "fas fa-cookie-bite", reqRemarkPlaceholder: "What you are eating?"));
+    ots.Add(AddOptionToShow(typeId: 2000, optionId: 59, icon: "fas fa-water text-info;fas fa-dna"));
+    ots.Add(AddOptionToShow(typeId: 2000, optionId: 54, icon: "fas fa-water;fas fa-glass-water-droplet"));
+    ots.Add(AddOptionToShow(typeId: 2000, optionId: 52, icon: "fas fa-water"));
+    ots.Add(AddOptionToShow(typeId: 2000, optionId: 62, icon: "fas fa-glass-water-droplet"));
+    ots.Add(AddOptionToShow(typeId: 9007, optionId: 60, icon: "fas fa-poo"));
+    ots.Add(AddOptionToShow(typeId: 9007, optionId: 33, icon: "fas fa-poop", reqRemarkPlaceholder: "Why not normal?"));
 
     List<DailyTypeOption> dto = new List<DailyTypeOption>();
     foreach (var o in ots.OrderBy(x => x.SortOrder))
     {
-        dto.Add(Common.DailyTypeOptions.Single(x => x.optionId == o.Id));
+        dto.Add(Common.DailyTypeOptions.Single(x => x.typeId == o.TypeId && x.optionId == o.OptionId));
     }
 
     List<Daily> top5daily = new List<Daily>();
@@ -31,7 +35,6 @@
             .OrderByDescending(x => x.registerDateTime)
             .Take(10)
             .ToList();
-        // top5daily = Daily.Overview(Common.User.userId).OrderByDescending(x => x.registerDateTime).Take(5);
     }
 }
 <input type="hidden" id="typeId" name="typeId" />
@@ -40,12 +43,24 @@
 <div id="optionButtons" class="d-flex flex-row flex-wrap mt-1">
     @foreach (var option in dto)
     {
-        dynamic optionToShow = ots.Single(x => x.Id == option.optionId);
+        dynamic optionToShow = ots.Single(x => x.TypeId == option.typeId && x.OptionId == option.optionId);
         <div class="btn-action">
             <button id="dt_@(option.DailyType.typeId.ToString() + "_" + option.optionId.ToString())"
                     class="btn btn-success" @(optionToShow.IsRequired ? " required" : "") @(optionToShow.RequireExtraInfo ? " extra-info" : "") @(!string.IsNullOrWhiteSpace(optionToShow.RemarkPlaceholderText) ? " require-remark" : "")>
                 <div class="d-flex flex-column">
-                    <div class="col-12">@option.DailyType.Icon()</div>
+                    <div class="col-12">
+                        @if (optionToShow.Icon.Contains(";"))
+                        {
+                            <span class="fa-1x fa-2x fa-stack">
+                                <i class="@optionToShow.Icon.Split(';')[1] fa-stack-1x" style="zoom: .7; left: 50%; top: 20%;"></i>
+                                <i class="@optionToShow.Icon.Split(';')[0]"></i>
+                            </span>
+                        }
+                        else
+                        {
+                            <i class="@optionToShow.Icon"></i>
+                        }
+                    </div>
                     <div class="col-12 text-truncate">@option.internalTitle</div>
                     <div class="col-12 text-end optionExtraIcons"></div>
                 </div>
@@ -75,7 +90,9 @@
     <script>
         $(function () {
             pageForm.attr("action", "/Daily/Daily_AddEdit");
-            //$("#optionButtons button[extra-info] .optionExtraIcons").append("<span class='fas fa-fw fa-receipt text-warning' title='Additionl information is required' />");
+            $("#remark").on("keyup", function (e) {
+                pageForm.validate();
+            });
             $("#optionButtons button[require-remark] .optionExtraIcons").append("<span class='fas fa-fw fa-comment text-danger' title='Remark is required' />");
             $("#optionButtons button").on("click tap", function (e) {
                 $("#typeId").val($(this).attr("id").split("_")[1]);
@@ -144,6 +161,7 @@
             #optionButtons .btn-action {
                 flex-grow: 1;
                 margin: 0 .25rem 0 .25rem;
+                min-width: 200px;
             }
 
                 #optionButtons .btn-action button {
@@ -163,12 +181,14 @@
 }
 @functions {
     static int counter = 0;
-    public static ExpandoObject AddOptionToShow(int id, string reqRemarkPlaceholder = "", bool requireExtraInfo = false)
+    public static ExpandoObject AddOptionToShow(int typeId, int optionId, string reqRemarkPlaceholder = "", bool requireExtraInfo = false, string icon = "fas fa-whatsapp")
     {
         dynamic rtn;
         rtn = new ExpandoObject();
 
-        rtn.Id = id;
+        rtn.TypeId = typeId;
+        rtn.OptionId = optionId;
+        rtn.Icon = icon;
         rtn.IsRequired = !string.IsNullOrWhiteSpace(reqRemarkPlaceholder);
         rtn.RemarkPlaceholderText = "";
         rtn.RequireExtraInfo = requireExtraInfo;
