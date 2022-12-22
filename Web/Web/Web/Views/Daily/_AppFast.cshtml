@@ -10,31 +10,18 @@
     ots.Add(AddOptionToShow(typeId: 9503, optionId: 26, icon: "fas fa-smoking;fas fa-clock text-danger"));
     ots.Add(AddOptionToShow(typeId: 1500, optionId: 37, icon: "fas fa-utensils", reqRemarkPlaceholder: "What you are eating?"));
     ots.Add(AddOptionToShow(typeId: 1500, optionId: 38, icon: "fas fa-cookie-bite", reqRemarkPlaceholder: "What you are eating?"));
-    ots.Add(AddOptionToShow(typeId: 2000, optionId: 59, icon: "fas fa-water text-info;fas fa-dna"));
-    ots.Add(AddOptionToShow(typeId: 2000, optionId: 54, icon: "fas fa-water;fas fa-glass-water-droplet"));
-    ots.Add(AddOptionToShow(typeId: 2000, optionId: 52, icon: "fas fa-water"));
-    ots.Add(AddOptionToShow(typeId: 2000, optionId: 62, icon: "fas fa-glass-water-droplet"));
+    ots.Add(AddOptionToShow(typeId: 2000, optionId: 62, icon: "fas fa-glass-water-droplet;fas fa-mug-hot text-danger"));
+    ots.Add(AddOptionToShow(typeId: 2000, optionId: 54, icon: "fas fa-water text-primary;fas fa-glass-water-droplet"));
+    ots.Add(AddOptionToShow(typeId: 2000, optionId: 52, icon: "fas fa-water text-primary"));
+    ots.Add(AddOptionToShow(typeId: 2000, optionId: 59, icon: "fas fa-water text-primary;fas fa-dna"));
     ots.Add(AddOptionToShow(typeId: 9007, optionId: 60, icon: "fas fa-poo"));
     ots.Add(AddOptionToShow(typeId: 9007, optionId: 33, icon: "fas fa-poop", reqRemarkPlaceholder: "Why not normal?"));
+    //ots.Add(AddOptionToShow(typeId: 9507, optionId: 0, icon: "fas fa-gas-pump", reqRemarkPlaceholder: "Odometer, Trip, Liters, Liter Price and Full?"));
 
     List<DailyTypeOption> dto = new List<DailyTypeOption>();
     foreach (var o in ots.OrderBy(x => x.SortOrder))
     {
         dto.Add(Common.DailyTypeOptions.Single(x => x.typeId == o.TypeId && x.optionId == o.OptionId));
-    }
-
-    List<Daily> top5daily = new List<Daily>();
-    using (var ctx = new Db())
-    {
-        top5daily = ctx.Daily
-            .Include("DailyType")
-            .Include("DailyType.DailyTypeOption")
-            .Include("DailyInfo")
-            .Include("DailyType.DailyTypeExtra")
-            .Where(x => x.createUserId == Common.User.userId)
-            .OrderByDescending(x => x.registerDateTime)
-            .Take(10)
-            .ToList();
     }
 }
 <input type="hidden" id="typeId" name="typeId" />
@@ -44,9 +31,9 @@
     @foreach (var option in dto)
     {
         dynamic optionToShow = ots.Single(x => x.TypeId == option.typeId && x.OptionId == option.optionId);
-        <div class="btn-action">
+        <div class="btn-action col-6 col-sm-4" style="margin: 0; padding: 0; min-width: 150px; width: auto;">
             <button id="dt_@(option.DailyType.typeId.ToString() + "_" + option.optionId.ToString())"
-                    class="btn btn-success" @(optionToShow.IsRequired ? " required" : "") @(optionToShow.RequireExtraInfo ? " extra-info" : "") @(!string.IsNullOrWhiteSpace(optionToShow.RemarkPlaceholderText) ? " require-remark" : "")>
+                    class="btn @(!string.IsNullOrWhiteSpace(optionToShow.RemarkPlaceholderText) ? "btn-warning" : "btn-dark")" @(optionToShow.IsRequired ? " required" : "") @(optionToShow.RequireExtraInfo ? " extra-info" : "")>
                 <div class="d-flex flex-column">
                     <div class="col-12">
                         @if (optionToShow.Icon.Contains(";"))
@@ -71,29 +58,27 @@
 @Form.Controls.TextBox(new Form.TextBox()
 {
     Id = "remark",
-    Title = "Optional Remark",
-    Required = true,
-    ControlOnly = true
+    Title = "Remark",
+    Required = false
 })
-<div id="dailyLog" class="mt-1">
-    @foreach (var daily in top5daily)
-    {
-        <div data-id="@daily.dailyId" class="d-flex shade">
-            <div class="col ps-1 pe-0 title">@daily.Title(equalSizeIcons: true)</div>
-            <div class="col-auto px-1 registerDateTime">
-                <span class="fas fa-clock"></span> @daily.registerDateTime.ToString("MM/dd HH:mm")
-            </div>
-        </div>
-    }
-</div>
+@Form.Controls.DateTime(new Form.DateTime()
+{
+    Id = "registerDateTime",
+    Title = "Register Date/Time",
+    LabelText = "Register Date/Time",
+    Required = false,
+    Value = DateTime.Now
+})
 @section scripts {
     <script>
         $(function () {
             pageForm.attr("action", "/Daily/Daily_AddEdit");
+            $(".dropdown-menu li:nth-child(1)").addClass("text-bg-success");
+
             $("#remark").on("keyup", function (e) {
                 pageForm.validate();
             });
-            $("#optionButtons button[require-remark] .optionExtraIcons").append("<span class='fas fa-fw fa-comment text-danger' title='Remark is required' />");
+
             $("#optionButtons button").on("click tap", function (e) {
                 $("#typeId").val($(this).attr("id").split("_")[1]);
                 $("#optionId").val($(this).attr("id").split("_")[2]);
@@ -120,26 +105,7 @@
                 return false;
             });
             Skd.SetEvents();
-
-            pageResize();
-            window.addEventListener("resize", function (e) {
-                pageResize();
-            }, false);
         });
-
-        function pageResize() {
-            $("#optionButtons button .optionExtraIcons").each(function (index, elm) {
-                let btn = $(this).closest("button");
-
-                $(this).find(".fas").each(function (index2, elm2) {
-                    $(this)
-                        .css("position", "absolute")
-                        .css("top", "calc(" + btn.position().top + "px + .5rem + " + (index2 * 35) + "px)")
-                        .css("left", "calc(" + btn.position().left + "px +  3px)")
-                        ;
-                });
-            });
-        }
     </script>
 }
 @section styles {
@@ -148,7 +114,11 @@
             --button-spacing: .25rem;
         }
 
-        .content #remark {
+        .skd-form-row .col {
+            width: calc(100% - 1rem) !important;
+        }
+
+        .skd-form-row label, .skd-form-row .form-control, .skd-form-row .button, .skd-form-row .fas {
             font-size: 2rem;
         }
 
@@ -177,11 +147,16 @@
                     #optionButtons .btn-action button .optionExtraIcons .fas {
                         font-size: 2rem;
                     }
+
+        /* dummy */
+        #registerDateTime_container {
+            margin-top: .5rem;
+        }
     </style>
 }
 @functions {
     static int counter = 0;
-    public static ExpandoObject AddOptionToShow(int typeId, int optionId, string reqRemarkPlaceholder = "", bool requireExtraInfo = false, string icon = "fas fa-whatsapp")
+    public static ExpandoObject AddOptionToShow(int typeId, int? optionId, string reqRemarkPlaceholder = "", bool requireExtraInfo = false, string icon = "fas fa-whatsapp")
     {
         dynamic rtn;
         rtn = new ExpandoObject();
@@ -195,7 +170,6 @@
         if (rtn.IsRequired)
         {
             rtn.RemarkPlaceholderText = reqRemarkPlaceholder;
-            //rtn.RequireExtraInfo = true;
         }
         rtn.SortOrder = counter++;
 

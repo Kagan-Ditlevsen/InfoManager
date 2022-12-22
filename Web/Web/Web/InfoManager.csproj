@@ -1684,6 +1684,7 @@
     <Content Include="Views\Daily\Sidebar_Stat.cshtml" />
     <Content Include="Views\Daily\_DailyList.cshtml" />
     <Content Include="Views\System\Sidebar_Device.cshtml" />
+    <Content Include="Views\Daily\_AppFastLog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\SkdWebHelper\Skd.Font.ttf" />
@@ -1726,7 +1727,7 @@
     <Content Include="Views\Work\Drive2.cshtml" />
     <Content Include="Views\Shared\_Layout_Empty.cshtml" />
     <Content Include="Views\Work\DriversAid.cshtml" />
-    <Content Include="Views\Daily\_Fast_Dummy.cshtml" />
+    <Content Include="Views\Daily\_AppFast.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.esm.min.js.map" />

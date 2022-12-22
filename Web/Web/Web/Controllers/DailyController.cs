@@ -11,7 +11,11 @@ namespace dk.infomanager.Controllers
     {
         public ActionResult Fast()
         {
-            return View("_Fast_Dummy");
+            return View("_AppFast");
+        }
+        public ActionResult FastLog()
+        {
+            return View("_AppFastLog");
         }
         public ActionResult Index() => View();
         public ActionResult Stat() => View();

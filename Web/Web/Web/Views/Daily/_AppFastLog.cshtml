@@ -1,0 +1,53 @@
+﻿@using System.Dynamic;
+@{
+    Layout = "~/Views/Shared/_Layout_Empty.cshtml";
+    ViewBag.Title = "Daily Log, Top 50";
+    ViewBag.Icon = "table-list";
+
+    List<Daily> topDaily = new List<Daily>();
+    using (var ctx = new Db())
+    {
+        topDaily = ctx.Daily
+            .Include("DailyType")
+            .Include("DailyType.DailyTypeOption")
+            .Include("DailyInfo")
+            .Include("DailyType.DailyTypeExtra")
+            .Where(x => x.createUserId == Common.User.userId)
+            .OrderByDescending(x => x.registerDateTime)
+            .Take(50)
+            .ToList();
+    }
+}
+<div id="dailyLog">
+    @foreach (var daily in topDaily)
+    {
+        <div data-id="@daily.dailyId" class="d-flex shade p-1">
+            <div class="col-auto px-1 registerDateTime">
+                <span class="fas fa-clock"></span> @daily.registerDateTime.ToString("MM/dd HH:mm")
+            </div>
+            <div class="col ps-1 pe-0 title">@daily.Title(equalSizeIcons: true)</div>
+        </div>
+    }
+</div>
+@section scripts {
+    <script>
+$(function () {
+            $(".dropdown-menu li:nth-child(2)").addClass("text-bg-success");
+});
+    </script>
+}
+@section styles {
+    <style>
+        :root {
+            --button-spacing: .25rem;
+        }
+
+        .content {
+            padding: 0 !important;
+        }
+
+        #dailyLog {
+            font-size: 1.5rem;
+        }
+    </style>
+}
