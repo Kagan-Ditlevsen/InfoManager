@@ -112,7 +112,7 @@
             }
         }
         <div class="col px-2 text-truncate" style="padding-top: 2px;">@Common.User.CompleteName()</div>
-        <button class="col-auto btn btn-secondary"><span class="fas fa-box-open"></span> @(20 - cigPackage) - </button>
+        <button class="col-auto btn btn-secondary"><span class="fas fa-box-open"></span> @(20 - cigPackage)</button>
         <button class="col-auto btn btn-warning"><span class="fas fa-smoking"></span> @lastCig.ToHM()</button>
         <button class="col-auto btn btn-danger"><span class="fas fa-sun"></span> @Common.User.Stat.RetrieveAsOptionGroup(9503).qtyMorning</button>
     </footer>
