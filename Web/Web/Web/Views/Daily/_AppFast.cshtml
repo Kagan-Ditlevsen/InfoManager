@@ -113,16 +113,19 @@ $(function () {
                 pageForm.validate();
             });
 
-            $("button.btn-action").on("click tap", function (e) {
+            $(".btn-action button").on("click tap", function (e) {
+                e.preventDefault();
+
                 $("#typeId").val($(this).attr("id").split("_")[1]);
                 $("#optionId").val($(this).attr("id").split("_")[2]);
-                $("#remark").attr("required", $(this).hasAttr("require-remark"));
-                if ($(this).hasAttr("require-remark")) {
+                $("#remark").attr("required", $(this).hasAttr("required"));
+                if ($(this).hasAttr("required")) {
                 } else {
                     $("#remark").removeClass("is-invalid");
                 }
 
                 pageForm.validate();
+                pageForm.submit();
             });
             pageForm.submit(function (e) {
                 if (pageForm.valid()) {
