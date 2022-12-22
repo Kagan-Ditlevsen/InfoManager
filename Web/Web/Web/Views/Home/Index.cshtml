@@ -61,88 +61,95 @@
             </div>
         </div>
     </div>
-    <div id="dailyEntries" class="col-12 col-lg">
-        @{
-            int filter_days = 2;
-            bool header_show = true;
+    @**@
+        <div id="dailyEntries" class="col-12 col-lg">
+            @{
+                int filter_days = 2;
+                bool header_show = true;
 
-            List<vw_Daily_Days> dayList = new List<vw_Daily_Days>();
-            using (var db = new Db())
-            {
-                dayList = db.vw_Daily_Days.Where(x => x.createUserId == Common.User.userId && x.typeId == 9001).OrderByDescending(x => x.startDateTime).Take(filter_days).ToList();
-            }
-
-            List<Daily> dailies = Daily.Overview(Common.User.userId)
-                .Where(x => x.registerDateTime >= dayList.Min(y => y.startDateTime))
-                .ToList();
-        }
-        <div class="card skd-table skd-content-loader-show">
-            <img class="skd-content-loader" src="~/Content/Images/loader-circle.gif" />
-            <div class="card-header">
-                <div class="col pr-1 ellipsis"><span class="fas fa-list-ol"></span> List of todays entries</div>
-                @Table.Controls.Search()
-            </div>
-            <div class="card-body">
-                @foreach (var day in dayList)
+                List<vw_Daily_Days> dayList = new List<vw_Daily_Days>();
+                List<Daily> dailies = new List<Daily>();
+                using (var db = new Db())
                 {
-                    string edt = "Still up";
-                    string dayTitle = "Today";
-                    if (!day.endDateTime.HasValue)
-                    {
-                        day.endDateTime = DateTime.Now;
-                    }
-                    else
-                    {
-                        edt = day.endDateTime.Value.ToYMDHM();
-                        dayTitle = day.startDateTime.ToString("dddd").ToUpper();
-                    }
-                    if (header_show)
-                    {
-                        <div class="skd-table-header">
-                            <div class="col-auto"><span class="fas @Icon.Goodmorning"></span> @day.startDateTime.ToYMDHM()</div>
-                            <div class="col text-center">@dayTitle</div>
-                            <div class="col-auto" style="text-align: right;">@edt <span class="fas @Icon.Goodnight"></span></div>
-                        </div>
-                    }
-                    foreach (var row in dailies.Where(x => x.registerDateTime >= day.startDateTime && x.registerDateTime <= day.endDateTime).OrderByDescending(x => x.registerDateTime))
-                    {
-                        <div class="skd-table-row shade" skd-sidebar-url="/Daily/Sidebar_DailyAdd" skd-sidebar-data="dailyId=@row.dailyId">
-                            <div class="col-auto">
-                                @row.registerDateTime.ToHM()
-                            </div>
-                            <div class="col">
-                                @row.Title()
-                            </div>
-                            <div class="col-auto">
-                                @row.InfoesAsString()
-                            </div>
-                            @if (!string.IsNullOrEmpty(row.remark))
-                            {
-                                <div class="col-auto"><span class="fas @Icon.Comment text-warning ps-1" title="@row.remark"></span></div>
-                            }
-                        </div>
-                    }
+                    dayList = db.vw_Daily_Days.Where(x => x.createUserId == Common.User.userId && x.typeId == 9001).OrderByDescending(x => x.startDateTime).Take(filter_days).ToList();
+                    DateTime firstMorning = dayList.Min(y => y.startDateTime);
+                    dailies = db.Daily
+                        .Include("DailyType")
+                        .Include("DailyType.DailyTypeOption")
+                        .Include("DailyInfo")
+                        .Include("DailyType.DailyTypeExtra")
+                        .Where(x => x.createUserId == Common.User.userId && x.registerDateTime >= firstMorning)
+                        //.Where(x => x.registerDateTime > DateTime.Now.AddDays(-3))
+                        .ToList();
                 }
-            </div>
-            <div class="card-footer flex-column p-0 text-sm">
-                <div class="skd-table w-100">
-                    @foreach (var i in new[] { 9503, 1011, 1017 })
+            }
+            <div class="card skd-table skd-content-loader-show">
+                <img class="skd-content-loader" src="~/Content/Images/loader-circle.gif" />
+                <div class="card-header">
+                    <div class="col pr-1 ellipsis"><span class="fas fa-list-ol"></span> List of todays entries</div>
+                    @Table.Controls.Search()
+                </div>
+                <div class="card-body">
+                    @foreach (var day in dayList)
                     {
-                        try
+                        string edt = "Still up";
+                        string dayTitle = "Today";
+                        if (!day.endDateTime.HasValue)
                         {
-                            var s = Common.User.Stat.RetrieveAsOptionGroup(i);
-                            <div class="skd-table-row">
-                                <div class="col">
-                                    <strong><u>@s.typeTitle</u></strong>: @s.StatusText()
-                                </div>
+                            day.endDateTime = DateTime.Now;
+                        }
+                        else
+                        {
+                            edt = day.endDateTime.Value.ToYMDHM();
+                            dayTitle = day.startDateTime.ToString("dddd").ToUpper();
+                        }
+                        if (header_show)
+                        {
+                            <div class="skd-table-header">
+                                <div class="col-auto"><span class="fas @Icon.Goodmorning"></span> @day.startDateTime.ToYMDHM()</div>
+                                <div class="col text-center">@dayTitle</div>
+                                <div class="col-auto" style="text-align: right;">@edt <span class="fas @Icon.Goodnight"></span></div>
                             </div>
                         }
-                        catch { }
+                        foreach (var row in dailies.Where(x => x.registerDateTime >= day.startDateTime && x.registerDateTime <= day.endDateTime).OrderByDescending(x => x.registerDateTime))
+                        {
+                            <div class="skd-table-row shade" skd-sidebar-url="/Daily/Sidebar_DailyAdd" skd-sidebar-data="dailyId=@row.dailyId">
+                                <div class="col-auto">
+                                    @row.registerDateTime.ToHM()
+                                </div>
+                                <div class="col">
+                                    @row.Title()
+                                </div>
+                                <div class="col-auto">
+                                    @row.InfoesAsString()
+                                </div>
+                                @if (!string.IsNullOrEmpty(row.remark))
+                                {
+                                    <div class="col-auto"><span class="fas @Icon.Comment text-warning ps-1" title="@row.remark"></span></div>
+                                }
+                            </div>
+                        }
                     }
+                </div>
+                <div class="card-footer flex-column p-0 text-sm">
+                    <div class="skd-table w-100">
+                        @foreach (var i in new[] { 9503, 1011, 1017 })
+                        {
+                            try
+                            {
+                                var s = Common.User.Stat.RetrieveAsOptionGroup(i);
+                                <div class="skd-table-row">
+                                    <div class="col">
+                                        <strong><u>@s.typeTitle</u></strong>: @s.StatusText()
+                                    </div>
+                                </div>
+                            }
+                            catch { }
+                        }
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 @section scripts {
     <script>

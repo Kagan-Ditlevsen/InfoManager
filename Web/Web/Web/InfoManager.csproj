@@ -168,8 +168,6 @@
     <Compile Include="Controllers\DeveloperController.cs" />
     <Compile Include="Controllers\EconomyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\WorkController.cs" />
-    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
@@ -197,11 +195,6 @@
     <Compile Include="Models\Extend\DailyTypeExtra.cs" />
     <Compile Include="Models\Extend\DailyType.cs" />
     <Compile Include="Models\Extend\DailyTypeOption.cs" />
-    <Compile Include="Models\Extend\WorkTask.cs" />
-    <Compile Include="Models\Extend\WorkVehicle.cs" />
-    <Compile Include="Models\Extend\WorkTaskType.cs" />
-    <Compile Include="Models\Extend\Work.cs" />
-    <Compile Include="Models\Extend\WorkAddress.cs" />
     <Compile Include="Models\Extend\SysUser.cs" />
     <Compile Include="Models\Extend\_CommonTables.cs" />
     <Compile Include="Models\Extend\_Enumeration.cs" />
@@ -1675,7 +1668,6 @@
     <Content Include="Views\Developer\PoC\Layout\Skd-Form.cshtml" />
     <Content Include="Views\System\Me_Sidebar.cshtml" />
     <Content Include="Views\Shared\_Layout_SkdSidebar.cshtml" />
-    <Content Include="Views\Task\Task_Sidebar.cshtml" />
     <Content Include="Views\System\Index.cshtml" />
     <!-- <Content Include="Views\Daily\Sidebar_Daily.cshtml" /> -->
     <Content Include="Views\System\DailyTypeExtra.cshtml" />
