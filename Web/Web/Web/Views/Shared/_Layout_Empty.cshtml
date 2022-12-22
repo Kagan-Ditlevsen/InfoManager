@@ -104,14 +104,17 @@
     <footer class="d-flex fixed-bottom text-bg-warning">
         @{
             var cigPackage = -1;
+            DateTime lastCig;
             using (var db = new Db())
             {
                 cigPackage = db.Database.SqlQuery<int>("SELECT COUNT(1) FROM Daily WHERE typeId = 9503 AND registerDateTime >= (SELECT MAX(registerDateTime) FROM Daily WHERE typeId = 9503 AND optionId = 25 AND createUserId = {0}) AND createUserId = {1}", Common.User.userId, Common.User.userId).First();
+                lastCig = db.Database.SqlQuery<DateTime>("SELECT MAX(registerDateTime) FROM Daily WHERE typeId = 9503 AND createUserId = {0}", Common.User.userId).First();
             }
         }
         <div class="col px-2 text-truncate" style="padding-top: 2px;">@Common.User.CompleteName()</div>
-        <button class="col-auto btn btn-secondary"><span class="fas fa-box-open"></span> @(20 - cigPackage)</button>
-        <button class="col-auto btn btn-danger"><span class="fas fa-smoking"></span> @Common.User.Stat.RetrieveAsOptionGroup(9503).qtyMorning</button>
+        <button class="col-auto btn btn-secondary"><span class="fas fa-box-open"></span> @(20 - cigPackage) - </button>
+        <button class="col-auto btn btn-warning"><span class="fas fa-smoking"></span> @lastCig.ToHM()</button>
+        <button class="col-auto btn btn-danger"><span class="fas fa-sun"></span> @Common.User.Stat.RetrieveAsOptionGroup(9503).qtyMorning</button>
     </footer>
 
     <right skd-sidebar loading-message="Loading content..." style="display: none">Loading content...</right>
