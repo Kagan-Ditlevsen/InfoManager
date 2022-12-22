@@ -16,7 +16,8 @@
     ots.Add(AddOptionToShow(typeId: 2000, optionId: 59, icon: "fas fa-water text-primary;fas fa-dna"));
     ots.Add(AddOptionToShow(typeId: 9007, optionId: 60, icon: "fas fa-poo"));
     ots.Add(AddOptionToShow(typeId: 9007, optionId: 33, icon: "fas fa-poop", reqRemarkPlaceholder: "Why not normal?"));
-    //ots.Add(AddOptionToShow(typeId: 9507, optionId: 0, icon: "fas fa-gas-pump", reqRemarkPlaceholder: "Odometer, Trip, Liters, Liter Price and Full?"));
+    ots.Add(AddOptionToShow(typeId: 9507, optionId: 63, icon: "fas fa-gas-pump", reqRemarkPlaceholder: "Odometer, Trip, Liters, Liter Price"));
+    ots.Add(AddOptionToShow(typeId: 9507, optionId: 64, icon: "fas fa-gas-pump", reqRemarkPlaceholder: "Odometer, Trip, Liters, Liter Price"));
 
     List<DailyTypeOption> dto = new List<DailyTypeOption>();
     foreach (var o in ots.OrderBy(x => x.SortOrder))
