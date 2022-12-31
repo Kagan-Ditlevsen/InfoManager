@@ -1,0 +1,216 @@
+﻿@using System.Dynamic;
+@{
+    Layout = "~/Views/Shared/_Layout_Empty.cshtml";
+    ViewBag.Title = "Daily Fast";
+    ViewBag.Icon = "seedling";
+
+    var ots = new List<dynamic>();
+    ots.Add(AddOptionToShow(typeId: 9503, optionId: 23, icon: "fas fa-smoking", requireExtraInfo: true));
+    ots.Add(AddOptionToShow(typeId: 9503, optionId: 25, icon: "fas fa-smoking;fas fa-box text-warning"));
+    ots.Add(AddOptionToShow(typeId: 9503, optionId: 26, icon: "fas fa-smoking;fas fa-clock text-danger"));
+    ots.Add(AddOptionToShow(typeId: 1500, optionId: 37, icon: "fas fa-utensils", reqRemarkPlaceholder: "What you are eating?"));
+    ots.Add(AddOptionToShow(typeId: 1500, optionId: 38, icon: "fas fa-cookie-bite", reqRemarkPlaceholder: "What you are eating?"));
+    ots.Add(AddOptionToShow(typeId: 2000, optionId: 62, icon: "fas fa-glass-water-droplet;fas fa-mug-hot text-danger"));
+    ots.Add(AddOptionToShow(typeId: 2000, optionId: 54, icon: "fas fa-water text-primary;fas fa-glass-water-droplet"));
+    ots.Add(AddOptionToShow(typeId: 2000, optionId: 52, icon: "fas fa-water text-primary"));
+    ots.Add(AddOptionToShow(typeId: 2000, optionId: 59, icon: "fas fa-water text-primary;fas fa-dna"));
+    ots.Add(AddOptionToShow(typeId: 9007, optionId: 60, icon: "fas fa-poo"));
+    ots.Add(AddOptionToShow(typeId: 9007, optionId: 33, icon: "fas fa-poop", reqRemarkPlaceholder: "Why not normal?"));
+    ots.Add(AddOptionToShow(typeId: 9507, optionId: 63, icon: "fas fa-gas-pump", reqRemarkPlaceholder: "Odometer, Trip, Liters, Liter Price", showBelow: true));
+    ots.Add(AddOptionToShow(typeId: 9507, optionId: 64, icon: "fas fa-gas-pump", reqRemarkPlaceholder: "Odometer, Trip, Liters, Liter Price", showBelow: true));
+
+    List<DailyTypeOption> dto = new List<DailyTypeOption>();
+    foreach (var o in ots.Where(x => !x.ShowBelow).OrderBy(x => x.SortOrder))
+    {
+        dto.Add(Common.DailyTypeOptions.Single(x => x.typeId == o.TypeId && x.optionId == o.OptionId));
+    }
+    List<DailyTypeOption> dtoBelow = new List<DailyTypeOption>();
+    foreach (var o in ots.Where(x => x.ShowBelow).OrderBy(x => x.SortOrder))
+    {
+        dtoBelow.Add(Common.DailyTypeOptions.Single(x => x.typeId == o.TypeId && x.optionId == o.OptionId));
+    }
+}
+<input type="hidden" id="typeId" name="typeId" />
+<input type="hidden" id="optionId" name="optionId" />
+<input type="hidden" id="rUrl" name="rUrl" value="/Daily/Fast" />
+<div id="optionButtons" class="d-flex flex-row flex-wrap justify-content-evenly mt-1">
+    @foreach (var option in dto)
+    {
+        dynamic optionToShow = ots.Single(x => x.TypeId == option.typeId && x.OptionId == option.optionId);
+        <div class="btn-action /*col-6 col-sm-4*/" style="/*margin: 0; padding: 0; /*min-width: 150px; max-width: 150px; width: auto;*/">
+            <button id="dt_@(option.DailyType.typeId.ToString() + "_" + option.optionId.ToString())"
+                    class="btn @(!string.IsNullOrWhiteSpace(optionToShow.RemarkPlaceholderText) ? "btn-warning" : "btn-dark")" @(optionToShow.IsRequired ? " required" : "") @(optionToShow.RequireExtraInfo ? " extra-info" : "")>
+                <div class="d-flex flex-column">
+                    <div class="col-12">
+                        @if (optionToShow.Icon.Contains(";"))
+                        {
+                            <span class="fa-1x fa-2x fa-stack">
+                                <i class="@optionToShow.Icon.Split(';')[1] fa-stack-1x" style="zoom: .7; left: 50%; top: 20%;"></i>
+                                <i class="@optionToShow.Icon.Split(';')[0]"></i>
+                            </span>
+                        }
+                        else
+                        {
+                            <i class="@optionToShow.Icon"></i>
+                        }
+                    </div>
+                    <div class="col-12 text-truncate">@option.internalTitle</div>
+                    <div class="col-12 text-end optionExtraIcons"></div>
+                </div>
+            </button>
+        </div>
+    }
+</div>
+@Form.Controls.TextBox(new Form.TextBox()
+{
+    Id = "remark",
+    Title = "Remark",
+    Required = false
+})
+@Form.Controls.DateTime(new Form.DateTime()
+{
+    Id = "registerDateTime",
+    Title = "Register Date/Time",
+    LabelText = "Register Date/Time",
+    Required = false,
+    Value = DateTime.Now
+})
+<div id="optionButtonsBelow" class="d-flex flex-row flex-wrap mt-1">
+    @foreach (var option in dtoBelow)
+    {
+        dynamic optionToShow = ots.Single(x => x.TypeId == option.typeId && x.OptionId == option.optionId);
+        <div class="btn-action col-6 col-sm-4" style="margin: 0; padding: 0; min-width: 150px; width: auto;">
+            <button id="dt_@(option.DailyType.typeId.ToString() + "_" + option.optionId.ToString())"
+                    class="btn @(!string.IsNullOrWhiteSpace(optionToShow.RemarkPlaceholderText) ? "btn-warning" : "btn-dark")" @(optionToShow.IsRequired ? " required" : "") @(optionToShow.RequireExtraInfo ? " extra-info" : "")>
+                <div class="d-flex flex-column">
+                    <div class="col-12">
+                        @if (optionToShow.Icon.Contains(";"))
+                        {
+                            <span class="fa-1x fa-2x fa-stack">
+                                <i class="@optionToShow.Icon.Split(';')[1] fa-stack-1x" style="zoom: .7; left: 50%; top: 20%;"></i>
+                                <i class="@optionToShow.Icon.Split(';')[0]"></i>
+                            </span>
+                        }
+                        else
+                        {
+                            <i class="@optionToShow.Icon"></i>
+                        }
+                    </div>
+                    <div class="col-12 text-truncate">@option.internalTitle</div>
+                    <div class="col-12 text-end optionExtraIcons"></div>
+                </div>
+            </button>
+        </div>
+    }
+</div>
+@section scripts {
+    <script>
+$(function () {
+            pageForm.attr("action", "/Daily/Daily_AddEdit");
+            $(".dropdown-menu li:nth-child(1)").addClass("text-bg-success");
+
+            $("#remark").on("keyup", function (e) {
+                pageForm.validate();
+            });
+
+            $(".btn-action button").on("click tap", function (e) {
+                e.preventDefault();
+
+                $("#typeId").val($(this).attr("id").split("_")[1]);
+                $("#optionId").val($(this).attr("id").split("_")[2]);
+                $("#remark").attr("required", $(this).hasAttr("required"));
+                if ($(this).hasAttr("required")) {
+                } else {
+                    $("#remark").removeClass("is-invalid");
+                }
+
+                pageForm.validate();
+                pageForm.submit();
+            });
+            pageForm.submit(function (e) {
+                if (pageForm.valid()) {
+                    if (skd_debug) {
+                        skd_form_debug(pageForm);
+                    } else {
+                        Skd.PageLoading("Adding Entry...", 0);
+                        return true;
+                    }
+                } else {
+                    $("#typeId, #optionId").val("");
+                }
+
+                return false;
+            });
+            Skd.SetEvents();
+});
+    </script>
+}
+@section styles {
+    <style>
+        :root {
+            --button-spacing: .25rem;
+        }
+
+        .skd-form-row .col {
+            width: calc(100% - 1rem) !important;
+        }
+
+        .skd-form-row label, .skd-form-row .form-control, .skd-form-row .button, .skd-form-row .fas {
+            font-size: 2rem;
+        }
+
+        #optionButtons, #optionButtonsBelow {
+            justify-content: space-evenly;
+            align-items: stretch;
+            align-content: stretch;
+        }
+
+        .btn-action {
+            flex-grow: 1;
+            /*margin: 0 .25rem 0 .25rem;
+            min-width: 200px;*/
+        }
+
+            .btn-action button {
+                margin-bottom: .5rem;
+                width: 100%;
+                min-width: 100%;
+            }
+
+                .btn-action button .fas {
+                    font-size: 4rem;
+                }
+
+                .btn-action button .optionExtraIcons .fas {
+                    font-size: 2rem;
+                }
+
+        /* dummy */
+        #registerDateTime_container {
+            margin-top: .5rem;
+        }
+    </style>
+}
+@functions {
+    static int counter = 0;
+    public static ExpandoObject AddOptionToShow(int typeId, int? optionId, string reqRemarkPlaceholder = "", bool requireExtraInfo = false, string icon = "fas fa-whatsapp", bool showBelow = false)
+    {
+        dynamic rtn;
+        rtn = new ExpandoObject();
+
+        rtn.TypeId = typeId;
+        rtn.OptionId = optionId;
+        rtn.Icon = icon;
+        rtn.IsRequired = !string.IsNullOrWhiteSpace(reqRemarkPlaceholder);
+        rtn.RemarkPlaceholderText = "";
+        rtn.RequireExtraInfo = requireExtraInfo;
+        if (rtn.IsRequired)
+        {
+            rtn.RemarkPlaceholderText = reqRemarkPlaceholder;
+        }
+        rtn.SortOrder = counter++;
+        rtn.ShowBelow = showBelow;
+
+        return rtn;
+    }
+}

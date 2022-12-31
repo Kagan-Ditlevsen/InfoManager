@@ -1,2 +1,0 @@
-D:\Github\Diverse\InformationManagerBS5 - Kopi\Web\obj\Release\InfoMan5.csproj.AssemblyReference.cache
-D:\Github\Diverse\InformationManagerBS5 - Kopi\Web\obj\Release\InfoMan5.csproj.CoreCompileInputs.cache
