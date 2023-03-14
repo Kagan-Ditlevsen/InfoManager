@@ -1,0 +1,304 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Skd.Common</name>
+    </assembly>
+    <members>
+        <member name="M:Skd.ExtensionDateTime.ToDayHM(System.TimeSpan,System.Boolean)">
+            <summary>
+            Returns a timespan written in days, hours and minutes
+            </summary>
+            <param name="value"></param>
+            <param name="simpleFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.ExtensionDateTime.DaysInMonth(System.DateTime,System.Boolean,System.Boolean)">
+            <summary>
+            Returns an leap year array containing the numbers of days in a given year
+            </summary>
+            <param name="value"></param>
+            <param name="zerobased"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.ExtensionDateTime.DaysInCurrentMonth(System.DateTime,System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="zerobased"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.ExtensionDateTime.ToIso8601Weeknumber(System.DateTime)">
+            <summary>
+            Converts a date to a week number.
+            ISO 8601 week 1 is the week that contains the first Thursday that year.
+            </summary>
+        </member>
+        <member name="M:Skd.ExtensionDateTime.DayOffset(System.DayOfWeek)">
+            <summary>
+            Iso8601 weeks start on Monday. This returns 0 for Monday.
+            </summary>
+        </member>
+        <member name="M:Skd.ExtensionDateTime.WeekOfYear(System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.ExtensionDateTime.StartOfWeek(System.DateTime,System.DayOfWeek)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="firstDayOfWeek"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.ExtensionDateTime.StartOfWeek(System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.ExtensionDateTime.DayOfWeek(System.DateTime,System.DayOfWeek)">
+            <summary>
+            Returns an zero-based index where firstDayOfWeek = 0 and lastDayOfWeek = 6
+            </summary>
+            <param name="value"></param>
+            <param name="firstDayOfWeek"></param>
+            <returns>int between 0 and 6</returns>
+        </member>
+        <member name="T:Skd.ExtensionMethods">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Skd.ExtensionMethods.CamelCaseToLabel(System.String)">
+            <summary>
+            Transforms a camel case string format into a label-like format
+            </summary>
+            <example>"camelCaseString".CamelCaseToLabel() => "Camel Case String"</example>
+            /// <example>"camelCasestring".CamelCaseToLabel() => "Camel Casestring"</example>
+            /// <example>"camelCase string".CamelCaseToLabel() => "Camel Case String"</example>
+            <param name="value"></param>
+            <returns>Formatted string</returns>
+            
+        </member>
+        <member name="M:Skd.ExtensionMethods.CamelCase(System.String,System.Char)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="caseAfterChar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.ExtensionMethods.Right(System.String,System.Int32)">
+            <summary>
+            Returns the rightmost <ref>charsToReturn</ref> of the calling string.
+            </summary>
+            <param name="value"></param>
+            <param name="charsToReturn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.ExtensionMethods.Right(System.String,System.String,System.Int32)">
+            <summary>
+            Returns the rightmost <ref>charsToReturn</ref> of the concated string <ref>charsBefore</ref> and the calling string.
+            </summary>
+            <param name="value"></param>
+            <param name="charsBefore"></param>
+            <param name="charsToReturn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.ExtensionMethods.ToDateTime(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.ExtensionMethods.ToIp(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.ExtensionMethods.ToSqlString(System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.ExtensionMethods.UrlReady(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Skd.Images">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Skd.Images.ResizeStream(System.Int32,System.IO.Stream,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="imageSize"></param>
+            <param name="filePath"></param>
+            <param name="outputPath"></param>
+        </member>
+        <member name="T:Skd.Net">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Skd.Net.GetIp">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Skd.Common.Properties.Config">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Skd.Common.Properties.Config.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Skd.Common.Properties.Config.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:Skd.Common.Properties.Menu">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Skd.Common.Properties.Menu.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Skd.Common.Properties.Menu.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Skd.Common.Properties.Menu.MenuCss">
+             <summary>
+               Looks up a localized string similar to /* Google Icons */
+            @font-face {
+                font-family: &apos;Material Icons&apos;;
+                font-style: normal;
+                font-weight: 400;
+                src: url(&quot;/Areas/Admin/Content/GoogleIcon.v36.woff2&quot;) format(&apos;woff2&apos;);
+            }
+            
+            .material-icons {
+                font-family: &apos;Material Icons&apos;;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 24px;
+                line-height: 1;
+                letter-spacing: normal;
+                text-transform: none;
+                display: inline-block;
+                white-space: nowrap;
+                word-wrap: normal;
+                direction: ltr;
+                -webk [rest of string was truncated]&quot;;.
+             </summary>
+        </member>
+        <member name="P:Skd.Common.Properties.Menu.MenuXmlEmpty">
+             <summary>
+               Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+            &lt;!-- Skd.Menu:version **version**, **date** --&gt;
+            &lt;menus xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:noNamespaceSchemaLocation=&quot;Menu.xsd&quot;&gt;
+            &lt;/menus&gt;.
+             </summary>
+        </member>
+        <member name="P:Skd.Common.Properties.Menu.MenuXmlExample">
+             <summary>
+               Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+            &lt;!-- Skd.Menu:version **version**, **date** --&gt;
+            &lt;menus xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:noNamespaceSchemaLocation=&quot;Skd.Menu.xsd&quot;&gt;
+              &lt;menu title=&quot;Main Navigation (using FontAwesome)&quot; cssClass=&quot;sidebar-menu&quot; description=&quot;&quot; iconClass=&quot;FontAwesome&quot; icon=&quot;dashboard&quot; name=&quot;Primary&quot;&gt;
+                &lt;item title=&quot;Frontpage wefwefwef&quot; url=&quot;/&quot; icon=&quot;home&quot; description=&quot;Goto the frontpage of the dashboard&quot;&gt;&lt;/item&gt;
+                &lt;item title=&quot;Test SubMenu&quot; url=&quot;/Test&quot; icon= [rest of string was truncated]&quot;;.
+             </summary>
+        </member>
+        <member name="P:Skd.Common.Properties.Menu.MenuXmlXsd">
+             <summary>
+               Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+            &lt;xs:schema attributeFormDefault=&quot;unqualified&quot; elementFormDefault=&quot;qualified&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
+              &lt;xs:element name=&quot;menus&quot;&gt;
+                &lt;xs:complexType&gt;
+                  &lt;xs:sequence&gt;
+                    &lt;xs:element maxOccurs=&quot;unbounded&quot; name=&quot;menu&quot;&gt;
+                      &lt;xs:complexType&gt;
+                        &lt;xs:sequence&gt;
+                          &lt;xs:element maxOccurs=&quot;unbounded&quot; name=&quot;item&quot;&gt;
+                            &lt;xs:complexType&gt;
+                              &lt;xs:sequence minOccurs=&quot;0&quot;&gt;
+                                &lt;xs [rest of string was truncated]&quot;;.
+             </summary>
+        </member>
+        <member name="T:Skd.Utils">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Skd.Utils.Ticks">
+            <summary>
+            Returns ticks elapsed from the start of the century until now
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.Utils.XmlToHtml(System.String)">
+            <summary>
+            Load the cref="fileName" xml file and print-out an html presentation of the file structure and data
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Skd.Utils.XmlToDataSet(System.String)">
+            <summary>
+            Load the cref="fileName" xml file and print-out an html presentation of the file structure and data
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Skd.Config">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Skd.Config.Version">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Skd.Config.Date">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Skd.Config.GetVersion(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dllFile"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

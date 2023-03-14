@@ -95,11 +95,11 @@
     </Reference>
     <Reference Include="Skd.Common, Version=1.0.8230.21393, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Skd\Skd.Common\Skd.Common\bin\Release\Skd.Common.dll</HintPath>
+      <HintPath>..\..\..\Skd\Skd.Web\Skd.Web\bin\Release\Skd.Common.dll</HintPath>
     </Reference>
     <Reference Include="Skd.Web, Version=1.0.8232.38453, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Skd\Skd.Web\Skd.Web\bin\Release\Skd.Web.dll</HintPath>
+      <HintPath>..\..\..\Skd\Skd.Web\Skd.Web\bin\Release\Skd.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
