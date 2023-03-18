@@ -1678,6 +1678,7 @@
     <Content Include="Views\Daily\_DailyList.cshtml" />
     <Content Include="Views\System\Sidebar_Device.cshtml" />
     <Content Include="Views\Daily\_AppFastLog.cshtml" />
+    <Content Include="Views\Daily\_AppFast2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\SkdWebHelper\Skd.Font.ttf" />
