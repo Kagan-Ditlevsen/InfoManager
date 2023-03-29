@@ -10,37 +10,22 @@
         int[] types = new[] { 9503, 1500, 2000, 9007, 9507 };
         dailyTypes = ctx.DailyType
             .Include("DailyTypeOption")
+            .Include("DailyTypeExtra")
             .Where(x => types.Contains(x.typeId))
             .OrderBy(x => x.internalTitle)
-            //.ThenBy(x => x.DailyTypeOption.OrderBy(y => y.sortOrder))
             .ToList();
     }
 }
 <input type="hidden" id="typeId" name="typeId" />
 <input type="hidden" id="optionId" name="optionId" />
 <input type="hidden" id="rUrl" name="rUrl" value="/Daily/Fast2" />
-<div id="optionButtons" class="d-flex flex-row flex-wrap justify-content-evenly mt-1">
-    @foreach (var option in dailyTypes)
-    {
-        <div class="btn-action input-group">
-            <button id="dt_@option.typeId" class="btn btn-warning">
-                <span class="fas fa-bolt"></span>
-                @option.internalTitle
-            </button>
-            @if (option.defaultOptionId.HasValue)
-            {
-                <button id="dt_@Html.Raw(option.typeId.ToString() + "_option")" class="btn btn-danger">
-                    <span class="fas fa-cog"></span>
-                </button>
-            }
-        </div>
-    }
-</div>
-@Form.Controls.TextBox(new Form.TextBox()
+@Form.Controls.Text(new Form.Text()
 {
     Id = "remark",
     Title = "Remark",
-    Required = false
+    Required = false,
+    ControlOnly = true,
+    ControllerStyle = "font-size: 4rem"
 })
 @Form.Controls.DateTime(new Form.DateTime()
 {
@@ -48,8 +33,38 @@
     Title = "Register Date/Time",
     LabelText = "Register Date/Time",
     Required = false,
-    Value = DateTime.Now
+    Value = DateTime.Now,
+    ControlOnly = true
 })
+<div id="optionButtons" class="d-flex flex-row flex-wrap justify-content-evenly mt-2">
+    @foreach (var option in dailyTypes)
+    {
+        <div class="
+             col-12 px-0
+             col-lg-6">
+            <div class="btn-action input-group" data-type-id="@option.typeId">
+                <button class="btn @(option.defaultOptionId.HasValue ? "btn-warning" : "btn-dark") d-flex">
+                    <div class="col-auto">@option.Icon(true)</div>
+                    <div class="col">
+                        @option.internalTitle
+                        @if (option.defaultOptionId.HasValue)
+                        {
+                            <br />@option.DailyTypeOption.Single(x => x.optionId == option.defaultOptionId).internalTitle
+                        }
+                    </div>
+                    @if (option.defaultOptionId.HasValue)
+                    {
+                        <div class="col-auto"><span class="fas fa-bolt text-danger"></span></div>
+                    }
+                </button>
+                @if (option.DailyTypeOption.Count > 0)
+                {
+                    <button class="btn btn-info"><span class="fas fa-angles-right"></span></button>
+                }
+            </div>
+        </div>
+    }
+</div>
 @section scripts {
     <script>
         $(function () {
@@ -98,66 +113,43 @@
             --button-spacing: .25rem;
         }
 
-        .skd-form-row .col {
-            width: calc(100% - 1rem) !important;
-        }
-
         .skd-form-row label, .skd-form-row .form-control, .skd-form-row .button, .skd-form-row .fas {
-            font-size: 2rem;
-        }
-
-        #optionButtons, #optionButtonsBelow {
-            justify-content: space-evenly;
-            align-items: stretch;
-            align-content: stretch;
+            font-size: 3rem;
         }
 
         .btn-action {
-            flex-grow: 1;
-            /*margin: 0 .25rem 0 .25rem;
-            min-width: 200px;*/
         }
 
             .btn-action button {
                 margin-bottom: .5rem;
-                width: 100%;
-                min-width: 100%;
+                font-size: 2rem;
             }
 
-                .btn-action button .fas {
-                    font-size: 4rem;
-                }
+            .btn-action > button:first-child {
+                flex-grow: 1;
+                text-align: left;
+            }
 
-                .btn-action button .optionExtraIcons .fas {
-                    font-size: 2rem;
-                }
+            .btn-action button .fas {
+                font-size: 4rem;
+            }
+
+            .btn-action .d-flex > div {
+                padding-right: 0;
+            }
+
+            .btn-action .d-flex .col {
+                line-height: 1;
+                align-self: center;
+            }
+
+            .btn-action .d-flex > :first-child {
+                padding-left: 0;
+            }
 
         /* dummy */
         #registerDateTime_container {
             margin-top: .5rem;
         }
     </style>
-}
-@functions {
-    static int counter = 0;
-    public static ExpandoObject AddOptionToShow(int typeId, int? optionId, string reqRemarkPlaceholder = "", bool requireExtraInfo = false, string icon = "fas fa-whatsapp", bool showBelow = false)
-    {
-        dynamic rtn;
-        rtn = new ExpandoObject();
-
-        rtn.TypeId = typeId;
-        rtn.OptionId = optionId;
-        rtn.Icon = icon;
-        rtn.IsRequired = !string.IsNullOrWhiteSpace(reqRemarkPlaceholder);
-        rtn.RemarkPlaceholderText = "";
-        rtn.RequireExtraInfo = requireExtraInfo;
-        if (rtn.IsRequired)
-        {
-            rtn.RemarkPlaceholderText = reqRemarkPlaceholder;
-        }
-        rtn.SortOrder = counter++;
-        rtn.ShowBelow = showBelow;
-
-        return rtn;
-    }
 }
