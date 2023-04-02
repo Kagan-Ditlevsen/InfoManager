@@ -17,8 +17,9 @@
     @RenderSection("styles", required: false)
     <style>
         :root {
-            --header-height: 50px;
-            --footer-height: 50px;
+            --header-height: 86px;
+            --footer-height: 86px;
+            --font-size: 3rem;
         }
 
         header {
@@ -29,8 +30,12 @@
             min-height: var(--footer-height);
         }
 
+            footer button {
+                /*padding: .25rem 0 !important;*/
+            }
+
         header, footer {
-            font-size: 1.5rem;
+            font-size: var(--font-size);
             border: 0;
             align-items: baseline !important;
             text-align: left;
@@ -38,11 +43,11 @@
 
             header button, footer button {
                 border-radius: 0 !important;
-                font-size: 1.5rem !important;
+                font-size: var(--font-size) !important;
             }
 
                 header button .fas, footer button .fas {
-                    font-size: 1.5rem !important;
+                    font-size: var(--font-size) !important;
                 }
 
         .content {
@@ -66,7 +71,7 @@
         }
 
             .dropdown-menu .dropdown-item {
-                font-size: 1.5rem;
+                font-size: var(--font-size);
             }
     </style>
 
@@ -96,7 +101,7 @@
             </ul>
         </button>
         <div class="col px-2 text-truncate">@ViewBag.Title</div>
-        <button id="top_btn_refresh" class="col-auto btn btn-dark"><span class="fas fa-refresh"></span> Refresh</button>
+        <button id="top_btn_refresh" class="col-auto btn btn-dark"><span class="fas fa-refresh"></span></button>
     </header>
 
     <div class="content">
@@ -114,9 +119,9 @@
                 lastCig = db.Database.SqlQuery<DateTime>("SELECT MAX(registerDateTime) FROM Daily WHERE typeId = 9503 AND createUserId = {0}", Common.User.userId).First();
             }
         }
-        <div class="col px-2 text-truncate" style="padding-top: 2px;">@Common.User.CompleteName()</div>
+        @*<div class="col px-2 text-truncate" style="padding-top: 2px;">@Common.User.CompleteName()</div>*@
         <button class="col-auto btn btn-secondary"><span class="fas fa-box-open"></span> @(20 - cigPackage)</button>
-        <button class="col-auto btn btn-warning"><span class="fas fa-smoking"></span> @lastCig.ToHM()</button>
+        <button class="col btn btn-warning"><span class="fas fa-smoking"></span> @lastCig.ToHM()</button>
         <button class="col-auto btn btn-danger"><span class="fas fa-sun"></span> @Common.User.Stat.RetrieveAsOptionGroup(9503).qtyMorning</button>
     </footer>
 

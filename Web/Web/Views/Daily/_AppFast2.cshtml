@@ -37,29 +37,36 @@
     ControlOnly = true
 })
 <div id="optionButtons" class="d-flex flex-row flex-wrap justify-content-evenly mt-2">
-    @foreach (var option in dailyTypes)
+    @foreach (var type in dailyTypes)
     {
         <div class="
              col-12 px-0
              col-lg-6">
-            <div class="btn-action input-group" data-type-id="@option.typeId">
-                <button class="btn @(option.defaultOptionId.HasValue ? "btn-warning" : "btn-dark") d-flex">
-                    <div class="col-auto">@option.Icon(true)</div>
-                    <div class="col">
-                        @option.internalTitle
-                        @if (option.defaultOptionId.HasValue)
+            <div class="btn-action input-group" data-type-id="@type.typeId" data-default="@(type.defaultOptionId.HasValue ? type.defaultOptionId.Value : 0)">
+                @*<button class="btn @(type.defaultOptionId.HasValue ? "btn-warning" : "btn-dark") d-flex">
+                        <div class="col-auto">@type.Icon(true)</div>
+                        <div class="col">
+                            @type.internalTitle@(type.defaultOptionId.HasValue ? ", " + type.DailyTypeOption.Single(x => x.optionId == type.defaultOptionId).internalTitle : "")
+                        </div>
+                        @if (type.defaultOptionId.HasValue)
                         {
-                            <br />@option.DailyTypeOption.Single(x => x.optionId == option.defaultOptionId).internalTitle
+                            <div class="col-auto"><span class="fas fa-bolt text-danger"></span></div>
                         }
-                    </div>
-                    @if (option.defaultOptionId.HasValue)
-                    {
-                        <div class="col-auto"><span class="fas fa-bolt text-danger"></span></div>
-                    }
-                </button>
-                @if (option.DailyTypeOption.Count > 0)
+                    </button>*@
+                @if (type.DailyTypeOption.Count > 0)
                 {
-                    <button class="btn btn-info"><span class="fas fa-angles-right"></span></button>
+                    if (type.defaultOptionId.HasValue)
+                    {
+                        <span>options with default (quick with dropdown)</span>
+                    }
+                    else
+                    {
+                        <span>options no default (dropdown)</span>
+                    }
+                }
+                else
+                {
+                    <span>button, no dropdown</span>
                 }
             </div>
         </div>
@@ -69,7 +76,7 @@
     <script>
         $(function () {
             pageForm.attr("action", "/Daily/Daily_AddEdit");
-            $(".dropdown-menu li:nth-child(1)").addClass("text-bg-success");
+            $(".dropdown-menu li:nth-child(1)").addClass("text-bg-success"); // dummy active menu
 
             $("#remark").on("keyup", function (e) {
                 pageForm.validate();
@@ -89,6 +96,7 @@
                 pageForm.validate();
                 pageForm.submit();
             });
+
             pageForm.submit(function (e) {
                 if (pageForm.valid()) {
                     if (skd_debug) {
@@ -145,6 +153,10 @@
 
             .btn-action .d-flex > :first-child {
                 padding-left: 0;
+            }
+
+            .btn-action .dropdown-toggle {
+                font-size: 3rem;
             }
 
         /* dummy */
