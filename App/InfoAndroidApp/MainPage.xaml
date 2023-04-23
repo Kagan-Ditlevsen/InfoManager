@@ -4,7 +4,7 @@
              x:Class="InfoAndroidApp.MainPage" Title="Information Manager Web 2022">
 
     <Grid ColumnDefinitions="*" RowDefinitions="*">
-        <WebView x:Name="web" Source="https://infomanager.dk/Daily/Fast" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></WebView>
+        <WebView x:Name="web" Source="https://kagan-ditlevsen.dk/Daily/Fast" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></WebView>
     </Grid>
     <!--<ScrollView>
         <VerticalStackLayout
