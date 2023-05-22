@@ -42,7 +42,7 @@
         <div class="
              col-12 px-0
              col-lg-6">
-            <div class="btn-action input-group" data-type-id="@type.typeId" data-default="@(type.defaultOptionId.HasValue ? type.defaultOptionId.Value : 0)">
+            <div class="btn-action btn-group w-100" data-type-id="@type.typeId" data-default-id="@(type.defaultOptionId.HasValue ? type.defaultOptionId.Value : 0)">
                 @*<button class="btn @(type.defaultOptionId.HasValue ? "btn-warning" : "btn-dark") d-flex">
                         <div class="col-auto">@type.Icon(true)</div>
                         <div class="col">
@@ -53,26 +53,38 @@
                             <div class="col-auto"><span class="fas fa-bolt text-danger"></span></div>
                         }
                     </button>*@
-                @type.internalTitle - 
+                @*<button class="btn btn-primary ms-1">@type.Icon(true)</button>*@
                 @if (type.DailyTypeOption.Count > 0)
                 {
                     if (type.defaultOptionId.HasValue)
                     {
-                        <span>options with default (quick with dropdown)</span>
+                        <button class="btn btn-primary w-100 d-flex align-items-center justify-content-start">@type.Icon(true)&nbsp;@type.internalTitle</button>
+                        <button class="btn btn-warning w-100 d-flex align-items-center justify-content-end">@type.DailyTypeOption.Single(x => x.optionId == type.defaultOptionId).internalTitle&nbsp;<span class="fas fa-bolt"></span></button>
                     }
                     else
                     {
-                        <span>options no default (dropdown)</span>
+                        <button class="btn btn-primary w-100 d-flex align-items-center">@type.Icon(true)&nbsp;@type.internalTitle</button>
                     }
                 }
                 else
                 {
-                    <span>button, no dropdown</span>
+                    <button class="btn btn-warning w-100 d-flex align-items-center">@type.Icon(true)&nbsp;@type.internalTitle</button>
                 }
             </div>
         </div>
     }
 </div>
+<style>
+    .btn-action button.w-100 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .btn-action .btn-primary {
+        text-align: left;
+    }
+</style>
 @section scripts {
     <script>
         $(function () {
@@ -86,16 +98,24 @@
             $(".btn-action button").on("click tap", function (e) {
                 e.preventDefault();
 
-                $("#typeId").val($(this).attr("id").split("_")[1]);
-                $("#optionId").val($(this).attr("id").split("_")[2]);
-                $("#remark").attr("required", $(this).hasAttr("required"));
-                if ($(this).hasAttr("required")) {
-                } else {
-                    $("#remark").removeClass("is-invalid");
-                }
+                let elm = $(this).closest(".btn-group");
+                let typeId = elm.data("type-id");
+                let defaultId = elm.data("default-id");
+                let btn = $(this);
+                let action = btn.hasClass("btn-warning") ? "quick" : "option";
+                btn.blur();
+                console.log(elm.attr("data-type-id") + ", " + action);
 
-                pageForm.validate();
-                pageForm.submit();
+                //$("#typeId").val($(this).attr("id").split("_")[1]);
+                //$("#optionId").val($(this).attr("id").split("_")[2]);
+                //$("#remark").attr("required", $(this).hasAttr("required"));
+                //if ($(this).hasAttr("required")) {
+                //} else {
+                //    $("#remark").removeClass("is-invalid");
+                //}
+
+                //pageForm.validate();
+                //pageForm.submit();
             });
 
             pageForm.submit(function (e) {
